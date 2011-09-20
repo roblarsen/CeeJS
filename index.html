@@ -18,7 +18,9 @@
 	<h1>Canvas JS</h1>
     <p>There is an 800x600 canvas here. Try messing around in firebug or other browser console.</p>
 	<pre><code>ctx = new Canvas('ctx'); // creates a new Canvas object in the canvas with id="ctx"
-ctx.circle({x:25,y:25,radius:10,fill:true}); // creates a circle. coming soonish - adding more options for fill/stroke styles
+ctx.circle({x:25, y:25, radius: 10, fillStyle:'rgb(200,0,0)'}); // creates a red circle
+ctx.rectangle({x:50, y:75, height: 100, width: 50, fillStyle: 'rgba(0, 0, 200, 0.5)'}); // creates a bluish rectangle with transparency
+ctx.getCurrentPos(); // returns the current x and y coordinates of the 'cursor'
 </code></pre>
 	<p>More to come - including real documentation</p>
     <canvas id="ctx" width="800" heigh="600"></canvas>
