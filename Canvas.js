@@ -17,8 +17,8 @@
 // TODO: transformations - https://developer.mozilla.org/en/Canvas_tutorial/Transformations
 // TODO: compositing - https://developer.mozilla.org/en/Canvas_tutorial/Compositing
 // TODO: animations - https://developer.mozilla.org/en/Canvas_tutorial/Basic_animations
-
 (function(window){
+	"use strict";
     var document = window.document,
         navigator = window.navigator,
         location = window.location;
@@ -32,9 +32,26 @@
         Canvas.fn = Canvas.prototype = {
             constructor: Canvas,
             init: function(selector){
+				/*
+				Do some basic error handling
+				*/
+				/* TODO: ?potentially CREATE a canvas element as a
+				*  child of the body with teh specified id 
+				* if the selector fails entirely
+				*/
+				if (document.getElementById(selector)){
+					var container = document.getElementById(selector);
+				} else {
+					throw "Canvas expects a valid element ID as an argument";	
+				}
+				/* TODO: ?
+				* create a canvas element as the child of this div instead?
+				*/
+				if (container.nodeName.toLowerCase() !== "canvas"){
+					throw "Canvas operates on canvas elements";	
+				}
                 var xCurrentPos = 0,
                     yCurrentPos = 0,
-                    container = document.getElementById(selector),
                     context = container.getContext('2d'),
                     font = "normal 1em sans-serif",
                     fillStyle = "#000",
