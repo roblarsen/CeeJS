@@ -137,6 +137,12 @@
                         context.closePath();
                         return getCurrentPos();
                     },
+					drawImage= function(img,x,y){
+						context.drawImage(img,x,y);
+						xCurrentPos = x;  
+                        yCurrentPos = y; 
+						return getCurrentPos();
+					},
                     fill = function(){
                         context.fill();
                         return getCurrentPos();
@@ -295,6 +301,7 @@
                     circle: circle,
                     clearRect: clearRect,
                     closePath: closePath,
+					drawImage: drawImage,
                     fill: fill,
                     fillRect: fillRect,
                     getCurrentPos: getCurrentPos,
