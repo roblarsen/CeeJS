@@ -138,6 +138,13 @@
                         return getCurrentPos();
                     },
 					drawImage= function(img,x,y){
+						if (img.nodeName == undefined){
+							var newImg = document.createElement("img");
+							newImg.src=img;
+							img = newImg;	
+						}
+						var x = x || xCurrentPos,
+                            y = y || yCurrentPos;
 						context.drawImage(img,x,y);
 						xCurrentPos = x;  
                         yCurrentPos = y; 
@@ -147,7 +154,7 @@
                         context.fill();
                         return getCurrentPos();
                     },
-                    lineFor = function(distance,angle){
+                    lineFor = function(params){
                         // TODO: implement
                         return getCurrentPos();
                     },
@@ -157,6 +164,17 @@
                       yCurrentPos = y;
                       return getCurrentPos();
                     },
+					math = {
+						cosec : function(num){
+     						return 1 / Math.sin(num);
+   						},
+						sec : function(num){
+							return 1 / Math.cos(num);
+						},
+						radians : function(degrees){
+						 	return degrees * (Math.PI / 180);
+						}
+					},
                     moveTo = function(x,y){
                       context.moveTo(x,y);
                       xCurrentPos = x;
