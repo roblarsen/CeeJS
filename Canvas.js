@@ -142,6 +142,9 @@ createPattern, createRadialGradient, drawWindow, fillText, getImageData, isPoint
                         context.clearRect(x,y,width,height);
                         return getCurrentPos();
                     },
+					clip = function(){
+						context.clip();
+					},
                     closePath = function(){
                         context.closePath();
                         return getCurrentPos();
@@ -169,8 +172,112 @@ createPattern, createRadialGradient, drawWindow, fillText, getImageData, isPoint
                         context.fillRect(x,y,width,height);
                         return getCurrentPos();
                     },
-                    line = function(params){
-						// TODO: implement
+                   	line = function(params){
+						params = params || {};
+                        var x = params.x || xCurrentPos,
+                            y = params.y || yCurrentPos,
+                            distance = params.distance || 0,
+                            angle = params.angle || 0,
+							opposite,
+							adjacent,
+							newX,
+							newY,
+							radians;
+						  if ( angle < 45) {
+							console.log(angle);radians = math.radians(angle);
+							opposite = math.cosec(Math.sin(radians));
+							adjacent = math.sec(Math.sin(radians));
+							newX = x + Math.round(distance/adjacent);
+							newY = y + Math.round(distance/opposite);
+						  } else if (angle == 45){
+							radians = radians = math.radians(angle);
+							legs = distance/Math.sqrt(2);
+							newX = x + legs;
+							newY = y + legs;	  
+						  }
+							else if ( angle > 45 &&  angle <= 90 ) {
+							angle = 90- angle;
+							radians = radians = math.radians(angle);
+							opposite = math.cosec(Math.sin(radians));
+							adjacent = math.sec(Math.sin(radians));
+							newX = x + Math.round(distance/opposite);
+							newY = y + Math.round(distance/adjacent);
+						  }  
+						  else if ( angle > 90 &&  angle < 135 ) {
+							angle =  angle - 90;
+							radians = math.radians(angle);
+							opposite = math.cosec(Math.sin(radians));
+							adjacent = math.sec(Math.sin(radians));
+							newX = x - Math.round(distance/opposite);
+							newY = y + Math.round(distance/adjacent);
+						  } 
+						  else if (angle == 135){
+							radians = radians = math.radians(angle);
+							legs = distance/Math.sqrt(2);
+							newX = x - legs;
+							newY = y + legs;	  
+						  }
+						  else if ( angle > 135 &&  angle <= 180 ) { 
+							angle = 180- angle;
+							radians = math.radians(angle);
+							opposite = math.cosec(Math.sin(radians));
+							adjacent = math.sec(Math.sin(radians));
+							newX = x - Math.round(distance/adjacent);
+							newY = y + Math.round(distance/opposite);
+						  }
+						  else if ( angle > 180  &&  angle < 225) {
+							angle =  angle -180;
+							radians = math.radians(angle);
+							opposite = math.cosec(Math.sin(radians));
+							adjacent = math.sec(Math.sin(radians));
+							newX = x - Math.round(distance/adjacent);
+							newY = y - Math.round(distance/opposite);
+						  } 
+						  else if (angle == 225){
+							radians = radians = math.radians(angle);
+							legs = distance/Math.sqrt(2);
+							newX = x - legs;
+							newY = y - legs;	  
+						  }
+						  else if ( angle > 225 &&  angle <= 270 ) {
+							angle = 270- angle;
+							radians = math.radians(angle);
+							opposite = math.cosec(Math.sin(radians));
+							adjacent = math.sec(Math.sin(radians));	
+							newX = x - Math.round(distance/opposite);
+							newY = y - Math.round(distance/adjacent);
+						  } 
+						  else if ( angle > 270  &&  angle < 315) {
+							angle =  angle - 270;
+							radians = math.radians(angle);
+							opposite = math.cosec(Math.sin(radians));
+							adjacent = math.sec(Math.sin(radians));
+							newX = x + Math.round(distance/opposite);
+							newY = y - Math.round(distance/adjacent);
+						  } 
+						  else if (angle == 315){
+							radians = radians = math.radians(angle);
+							legs = distance/Math.sqrt(2);
+							newX = x + legs;
+							newY = y - legs;	  
+						  } 
+						  else if ( angle > 315 &&  angle < 360 ) {
+							angle = 360 -  angle ;
+							radians = math.radians(angle);
+							opposite = math.cosec(Math.sin(radians));
+							adjacent = math.sec(Math.sin(radians));
+							newX = x + Math.round(distance/adjacent);
+							newY = y - Math.round(distance/opposite)
+						  } 
+						  //TODO: handle angles greater than 360!
+						  else if ( angle >= 360 ) {
+							newX = x + Math.round(distance/adjacent);
+							newY = y;
+						  }
+						context.moveTo(x,y);
+						context.lineTo(newX,newY);
+						xCurrentPos = newX;
+                      	yCurrentPos = newY;
                         return getCurrentPos();
                     },
                     lineTo = function(x,y){
@@ -333,6 +440,7 @@ createPattern, createRadialGradient, drawWindow, fillText, getImageData, isPoint
                     bezierCurveTo: bezierCurveTo,
                     circle: circle,
                     clearRect: clearRect,
+					clip: clip,
                     closePath: closePath,
 					drawImage: drawImage,
                     fill: fill,
