@@ -17,6 +17,9 @@
 // TODO: transformations - https://developer.mozilla.org/en/Canvas_tutorial/Transformations
 // TODO: compositing - https://developer.mozilla.org/en/Canvas_tutorial/Compositing
 // TODO: animations - https://developer.mozilla.org/en/Canvas_tutorial/Basic_animations
+/* TODO: At minimum, expose the core canvas versions of the following methods: clip, closePath, createImageData, createLinearGradient,
+createPattern, createRadialGradient, drawWindow, fillText, getImageData, isPointInPath, measureText, putImageData, rotate, scale, setTransform, strokeText, transform, translate,
+*/
 (function(window){
 	"use strict";
     var document = window.document,
@@ -75,6 +78,12 @@
                         context.arc(x,y,radius,start,end,counter);
                         return getCurrentPos();
                     },
+					arcTo = function(x1, y1, x2, y2, radius){
+						context.arcTo(x1, y1, x2, y2, radius);
+						xCurrentPos = x2;
+						yCurrentPos = y2;
+						return getCurrentPos();
+					},
                     beginPath = function(){
                         context.beginPath();
                         return getCurrentPos();
@@ -139,13 +148,15 @@
                     },
 					drawImage= function(img,x,y){
 						if (img.nodeName == undefined){
-							var newImg = document.createElement("img");
+							var newImg = new Image();
 							newImg.src=img;
 							img = newImg;	
 						}
+						img.onload = function(){
+							context.drawImage(img,x,y);
+						};
 						var x = x || xCurrentPos,
                             y = y || yCurrentPos;
-						context.drawImage(img,x,y);
 						xCurrentPos = x;  
                         yCurrentPos = y; 
 						return getCurrentPos();
@@ -154,8 +165,12 @@
                         context.fill();
                         return getCurrentPos();
                     },
-                    lineFor = function(params){
-                        // TODO: implement
+                    fillRect = function(x,y,width,height){
+                        context.fillRect(x,y,width,height);
+                        return getCurrentPos();
+                    },
+                    line = function(params){
+						// TODO: implement
                         return getCurrentPos();
                     },
                     lineTo = function(x,y){
@@ -268,16 +283,7 @@
                         }
                         return getCurrentPos();
                     },
-                    fillRect = function(x,y,width,height){
-                        context.fillRect(x,y,width,height);
-                        return getCurrentPos();
-                    },
-                    strokeRect = function(x,y,width,height){
-                        context.strokeRect(x,y,width,height);
-                        return getCurrentPos();
-                    },
-
-                    /*
+	                /*
                      * Function: reset
                      *
                      * Resets the canvas container, erasing the currently displayed drawings.
@@ -291,7 +297,10 @@
                         xCurrentPos = yCurrentPos = 0;
                         return getCurrentPos();
                     },
-                    roundedRectangle = function(x,y,width,height,radius){
+					restore = function(){
+						context.restore();
+					},
+	                roundedRectangle = function(x,y,width,height,radius){
                         // from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
                         beginPath();  
                         moveTo(x,y+radius);  
@@ -306,14 +315,20 @@
                         stroke(); 
                         return getCurrentPos();
                     },
-
+					save = function(){
+						context.save();
+					},
+                    strokeRect = function(x,y,width,height){
+                        context.strokeRect(x,y,width,height);
+                        return getCurrentPos();
+                    },
                     stroke = function(){
                         context.stroke();
                         return getCurrentPos();
                     };
-
-                return {
+	             return {
                     arc: arc,
+					arcTo : arcTo,
                     beginPath: beginPath,
                     bezierCurveTo: bezierCurveTo,
                     circle: circle,
@@ -323,13 +338,15 @@
                     fill: fill,
                     fillRect: fillRect,
                     getCurrentPos: getCurrentPos,
-                    lineFor: lineFor,
+                    line: line,
                     lineTo: lineTo,
                     moveTo: moveTo,
                     quadraticCurveTo: quadraticCurveTo,
                     rect: rect,
                     rectangle: rectangle,
                     reset: reset,
+					save : save,
+					restore : restore,
                     roundedRect: roundedRectangle,
                     stroke: stroke,
                     strokeRect: strokeRect
