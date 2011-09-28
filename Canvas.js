@@ -17,8 +17,7 @@
 // TODO: transformations - https://developer.mozilla.org/en/Canvas_tutorial/Transformations
 // TODO: compositing - https://developer.mozilla.org/en/Canvas_tutorial/Compositing
 // TODO: animations - https://developer.mozilla.org/en/Canvas_tutorial/Basic_animations
-/* TODO: At minimum, expose the core canvas versions of the following methods: clip, closePath, createImageData, createLinearGradient,
-createPattern, createRadialGradient, drawWindow, fillText, getImageData, isPointInPath, measureText, putImageData, rotate, scale, setTransform, strokeText, transform, translate,
+/* TODO: At minimum, expose the core canvas versions of the following methods: createPattern, createRadialGradient, drawWindow, fillText, getImageData, isPointInPath, measureText, putImageData, rotate, scale, setTransform, strokeText, transform, translate,
 */
 (function(window){
 	"use strict";
@@ -144,11 +143,20 @@ createPattern, createRadialGradient, drawWindow, fillText, getImageData, isPoint
                     },
 					clip = function(){
 						context.clip();
+						return getCurrentPos();
 					},
                     closePath = function(){
                         context.closePath();
                         return getCurrentPos();
                     },
+					createImageData = function(height,width){
+					    context.closePath(height,width);
+                        return getCurrentPos();
+					},
+					createLinearGradient = function(x0, y0, x1, y1){
+						context.createLinearGradient(x0, y0, x1, y1);
+						return getCurrentPos();
+					},
 					drawImage= function(img,x,y){
 						if (img.nodeName == undefined){
 							var newImg = new Image();
