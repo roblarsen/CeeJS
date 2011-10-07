@@ -2,17 +2,14 @@
 //An error threshold of 7 seems to do the trick so far
 var ERROR_THRESHOLD = 7;
 
-function startTest(name, drawCanvas, controlImage){
+function startTest(name, drawCanvas, drawControl){
 	var ctx = document.getElementById('ctx'),
 		ctxContext = ctx.getContext('2d'),
 		controlCtx = document.getElementById('control-ctx'),
-		controlCtxContext = controlCtx.getContext('2d'),
-		img = new Image();
-	
-	img.src = controlImage;
-	img.onload = function(){
+		controlCtxContext = controlCtx.getContext('2d');
+
 		drawCanvas('ctx');
-		controlCtxContext.drawImage(img,0,0);
+		drawControl('control-ctx');
 		
 		imageData = ctxContext.getImageData(0, 0, ctx.width, ctx.height);
 		imageDataControl = controlCtxContext.getImageData(0, 0, controlCtx.width, controlCtx.height);
@@ -34,7 +31,7 @@ function startTest(name, drawCanvas, controlImage){
 				console.log(log);
 				count++;
 				
-				if(count > 2000){
+				if(count > 20){
 					console.log('exiting: too many errors');
 					var errorRate = document.getElementById('error-rate');
 					errorRate.innerHTML = 'too many';
@@ -56,5 +53,4 @@ function startTest(name, drawCanvas, controlImage){
 		else {
 			console.log('different length');
 		}
-	}
 }

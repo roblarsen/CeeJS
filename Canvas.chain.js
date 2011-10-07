@@ -57,7 +57,6 @@
                     context = container.getContext('2d'),
                     font = "normal 1em sans-serif",
                     fillStyle = "#000",
-                    strokeStyle = "#000",
                     getCurrentPos = function(){
                         //TODO: Make sure all methods update currentPos where applicable
                         return {
@@ -198,7 +197,6 @@
 							b = Math.cos(radians) * hypotenuse,
 							newX = x + b,
 							newY = y + a;
-							console.log([a,b]);
 							
 						context.moveTo(x,y);
 						context.lineTo(newX,newY);
@@ -354,6 +352,15 @@
 						context.save();
 						return this;
 					},
+					strokeStyle = function(color){
+						if(color !== undefined){
+							context.strokeStyle = color;
+							return this;
+						}
+						else {
+							return context.strokeStyle;
+						}
+					},
                     strokeRect = function(x,y,width,height){
                         context.strokeRect(x,y,width,height);
                         return this;
@@ -386,6 +393,7 @@
 					restore : restore,
                     roundedRect: roundedRectangle,
                     stroke: stroke,
+					strokeStyle: strokeStyle,
                     strokeRect: strokeRect
                 }
             }
