@@ -378,6 +378,7 @@
                     clearRect: clearRect,
 					clip: clip,
                     closePath: closePath,
+					context: context,
 					drawImage: drawImage,
                     fill: fill,
                     fillRect: fillRect,
