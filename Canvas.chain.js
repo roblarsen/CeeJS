@@ -37,20 +37,24 @@
 				/*
 				Do some basic error handling
 				*/
-				/* TODO: ?potentially CREATE a canvas element as a
-				*  child of the body with teh specified id 
-				* if the selector fails entirely
-				*/
 				if (document.getElementById(selector)){
 					var container = document.getElementById(selector);
 				} else {
-					throw "Canvas expects a valid element ID as an argument";	
+					var canvas = document.createElement( "canvas" );
+					canvas.id = selector;
+					canvas.width="400";
+					canvas.height ="400";
+					document.body.appendChild(canvas);
+					var container = document.getElementById(selector);
+					throw "Canvas.js expects a valid element ID as an argument. Since you didn't provide one, we'll just go ahead and create one for you. ";	
 				}
-				/* TODO: ?
-				* create a canvas element as the child of this div instead?
-				*/
 				if (container.nodeName.toLowerCase() !== "canvas"){
-					throw "Canvas operates on canvas elements";	
+					var canvas = document.createElement( "canvas" );
+					canvas.width = container.offsetHeight;
+					canvas.height = container.offsetWidth;
+					canvas.id ="bigc"
+					container.appendChild(canvas);
+					container = document.getElementById("bigc");
 				}
                 var xCurrentPos = 0,
                     yCurrentPos = 0,
