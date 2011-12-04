@@ -1,5 +1,5 @@
 /*!
- * Canvas JavaScript Library v0.0.8
+ * Canvas JavaScript Library v0.1
  * some day:
  * canvasjs.net
  * for now, visit:
@@ -12,40 +12,62 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://bobholtwebdev.com/license
  *
- * Date: 2011.11.30 
- */
-// TODO: transformations - https://developer.mozilla.org/en/Canvas_tutorial/Transformations
-// TODO: animations - https://developer.mozilla.org/en/Canvas_tutorial/Basic_animations
-/* TODO: At minimum, expose the core canvas versions of the following methods: , drawWindow,  getImageData, isPointInPath, measureText, putImageData, rotate, scale, setTransform,  transform, translate,
+ * Date: 2011.12.1
+ *
+* TODO: animations - https://developer.mozilla.org/en/Canvas_tutorial/Basic_animations
+* TODO: Manage current position better. We're fuzzy on what x,y actually means. It's easy enough to give options, we just need to come up with a default. 
+* For starters, ADD boundingBox property for shapes, which we can then expose as whatever current X,Y scheme wed default to and then then whatever people want
+* then set up a configruation piece. SEt default position when the Canvas is created and then allow overrides at any point. 
+* Something like ctx.setOrigin ( args )
+* TODO: DOCUMENTATION
+* TODO: BUILD SCRIPT
 */
+
 (function(window) {
     "use strict";
-    var document = window.document,
-        navigator = window.navigator,
-        location = window.location;
+    var document = window.document;
 
     var Canvas = (function() {
 
         // Define a local copy of Canvas
-        var Canvas = function(selector, params) {
-            return new Canvas.fn.init(selector)
+        var Canvas = function( selector , params ) {
+            return new Canvas.fn.init( selector )
         };
 
         Canvas.fn = Canvas.prototype = {
             constructor: Canvas,
-            init: function(selector, params) {
+/*
+* Function: Canvas
+*
+* Intializes the Canvas object.  Accepts an optional params object which sets a variety of context level properties
+*
+* Parameters:
+* params.fillStyle - default fill style. Defaults to "#000000";
+* params.font - default font. Defaults to "10px sans-serif";
+* params.globalAlpha - default alpha. Defaults to 1;
+* params.globalCompositeOperation - Default global composition operation. Defaults to "source-over";
+* params.lineCap - Default line cap. Defaults to "butt";
+* params.lineJoin - Default line join. Defaults to "miter";
+* params.lineWidth - Default line width. Defaults to 1;
+* params.miterLimit - Default miter limit. Defaults to 10;
+* params.shadowBlur - Default shadowBlur. Defaults to 0;
+* params.shadowColor - Default shadowColor. Defaults to "rgba(0, 0, 0, 0)";
+* params.shadowOffsetX - Default shadodOffsetX. Defaults to 0;
+* params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
+* params.strokeStyle - Default strokeStyle. Defaults to "#000000";
+* params.textAlign - Default textAlign. Defaults to "start";
+* params.textBaseline - Default textBaseline. Defaults to "alphabetic";				
+*
+* Returns:
+*  A chainable Canvas object.
+*/
+			init: function( selector, params ) {
                 params = params || {};
                 var container;
-                if (document.getElementById(selector)) {
-                    container = document.getElementById(selector);
+                if ( document.getElementById( selector ) ) {
+                    container = document.getElementById( selector );
                 } else {
-                    var canvas = document.createElement("canvas");
-                    canvas.id = selector;
-                    canvas.width = "400";
-                    canvas.height = "400";
-                    document.body.appendChild(canvas);
-                    container = document.getElementById(selector);
-                    throw "Canvas.js expects a valid element ID as an argument. Since you didn't provide one, we'll just go ahead and create one for you. ";
+                  throw "Canvas.js expects a valid element ID as an argument.";
                 }
                 if (container.nodeName.toLowerCase() !== "canvas") {
                     var canvas = document.createElement("canvas");
@@ -54,11 +76,15 @@
                     canvas.id = "bigc"
                     container.appendChild(canvas);
                     container = document.getElementById("bigc");
+					throw "The provideed ID wasn't a canvas element. A canvas element with id 'bigc' created as a child of the supplied node."
                 }
                 var xCurrentPos = 0,
                     yCurrentPos = 0,
                     context = container.getContext('2d');
-                //Default properties    
+                /* Default properties
+				*  These are all available to set at intialization
+				*/
+				
                 context.fillStyle = params.fillStyle || "#000000";
                 context.font = params.font || "10px sans-serif";
                 context.globalAlpha = params.globalAlpha || 1;
@@ -75,13 +101,53 @@
                 context.textAlign = params.textAlign || "start";
                 context.textBaseline = params.textBaseline || "alphabetic";
 
-                var getCurrentPos = function() {
-                    //TODO: Make sure all methods update currentPos where applicable
-                    return {
-                        x: xCurrentPos,
-                        y: yCurrentPos
-                    }
-                },
+/*
+* Function: currrentPos
+*
+* Intializes the Canvas object.  Accepts an optional params object which sets a variety of context level properties
+*
+* Parameters:
+* params.fillStyle - default fill style. Defaults to "#000000";
+* params.font - default font. Defaults to "10px sans-serif";
+* params.globalAlpha - default alpha. Defaults to 1;
+* params.globalCompositeOperation - Default global composition operation. Defaults to "source-over";
+* params.lineCap - Default line cap. Defaults to "butt";
+* params.lineJoin - Default line join. Defaults to "miter";
+* params.lineWidth - Default line width. Defaults to 1;
+* params.miterLimit - Default miter limit. Defaults to 10;
+* params.shadowBlur - Default shadowBlur. Defaults to 0;
+* params.shadowColor - Default shadowColor. Defaults to "rgba(0, 0, 0, 0)";
+* params.shadowOffsetX - Default shadodOffsetX. Defaults to 0;
+* params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
+* params.strokeStyle - Default strokeStyle. Defaults to "#000000";
+* params.textAlign - Default textAlign. Defaults to "start";
+* params.textBaseline - Default textBaseline. Defaults to "alphabetic";				
+*
+* Returns:
+*  An hainable Canvas object.
+*
+* See Also:
+*
+*  <circle>
+*  <rectangle>
+*/
+
+                var currentPos = function( x , y) {
+					if ( ( x !== undefined && y !== undefined )  && ( typeof(x).toLowerCase() === "number" && typeof(y).toLowerCase() === "number" ) ) {
+						xCurrentPos = x;
+                    	yCurrentPos = y;
+						return {
+                    		x: xCurrentPos,
+                        	y: yCurrentPos
+                    	}
+					}
+                    else {
+						return {
+                    		x: xCurrentPos,
+                       		y: yCurrentPos
+							}
+						}
+                	},
                     arc = function(params) {
                         params = params || {};
                         var x = params.x || xCurrentPos,
@@ -106,10 +172,15 @@
                     },
                     bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x, y) {
                         context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
-                        return this;
+                        xCurrentPos = x;
+                        yCurrentPos = y;
+						return this;
                     },
-                    circle = function(params) {
-                        params = params || {};
+                    circle = function( params ) {
+                     	//TODO: expand params to set any style appliable to a rectangle
+						//TODO: it shouldn't always stroke the circle.
+						// ODO: sugar for strokeCircle and fillCircle
+						params = params || {};
                         var x = params.x || xCurrentPos,
                             y = params.y || yCurrentPos,
                             radius = params.radius || 10,
@@ -178,9 +249,10 @@
                         context.createPattern(img, repetition);
                         return this;
                     },
-/*createRadialGradient = function(){
-                        
-                    },*/
+                    createRadialGradient = function( x0 , y0 , r0 , x1 , y1 ,  r1  ){
+                    	context.createRadialGradient( x0 , y0 , r0 , x1 , y1 ,  r1 );
+						return this;
+                    },
                     drawImage = function(img, x, y) {
                         if (img.nodeName == undefined) {
                             var newImg = new Image();
@@ -200,9 +272,14 @@
                         context.fill();
                         return this;
                     },
+					fillCircle = function(){
+						//TODO implement
+					},
                     fillRect = function(x, y, width, height) {
                         context.fillRect(x, y, width, height);
-                        return this;
+                        xCurrentPos = x;
+                        yCurrentPos = y;
+						return this;
                     },
                     fillStyle = function(color) {
                         if (color !== undefined) {
@@ -215,7 +292,9 @@
                     },
                     fillText = function(text, x, y, maxWidth) {
                         context.fillText(text, x, y, maxWidth);
-                        return this;
+                        xCurrentPos = x;
+                        yCurrentPos = y;
+						return this;
                     },
                     font = function(declaration) {
                         if (declaration !== undefined) {
@@ -226,6 +305,11 @@
                             return context.font;
                         }
                     },
+					getImageData = function( x, y, width, height ){
+						xCurrentPos = x;
+                        yCurrentPos = y;
+						return context.getImageData( x, y, width, height )
+					},
                     globalAlpha = function(num) {
                         if (num !== undefined) {
                             context.globalAlpha = num;
@@ -244,6 +328,10 @@
                             return context.globalCompositeOperation;
                         }
                     },
+					isPointInPath = function( x , y ){
+						//TODO: does this make sense to update the x, y?
+						return context.isPointInPath( x , y );
+					},
                     line = function(params) {
                         params = params || {};
                         var x = params.x || xCurrentPos,
@@ -296,16 +384,19 @@
                         }
                     },
                     math = {
-                        cosec: function(num) {
+                        cosec: function( num ) {
                             return 1 / Math.sin(num);
                         },
-                        sec: function(num) {
+                        sec: function( num ) {
                             return 1 / Math.cos(num);
                         },
-                        radians: function(degrees) {
+                        radians: function( degrees ) {
                             return degrees * (Math.PI / 180);
                         }
                     },
+					measureText = function( string ){
+						return context.measureText( string );
+					},
                     miterLimit = function(limit) {
                         if (limit !== undefined) {
                             context.miterLimit = limit;
@@ -321,7 +412,15 @@
                         yCurrentPos = y;
                         return this;
                     },
+					putImageData = function( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight ) {
+						xCurrentPos = x;
+                        yCurrentPos = y;
+						context.putImageData( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight );
+						return this;
+					},
                     quadraticCurveTo = function(cp1x, cp1y, x, y) {
+						xCurrentPos = x;
+                        yCurrentPos = y;
                         context.quadraticCurveTo(cp1x, cp1y, x, y);
                         return this;
                     },
@@ -370,7 +469,9 @@
                         return this;
                     },
                     rect = function(x, y, width, height) {
-                        context.rect(x, y, width, height);
+                        xCurrentPos = x;
+                        yCurrentPos = y;
+						context.rect(x, y, width, height);
                         return this;
                     },
 
@@ -395,7 +496,9 @@
                      *  <clearRect>
                      */
                     rectangle = function(params) {
-                        params = params || {};
+                        //TODO: expand params to set any style appliable to a rectangle
+						
+						params = params || {};
                         var x = params.x || xCurrentPos,
                             y = params.y || yCurrentPos,
                             width = params.width || 0,
@@ -431,6 +534,10 @@
                         context.restore();
                         return this;
                     },
+					rotate = function( angle ) {
+						context.rotate( angle );
+						return this
+				    }, 
                     roundedRectangle = function(x, y, width, height, radius) {
                         // from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
                         beginPath();
@@ -450,6 +557,14 @@
                         context.save();
                         return this;
                     },
+					scale = function( x , y ) {
+						context.scale( x , y);
+						return this;
+					}, 
+					setTransform = function( matrix11 , matrix12 , matrix21 , matrix22 , x , y ){
+						context.setTransform(  matrix11 , matrix12 , matrix21 , matrix22 , x , y );
+						return this;
+					},  
                     shadowBlur = function(num) {
                         if (num !== undefined) {
                             context.shadowBlur = num;
@@ -489,6 +604,9 @@
                     shadowOffset = function() {
                         //TODO, make one call if we need to set both!
                     },
+					strokeCircle = function(){
+						//TODO implement
+					},
                     strokeStyle = function(color) {
                         if (color !== undefined) {
                             context.strokeStyle = color;
@@ -499,10 +617,14 @@
                         }
                     },
                     strokeRect = function(x, y, width, height) {
-                        context.strokeRect(x, y, width, height);
+						xCurrentPos =  x;
+						yCurrentPos = y;
+						context.strokeRect(x, y, width, height);
                         return this;
                     },
                     strokeText = function(text, x, y, maxWidth) {
+						xCurrentPos =  x;
+						yCurrentPos = y;
                         context.strokeText(text, x, y, maxWidth);
                         return this;
                     },
@@ -527,8 +649,20 @@
                         else {
                             return context.textBaseline;
                         }
-                    };
-                return {
+                    },
+					transform = function( matrix11 , matrix12 , matrix21 , matrix22 , x , y ){
+						xCurrentPos =  x;
+						yCurrentPos = y;
+  						context.transform( matrix11 , matrix12 , matrix21 , matrix22 , x , y );
+						return this;
+					}, 
+					translate = function(){
+						xCurrentPos =  x;
+						yCurrentPos = y;
+						context.translate( x , y ); 
+						return this;
+					};
+		        return {
                     arc: arc,
                     arcTo: arcTo,
                     beginPath: beginPath,
@@ -538,29 +672,42 @@
                     clip: clip,
                     closePath: closePath,
                     context: context,
-                    drawImage: drawImage,
+                    createImageData : createImageData,
+                    createLinearGradient : createLinearGradient ,
+                    createPattern : createPattern,
+					createRadialGradient : createRadialGradient,
+					drawImage: drawImage,
                     fill: fill,
                     fillRect: fillRect,
                     fillStyle: fillStyle,
                     fillText: fillText,
                     font: font,
-                    getCurrentPos: getCurrentPos,
-                    globalAlpha: globalAlpha,
+                    currentPos: currentPos,
+                    getImageData : getImageData,
+					globalAlpha: globalAlpha,
                     globalCompositeOperation: globalCompositeOperation,
-                    line: line,
+                    isPointInPath : isPointInPath,
+					line: line,
                     lineCap: lineCap,
                     lineJoin: lineJoin,
                     lineTo: lineTo,
                     lineWidth: lineWidth,
                     miterLimit: miterLimit,
-                    moveTo: moveTo,
+                    measureText : measureText,
+					moveTo: moveTo,
+					putImageData : putImageData,
                     quadraticCurveTo: quadraticCurveTo,
+                    quadraticCurveToFixed: quadraticCurveToFixed,
                     rect: rect,
                     rectangle: rectangle,
                     reset: reset,
                     restore: restore,
+                    rotate : rotate,
+					roundedRectangle: roundedRectangle,
                     roundedRect: roundedRectangle,
                     save: save,
+					scale : scale,
+					setTransform : setTransform,
                     shadowBlur: shadowBlur,
                     shadowColor: shadowColor,
                     shadowOffsetX: shadowOffsetX,
@@ -570,7 +717,9 @@
                     strokeText: strokeText,
                     strokeRect: strokeRect,
                     textAlign: textAlign,
-                    textBaseline: textBaseline
+                    textBaseline: textBaseline,
+					transform : transform,
+					translate : translate
                 }
             }
         }
