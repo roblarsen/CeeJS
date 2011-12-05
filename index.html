@@ -16,18 +16,79 @@
 
 <body>
 	<h1>Canvas JS</h1>
-    <p>There is an 800x600 canvas here. Try messing around in firebug or other browser console.</p>
+    <p>There is an 800x600 canvas here. You can play with CanvasJS in browser console.</p>
 	<pre><code>ctx = new Canvas('ctx'); // creates a new Canvas object in the canvas with id="ctx"
-ctx.circle({x:25, y:25, radius: 10, fillStyle:'rgb(200,0,0)'}); // creates a red circle
-ctx.rectangle({x:50, y:75, height: 100, width: 50, fillStyle: 'rgba(0, 0, 200, 0.5)'}); // creates a bluish rectangle with transparency
-ctx.getCurrentPos(); // returns the current x and y coordinates of the 'cursor'
+    //Now you have all the features of CanvasJS available to you.
+    ctx.circle({x:25, y:25, radius: 10, fillStyle:'rgb(200,0,0)'}) //draw a circle
+       .rectangle({x:50, y:75, height: 100, width: 50, fillStyle: 'rgba(0, 0, 200, 0.5)'}) //draw a rectangle
+       .currentPos(); // returns the current x and y coordinates of the 'cursor' // get the current position
+       
 </code></pre>
-	<p>More to come - including real documentation</p>
     <canvas id="ctx" width="800" height="600" style="background:url(grids.jpg) no-repeat"></canvas>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
-<script>window.jQuery || document.write('<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js">\x3C/script>')</script>
 
 <!-- Specific to this page -->
 <script src="Canvas.chain.js"></script>
+
+<h2>"Documentation"</h2>
+<p>This will improve over time, and when it does, I'll remove the quotes. </p>
+<p>For now, in the spirit of keeping moving on this project, here's a list of all the methods and properties available in a new Canvas object. All of the common properties (fillStyle, etc) are actually mapped to getter/setter methods. Anything that doesn't return a value is chainable. </p>
+<ul>
+    <li> arc</li>
+    <li>arcTo</li>
+    <li>beginPath</li>
+    <li>bezierCurveTo</li>
+    <li>circle</li>
+    <li>clearRect</li>
+    <li>clip</li>
+    <li>closePath</li>
+    <li>context</li>
+    <li>createImageData</li>
+    <li>createLinearGradient</li>
+    <li>createPattern</li>
+    <li>createRadialGradient</li>
+    <li>drawImage</li>
+    <li>fill</li>
+    <li>fillRect</li>
+    <li>fillStyle</li>
+    <li>fillText</li>
+    <li>font</li>
+    <li> currentPos</li>
+    <li>getImageData</li>
+    <li>globalAlpha</li>
+    <li>globalCompositeOperation</li>
+    <li>sPointInPath</li>
+    <li>line</li>
+    <li>lineCap</li>
+    <li>lineJoin</li>
+    <li>lineTo</li>
+    <li>lineWidth</li>
+    <li>miterLimit</li>
+    <li>measureText</li>
+    <li>moveTo</li>
+    <li>putImageData</li>
+    <li>quadraticCurveTo</li>
+    <li>quadraticCurveToFixed</li>
+    <li>rect</li>
+    <li>rectangle</li>
+    <li>reset</li>
+    <li>restore</li>
+    <li>rotate</li>
+    <li>roundedRectangle/roundedRect</li>
+    <li>save</li>
+    <li>scale</li>
+    <li>setTransform </li>
+    <li>shadowBlur</li>
+    <li>shadowColor</li>
+    <li>shadowOffsetX</li>
+    <li>shadowOffsetY</li>
+    <li>stroke</li>
+    <li>strokeStyle</li>
+    <li>strokeText</li>
+    <li>strokeRect</li>
+    <li>textAlign</li>
+    <li>textBaseline</li>
+    <li>transform </li>
+    <li>translate</li>
+</ul>
 </body>
 </html>
