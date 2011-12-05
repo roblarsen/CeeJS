@@ -22,8 +22,8 @@ function startTest(name, drawCanvas, drawControl, controlImage) {
     img.src = controlImage;
     img.onload = function() {
         drawCanvas('ctx');
-		//drawControl('control-ctx');
-        controlCtxContext.drawImage(img, 0, 0);
+		drawControl('control-ctx');
+        //controlCtxContext.drawImage(img, 0, 0);
 
         imageData = ctxContext.getImageData(0, 0, ctx.width, ctx.height);
         imageData.data = blur(imageData.data, ctx.width, ctx.height);
