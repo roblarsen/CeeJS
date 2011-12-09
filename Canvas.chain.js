@@ -31,7 +31,7 @@
 
         // Define a local copy of Canvas
         var Canvas = function( selector , params ) {
-            return new Canvas.fn.init( selector )
+            return new Canvas.fn.init( selector );
         };
 
         Canvas.fn = Canvas.prototype = {
@@ -73,7 +73,7 @@
                     var canvas = document.createElement("canvas");
                     canvas.width = container.offsetHeight;
                     canvas.height = container.offsetWidth;
-                    canvas.id = "bigc"
+                    canvas.id = "bigc";
                     container.appendChild(canvas);
                     container = document.getElementById("bigc");
 					throw "The provideed ID wasn't a canvas element. A canvas element with id 'bigc' created as a child of the supplied node."
@@ -85,7 +85,7 @@
 				*  These are all available to set at intialization
 				*/
 				
-                context.fillStyle = params.fillStyle || "#000000";
+                context.fillStyle = params.fillStyle || "#ffffff";
                 context.font = params.font || "10px sans-serif";
                 context.globalAlpha = params.globalAlpha || 1;
                 context.globalCompositeOperation = params.globalCompositeOperation || "source-over";
@@ -291,7 +291,13 @@
                         }
                     },
                     fillText = function(text, x, y, maxWidth) {
-                        context.fillText(text, x, y, maxWidth);
+                    	if (maxWidth === undefined ){
+                    		 context.fillText(text, x, y);
+                    	} else {
+                    		 context.fillText(text, x, y, maxWidth);
+                    		
+                    	}
+                       
                         xCurrentPos = x;
                         yCurrentPos = y;
 						return this;
