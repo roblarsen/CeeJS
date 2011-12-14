@@ -4,10 +4,9 @@
  * canvasjs.net
  * for now, visit:
  * 
- * http://bobholtwebdev.com/
  * http://htmlcssjavascript.com
  * 
- * Copyright 2011, Bob Holt, Rob Larsen, Marc Neuwirth
+ * Copyright 2011, Rob Larsen
  * 
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://bobholtwebdev.com/license
@@ -31,10 +30,10 @@
 
         // Define a local copy of Canvas
         var Canvas = function( selector , params ) {
-            return new Canvas.fn.init( selector );
+            return new Canvas.prototype.init( selector );
         };
 
-        Canvas.fn = Canvas.prototype = {
+        Canvas.prototype = {
             constructor: Canvas,
 /*
 * Function: Canvas
@@ -730,7 +729,7 @@
             }
         }
 
-        Canvas.fn.init.prototype = Canvas.fn;
+        Canvas.prototype.init.prototype = Canvas.prototype;
 
         return Canvas;
     }());
