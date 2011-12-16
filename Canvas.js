@@ -15,8 +15,8 @@
  *
 * TODO: animations - https://developer.mozilla.org/en/Canvas_tutorial/Basic_animations
 * TODO: Manage current position better. We're fuzzy on what x,y actually means. It's easy enough to give options, we just need to come up with a default. 
-* For starters, ADD boundingBox property for shapes, which we can then expose as whatever current X,Y scheme wed default to and then then whatever people want
-* then set up a configruation piece. SEt default position when the Canvas is created and then allow overrides at any point. 
+* For starters, ADD boundingBox property for shapes, which we can then expose as whatever current X,Y scheme we'd default to and then then whatever people want
+* then set up a configruation piece. Set default position when the Canvas is created and then allow overrides at any point. 
 * Something like ctx.setOrigin ( args )
 * TODO: DOCUMENTATION
 * TODO: BUILD SCRIPT
@@ -66,16 +66,20 @@
                 if ( document.getElementById( selector ) ) {
                     container = document.getElementById( selector );
                 } else {
-                  throw "Canvas.js expects a valid element ID as an argument.";
-                }
+                  	container = document.createElement("canvas");
+                	container.width = params.width || "100";
+                	container.height = params.height || "100";
+					container.id= selector;
+                
+				}
                 if (container.nodeName.toLowerCase() !== "canvas") {
                     var canvas = document.createElement("canvas");
                     canvas.width = container.offsetHeight;
                     canvas.height = container.offsetWidth;
                     canvas.id = "bigc";
                     container.appendChild(canvas);
-                    container = document.getElementById("bigc");
-					throw "The provideed ID wasn't a canvas element. A canvas element with id 'bigc' created as a child of the supplied node."
+                    context = document.getElementById("bigc");
+					throw "The provided ID wasn't a canvas element. A canvas element with id 'bigc' created as a child of the supplied node."
                 }
                 var xCurrentPos = 0,
                     yCurrentPos = 0,
