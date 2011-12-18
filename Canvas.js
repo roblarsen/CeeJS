@@ -3,20 +3,20 @@
  * some day:
  * canvasjs.net
  * for now, visit:
- * 
+ *
  * http://htmlcssjavascript.com
- * 
+ *
  * Copyright 2011, Rob Larsen
- * 
+ *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://bobholtwebdev.com/license
  *
  * Date: 2011.12.1
  *
 * TODO: animations - https://developer.mozilla.org/en/Canvas_tutorial/Basic_animations
-* TODO: Manage current position better. We're fuzzy on what x,y actually means. It's easy enough to give options, we just need to come up with a default. 
+* TODO: Manage current position better. We're fuzzy on what x,y actually means. It's easy enough to give options, we just need to come up with a default.
 * For starters, ADD boundingBox property for shapes, which we can then expose as whatever current X,Y scheme we'd default to and then then whatever people want
-* then set up a configruation piece. Set default position when the Canvas is created and then allow overrides at any point. 
+* then set up a configruation piece. Set default position when the Canvas is created and then allow overrides at any point.
 * Something like ctx.setOrigin ( args )
 * TODO: DOCUMENTATION
 * TODO: BUILD SCRIPT
@@ -55,12 +55,12 @@
 * params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
 * params.strokeStyle - Default strokeStyle. Defaults to "#000000";
 * params.textAlign - Default textAlign. Defaults to "start";
-* params.textBaseline - Default textBaseline. Defaults to "alphabetic";				
+* params.textBaseline - Default textBaseline. Defaults to "alphabetic";
 *
 * Returns:
 *  A chainable Canvas object.
 */
-			init: function( selector, params ) {
+            init: function( selector, params ) {
                 params = params || {};
                 var container;
                 if ( document.getElementById( selector ) ) {
@@ -70,7 +70,7 @@
                 	container.width = params.width || "100";
                 	container.height = params.height || "100";
 					container.id= selector;
-                
+
 				}
                 if (container.nodeName.toLowerCase() !== "canvas") {
                     var canvas = document.createElement("canvas");
@@ -83,11 +83,12 @@
                 }
                 var xCurrentPos = 0,
                     yCurrentPos = 0,
+                    bbCurrent = null,
                     context = container.getContext('2d');
                 /* Default properties
-				*  These are all available to set at intialization
-				*/
-				
+                *  These are all available to set at intialization
+                */
+
                 context.fillStyle = params.fillStyle || "#ffffff";
                 context.font = params.font || "10px sans-serif";
                 context.globalAlpha = params.globalAlpha || 1;
@@ -124,7 +125,7 @@
 * params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
 * params.strokeStyle - Default strokeStyle. Defaults to "#000000";
 * params.textAlign - Default textAlign. Defaults to "start";
-* params.textBaseline - Default textBaseline. Defaults to "alphabetic";				
+* params.textBaseline - Default textBaseline. Defaults to "alphabetic";
 *
 * Returns:
 *  An hainable Canvas object.
@@ -136,25 +137,38 @@
 */
 
                 var currentPos = function( x , y) {
-					if ( ( x !== undefined && y !== undefined )  && ( typeof(x).toLowerCase() === "number" && typeof(y).toLowerCase() === "number" ) ) {
-						xCurrentPos = x;
-                    	yCurrentPos = y;
-						return {
-                    		x: xCurrentPos,
-                        	y: yCurrentPos
-                    	}
-					}
+                    if (x !== undefined &&
+                        y !== undefined &&
+                        typeof(x) === "number" &&
+                        typeof(y) === "number") {
+
+                        xCurrentPos = x;
+                        yCurrentPos = y;
+                        return {
+                            x: xCurrentPos,
+                            y: yCurrentPos
+                        }
+                    }
                     else {
-						return {
-                    		x: xCurrentPos,
-                       		y: yCurrentPos
-							}
-						}
-                	},
+                        return {
+                            x: xCurrentPos,
+                            y: yCurrentPos
+                            }
+                        }
+                    },
+                    valOrDefault = function(x, current){
+                        if( x !== undefined &&
+                            typeof(x) === "number"){
+                            return x;
+                        }
+                        else {
+                            return current;
+                        }
+                    },
                     arc = function(params) {
                         params = params || {};
-                        var x = params.x || xCurrentPos,
-                            y = params.y || yCurrentPos,
+                        var x = valOrDefault(params.x, xCurrentPos),
+                            y = valOrDefault(params.y, yCurrentPos),
                             radius = params.radius || 0,
                             start = params.start || 0,
                             end = params.end || Math.PI * 2,
@@ -165,8 +179,7 @@
                     },
                     arcTo = function(x1, y1, x2, y2, radius) {
                         context.arcTo(x1, y1, x2, y2, radius);
-                        xCurrentPos = x2;
-                        yCurrentPos = y2;
+                        currentPos(x2,y2);
                         return this;
                     },
                     beginPath = function() {
@@ -175,17 +188,78 @@
                     },
                     bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x, y) {
                         context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
-                        xCurrentPos = x;
-                        yCurrentPos = y;
-						return this;
+                        currentPos(x,y);
+                        return this;
+                    },
+                    boundingBox = function(params){
+                        var h,w,leftx,topy;
+                        if(params === undefined){
+                            return bbCurrent;
+                        }
+                        else if(params.x1 !== undefined &&
+                                params.y1 !== undefined &&
+                                params.x2 !== undefined &&
+                                params.y2 !== undefined){
+
+                            h  = Math.abs(params.y2 - params.y1);
+                            w  = Math.abs(params.x2 - params.x1);
+                            leftx =  (params.y1 < params.y2) ? params.y1 : params.y2;
+                            topy = (params.x1 < params.x2) ? params.x1 : params.x2;
+                        }
+                        else if(params.x !== undefined &&
+                                params.y !== undefined &&
+                                params.w !== undefined &&
+                                params.h !== undefined){
+                            h  = params.h;
+                            w  = params.w;
+                            leftx = params.x;
+                            topy = params.y;
+                        }
+                        else if(params.cx !== undefined &&
+                                params.cy !== undefined &&
+                                params.r  !== undefined){
+                            h = w = 2 * params.r;
+                            leftx = params.cx - params.r;
+                            topy = params.cy - params.r;
+                        }
+                        else if(params.x !== undefined &&
+                                params.y !== undefined){
+                            var current = currentPos();
+                            boundingBox({x1:params.x, y1:params.y, x2: current.x, y2: current.y});
+                        }
+                        else {
+                            return bbCurrent;
+                        }
+
+                        var tl = {x: leftx,         y: topy},
+                            t  = {x: leftx + w / 2, y: topy},
+                            tr = {x: leftx + w,     y: topy},
+                            r  = {x: leftx + w,     y: topy + h / 2},
+                            br = {x: leftx + w,     y: topy + h},
+                            b  = {x: leftx + w / 2, y: topy + h},
+                            bl = {x: leftx,         y: topy + h},
+                            l  = {x: leftx,         y: topy + h / 2};
+
+                        bbCurrent = {
+                            'tl': tl,
+                            't': t,
+                            'tr': tr,
+                            'r': r,
+                            'br': br,
+                            'b': b,
+                            'bl': bl,
+                            'l': l
+                        };
+
+                        return bbCurrent;
                     },
                     circle = function( params ) {
-                     	//TODO: expand params to set any style appliable to a rectangle
-						//TODO: it shouldn't always stroke the circle.
-						// ODO: sugar for strokeCircle and fillCircle
-						params = params || {};
-                        var x = params.x || xCurrentPos,
-                            y = params.y || yCurrentPos,
+                        //TODO: expand params to set any style appliable to a rectangle
+                        //TODO: it shouldn't always stroke the circle.
+                        // ODO: sugar for strokeCircle and fillCircle
+                        params = params || {};
+                        var x = valOrDefault(params.x, xCurrentPos),
+                            y = valOrDefault(params.y, yCurrentPos),
                             radius = params.radius || 10,
                             fillStyle = params.fillStyle || false;
                         moveTo(x, y);
@@ -201,10 +275,13 @@
                             context.fill();
                         }
                         closePath();
+
+                        boundingBox({cx:x,cy:y,r:radius});
+
                         return this;
                     },
 
-/*
+                    /*
                      * Function: clearRect
                      *
                      * Clears a rectangular area, making it fully transparent
@@ -225,11 +302,14 @@
                      */
                     clearRect = function(params) {
                         params = params || {};
-                        var x = params.x || xCurrentPos,
-                            y = params.y || yCurrentPos,
+                        var x = valOrDefault(params.x, xCurrentPos),
+                            y = valOrDefault(params.y, yCurrentPos),
                             width = params.width || 0,
                             height = params.height || 0;
                         context.clearRect(x, y, width, height);
+
+                        boundingBox({x:x, y:y, w:width, h:height});
+
                         return this;
                     },
                     clip = function() {
@@ -253,8 +333,8 @@
                         return this;
                     },
                     createRadialGradient = function( x0 , y0 , r0 , x1 , y1 ,  r1  ){
-                    	context.createRadialGradient( x0 , y0 , r0 , x1 , y1 ,  r1 );
-						return this;
+                        context.createRadialGradient( x0 , y0 , r0 , x1 , y1 ,  r1 );
+                        return this;
                     },
                     drawImage = function(img, x, y) {
                         if (img.nodeName == undefined) {
@@ -265,24 +345,25 @@
                         img.onload = function() {
                             context.drawImage(img, x, y);
                         };
-                        var x = x || xCurrentPos,
-                            y = y || yCurrentPos;
-                        xCurrentPos = x;
-                        yCurrentPos = y;
+                        var x = valOrDefault(x, xCurrentPos),
+                            y = valOrDefault(y, yCurrentPos);
+                        currentPos(x,y);
                         return this;
                     },
                     fill = function() {
                         context.fill();
                         return this;
                     },
-					fillCircle = function(){
-						//TODO implement
-					},
+                    fillCircle = function(){
+                        //TODO implement
+                    },
                     fillRect = function(x, y, width, height) {
                         context.fillRect(x, y, width, height);
-                        xCurrentPos = x;
-                        yCurrentPos = y;
-						return this;
+                        currentPos(x,y);
+
+                        boundingBox({x:x, y:y, w:width, h:height});
+
+                        return this;
                     },
                     fillStyle = function(color) {
                         if (color !== undefined) {
@@ -294,16 +375,15 @@
                         }
                     },
                     fillText = function(text, x, y, maxWidth) {
-                    	if (maxWidth === undefined ){
-                    		 context.fillText(text, x, y);
-                    	} else {
-                    		 context.fillText(text, x, y, maxWidth);
-                    		
-                    	}
-                       
-                        xCurrentPos = x;
-                        yCurrentPos = y;
-						return this;
+                        if (maxWidth === undefined ){
+                             context.fillText(text, x, y);
+                        } else {
+                             context.fillText(text, x, y, maxWidth);
+
+                        }
+
+                        currentPos(x,y);
+                        return this;
                     },
                     font = function(declaration) {
                         if (declaration !== undefined) {
@@ -314,11 +394,10 @@
                             return context.font;
                         }
                     },
-					getImageData = function( x, y, width, height ){
-						xCurrentPos = x;
-                        yCurrentPos = y;
-						return context.getImageData( x, y, width, height )
-					},
+                    getImageData = function( x, y, width, height ){
+                        currentPos(x,y);
+                        return context.getImageData( x, y, width, height )
+                    },
                     globalAlpha = function(num) {
                         if (num !== undefined) {
                             context.globalAlpha = num;
@@ -337,14 +416,14 @@
                             return context.globalCompositeOperation;
                         }
                     },
-					isPointInPath = function( x , y ){
-						//TODO: does this make sense to update the x, y?
-						return context.isPointInPath( x , y );
-					},
+                    isPointInPath = function( x , y ){
+                        //TODO: does this make sense to update the x, y?
+                        return context.isPointInPath( x , y );
+                    },
                     line = function(params) {
                         params = params || {};
-                        var x = params.x || xCurrentPos,
-                            y = params.y || yCurrentPos,
+                        var x = valOrDefault(params.x, xCurrentPos),
+                            y = valOrDefault(params.y, yCurrentPos),
                             hypotenuse = params.distance || 0,
                             angle = params.angle % 360 || 0,
                             radians = math.radians(angle),
@@ -355,8 +434,10 @@
 
                         context.moveTo(x, y);
                         context.lineTo(newX, newY);
-                        xCurrentPos = newX;
-                        yCurrentPos = newY;
+                        currentPos(newX,newY);
+
+                        boundingBox({x1:x, y1:y, x2:newX, y2: newY});
+
                         return this;
                     },
                     lineCap = function(cap) {
@@ -379,8 +460,10 @@
                     },
                     lineTo = function(x, y) {
                         context.lineTo(x, y);
-                        xCurrentPos = x;
-                        yCurrentPos = y;
+                        boundingBox({x:x, y:y});
+
+                        currentPos(x,y);
+
                         return this;
                     },
                     lineWidth = function(width) {
@@ -403,9 +486,9 @@
                             return degrees * (Math.PI / 180);
                         }
                     },
-					measureText = function( string ){
-						return context.measureText( string );
-					},
+                    measureText = function( string ){
+                        return context.measureText( string );
+                    },
                     miterLimit = function(limit) {
                         if (limit !== undefined) {
                             context.miterLimit = limit;
@@ -417,24 +500,21 @@
                     },
                     moveTo = function(x, y) {
                         context.moveTo(x, y);
-                        xCurrentPos = x;
-                        yCurrentPos = y;
+                        currentPos(x,y);
                         return this;
                     },
-					putImageData = function( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight ) {
-						xCurrentPos = x;
-                        yCurrentPos = y;
-						context.putImageData( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight );
-						return this;
-					},
+                    putImageData = function( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight ) {
+                        currentPos(x,y);
+                        context.putImageData( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight );
+                        return this;
+                    },
                     quadraticCurveTo = function(cp1x, cp1y, x, y) {
-						xCurrentPos = x;
-                        yCurrentPos = y;
+                        currentPos(x,y);
                         context.quadraticCurveTo(cp1x, cp1y, x, y);
                         return this;
                     },
                     quadraticCurveToFixed = function(cpx, cpy, x, y) {
-/* for FF1.5 - from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
+                        /* for FF1.5 - from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
                         /*
                         For the equations below the following variable name prefixes are used:
                             qp0 is the quadratic curve starting point (you must keep this from your last point sent to moveTo(), lineTo(), or bezierCurveTo() ).
@@ -458,33 +538,34 @@
                         cp2x = cp1x + (qp2x - qp0x) * (1 - ratio);
                         cp2y = cp1y + (qp2y - qp0y) * (1 - ratio);
 
-                        We will now  
+                        We will now
                             a) replace the qp0x and qp0y variables with currentX and currentY (which *you* must store for each moveTo/lineTo/bezierCurveTo)
                             b) replace the qp1x and qp1y variables with cpx and cpy (which we would have passed to quadraticCurveTo)
                             c) replace the qp2x and qp2y variables with x and y.
-                        which leaves us with:  
+                        which leaves us with:
                         */
-                        var ratio = 2.0 / 3.0; // 0.5522847498307933984022516322796 if the Bezier is approximating an elliptic arc with best fitting  
+                        var ratio = 2.0 / 3.0; // 0.5522847498307933984022516322796 if the Bezier is approximating an elliptic arc with best fitting
                         var cp1x = xCurrentPos + (cpx - xCurrentPos) * ratio;
                         var cp1y = yCurrentPos + (cpy - yCurrentPos) * ratio;
                         var cp2x = cp1x + (x - xCurrentPos) * (1 - ratio);
                         var cp2y = cp1y + (y - yCurrentPos) * (1 - ratio);
 
-                        // and now call cubic Bezier curve to function   
+                        // and now call cubic Bezier curve to function
                         bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
 
-                        xCurrentPos = x;
-                        yCurrentPos = y;
+                        currentPos(x,y);
                         return this;
                     },
                     rect = function(x, y, width, height) {
-                        xCurrentPos = x;
-                        yCurrentPos = y;
-						context.rect(x, y, width, height);
+                        currentPos(x,y);
+                        context.rect(x, y, width, height);
+
+                        boundingBox({x:x, y:y, w:width, h:height});
+
                         return this;
                     },
 
-/*
+                    /*
                      * Function: rectangle
                      *
                      * Draws a rectangle in the canvas container
@@ -506,14 +587,36 @@
                      */
                     rectangle = function(params) {
                         //TODO: expand params to set any style appliable to a rectangle
-						
-						params = params || {};
-                        var x = params.x || xCurrentPos,
-                            y = params.y || yCurrentPos,
-                            width = params.width || 0,
-                            height = params.height || 0,
-                            fillStyle = params.fillStyle || false,
+
+                        params = params || {};
+                        var x,y,width,height;
+                        if( params.x1 !== undefined &&
+                            params.y1 !== undefined &&
+                            params.x2 !== undefined &&
+                            params.y2 !== undefined){
+
+                            x = valOrDefault(params.x1, xCurrentPos);
+                            y = valOrDefault(params.y1, yCurrentPos);
+                            width = Math.abs(x - params.x2);
+                            height = Math.abs(y - params.y2);
+                        }
+                        else if(params.x !== undefined &&
+                                params.y !== undefined &&
+                                params.width !== undefined &&
+                                params.height !== undefined){
+
+                            x = valOrDefault(params.x, xCurrentPos);
+                            y = valOrDefault(params.y, yCurrentPos);
+                            width = valOrDefault(params.width, 0);
+                            height = valOrDefault(params.height, 0);
+                        }
+                        else {
+                            return this;
+                        }
+
+                        var fillStyle = params.fillStyle || false,
                             lineWidth = params.lineWidth || false;
+
                         if (lineWidth) {
                             context.lineWidth = lineWidth;
                         }
@@ -523,9 +626,11 @@
                         } else {
                             strokeRect(x, y, width, height);
                         }
+
+                        boundingBox({x:x, y:y, w:width, h:height});
                         return this;
                     },
-/*
+                    /*
                      * Function: reset
                      *
                      * Resets the canvas container, erasing the currently displayed drawings.
@@ -536,17 +641,17 @@
                      */
                     reset = function() {
                         container.width = container.width;
-                        xCurrentPos = yCurrentPos = 0;
+                        currentPos(0,0);
                         return this;
                     },
                     restore = function() {
                         context.restore();
                         return this;
                     },
-					rotate = function( angle ) {
-						context.rotate( angle );
-						return this
-				    }, 
+                    rotate = function( angle ) {
+                        context.rotate( angle );
+                        return this
+                    },
                     roundedRectangle = function(x, y, width, height, radius) {
                         // from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
                         beginPath();
@@ -560,20 +665,22 @@
                         lineTo(x + radius, y);
                         quadraticCurveTo(x, y, x, y + radius);
                         stroke();
+
+                        boundingBox({x:x, y:y, w:width, h:height});
                         return this;
                     },
                     save = function() {
                         context.save();
                         return this;
                     },
-					scale = function( x , y ) {
-						context.scale( x , y);
-						return this;
-					}, 
-					setTransform = function( matrix11 , matrix12 , matrix21 , matrix22 , x , y ){
-						context.setTransform(  matrix11 , matrix12 , matrix21 , matrix22 , x , y );
-						return this;
-					},  
+                    scale = function( x , y ) {
+                        context.scale( x , y);
+                        return this;
+                    },
+                    setTransform = function( matrix11 , matrix12 , matrix21 , matrix22 , x , y ){
+                        context.setTransform(  matrix11 , matrix12 , matrix21 , matrix22 , x , y );
+                        return this;
+                    },
                     shadowBlur = function(num) {
                         if (num !== undefined) {
                             context.shadowBlur = num;
@@ -613,9 +720,9 @@
                     shadowOffset = function() {
                         //TODO, make one call if we need to set both!
                     },
-					strokeCircle = function(){
-						//TODO implement
-					},
+                    strokeCircle = function(){
+                        //TODO implement
+                    },
                     strokeStyle = function(color) {
                         if (color !== undefined) {
                             context.strokeStyle = color;
@@ -626,14 +733,12 @@
                         }
                     },
                     strokeRect = function(x, y, width, height) {
-						xCurrentPos =  x;
-						yCurrentPos = y;
-						context.strokeRect(x, y, width, height);
+                        currentPos(x,y);
+                        context.strokeRect(x, y, width, height);
                         return this;
                     },
                     strokeText = function(text, x, y, maxWidth) {
-						xCurrentPos =  x;
-						yCurrentPos = y;
+                        currentPos(x,y);
                         context.strokeText(text, x, y, maxWidth);
                         return this;
                     },
@@ -659,23 +764,22 @@
                             return context.textBaseline;
                         }
                     },
-					transform = function( matrix11 , matrix12 , matrix21 , matrix22 , x , y ){
-						xCurrentPos =  x;
-						yCurrentPos = y;
-  						context.transform( matrix11 , matrix12 , matrix21 , matrix22 , x , y );
-						return this;
-					}, 
-					translate = function(){
-						xCurrentPos =  x;
-						yCurrentPos = y;
-						context.translate( x , y ); 
-						return this;
-					};
-		        return {
+                    transform = function( matrix11 , matrix12 , matrix21 , matrix22 , x , y ){
+                        currentPos(x,y);
+                        context.transform( matrix11 , matrix12 , matrix21 , matrix22 , x , y );
+                        return this;
+                    },
+                    translate = function(){
+                        currentPos(x,y);
+                        context.translate( x , y );
+                        return this;
+                    };
+                return {
                     arc: arc,
                     arcTo: arcTo,
                     beginPath: beginPath,
                     bezierCurveTo: bezierCurveTo,
+                    boundingBox: boundingBox,
                     circle: circle,
                     clearRect: clearRect,
                     clip: clip,
@@ -684,8 +788,8 @@
                     createImageData : createImageData,
                     createLinearGradient : createLinearGradient ,
                     createPattern : createPattern,
-					createRadialGradient : createRadialGradient,
-					drawImage: drawImage,
+                    createRadialGradient : createRadialGradient,
+                    drawImage: drawImage,
                     fill: fill,
                     fillRect: fillRect,
                     fillStyle: fillStyle,
@@ -693,18 +797,18 @@
                     font: font,
                     currentPos: currentPos,
                     getImageData : getImageData,
-					globalAlpha: globalAlpha,
+                    globalAlpha: globalAlpha,
                     globalCompositeOperation: globalCompositeOperation,
                     isPointInPath : isPointInPath,
-					line: line,
+                    line: line,
                     lineCap: lineCap,
                     lineJoin: lineJoin,
                     lineTo: lineTo,
                     lineWidth: lineWidth,
                     miterLimit: miterLimit,
                     measureText : measureText,
-					moveTo: moveTo,
-					putImageData : putImageData,
+                    moveTo: moveTo,
+                    putImageData : putImageData,
                     quadraticCurveTo: quadraticCurveTo,
                     quadraticCurveToFixed: quadraticCurveToFixed,
                     rect: rect,
@@ -712,11 +816,11 @@
                     reset: reset,
                     restore: restore,
                     rotate : rotate,
-					roundedRectangle: roundedRectangle,
+                    roundedRectangle: roundedRectangle,
                     roundedRect: roundedRectangle,
                     save: save,
-					scale : scale,
-					setTransform : setTransform,
+                    scale : scale,
+                    setTransform : setTransform,
                     shadowBlur: shadowBlur,
                     shadowColor: shadowColor,
                     shadowOffsetX: shadowOffsetX,
@@ -727,8 +831,8 @@
                     strokeRect: strokeRect,
                     textAlign: textAlign,
                     textBaseline: textBaseline,
-					transform : transform,
-					translate : translate
+                    transform : transform,
+                    translate : translate
                 }
             }
         }
