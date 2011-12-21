@@ -1,3 +1,8 @@
+/**
+ * @fileOverview CanvasJS, a helper library for the Canvas element
+ * @name CanvasJS
+ */
+
 /*!
  * Canvas JavaScript Library v0.1
  * some day:
@@ -26,41 +31,63 @@
     "use strict";
     var document = window.document;
 
+/*	Creates a new Canvas object
+ *  @name CanvasJS
+ *  @function
+ *  @constructor 
+ *  @param  {string} selector a string indicating the id of an HTML Canvas element or the name of the Canvas Element to be createed
+ *  @param {object} params An object containing the following paramters
+ *      params.fillStyle - default fill style. Defaults to "#000000";
+ *      params.font - default font. Defaults to "10px sans-serif";
+ *      params.globalAlpha - default alpha. Defaults to 1;
+ *      params.globalCompositeOperation - Default global composition operation. Defaults to "source-over";
+ *      params.lineCap - Default line cap. Defaults to "butt";
+ *      params.lineJoin - Default line join. Defaults to "miter";
+ *      params.lineWidth - Default line width. Defaults to 1;
+ *      params.miterLimit - Default miter limit. Defaults to 10;
+ *      params.shadowBlur - Default shadowBlur. Defaults to 0;
+ *      params.shadowColor - Default shadowColor. Defaults to "rgba(0, 0, 0, 0)";
+ *      params.shadowOffsetX - Default shadodOffsetX. Defaults to 0;
+ *      params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
+ *      params.strokeStyle - Default strokeStyle. Defaults to "#000000";
+ *      params.textAlign - Default textAlign. Defaults to "start";
+ *      params.textBaseline - Default textBaseline. Defaults to "alphabetic";
+ */
+
+
     var Canvas = (function() {
 
         // Define a local copy of Canvas
         var Canvas = function( selector , params ) {
-            return new Canvas.prototype.init( selector );
+            return new Canvas.prototype._init( selector );
         };
 
         Canvas.prototype = {
-            constructor: Canvas,
-/*
-* Function: Canvas
-*
-* Intializes the Canvas object.  Accepts an optional params object which sets a variety of context level properties
-*
-* Parameters:
-* params.fillStyle - default fill style. Defaults to "#000000";
-* params.font - default font. Defaults to "10px sans-serif";
-* params.globalAlpha - default alpha. Defaults to 1;
-* params.globalCompositeOperation - Default global composition operation. Defaults to "source-over";
-* params.lineCap - Default line cap. Defaults to "butt";
-* params.lineJoin - Default line join. Defaults to "miter";
-* params.lineWidth - Default line width. Defaults to 1;
-* params.miterLimit - Default miter limit. Defaults to 10;
-* params.shadowBlur - Default shadowBlur. Defaults to 0;
-* params.shadowColor - Default shadowColor. Defaults to "rgba(0, 0, 0, 0)";
-* params.shadowOffsetX - Default shadodOffsetX. Defaults to 0;
-* params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
-* params.strokeStyle - Default strokeStyle. Defaults to "#000000";
-* params.textAlign - Default textAlign. Defaults to "start";
-* params.textBaseline - Default textBaseline. Defaults to "alphabetic";
-*
-* Returns:
-*  A chainable Canvas object.
-*/
-            init: function( selector, params ) {
+/*	Creates a new Canvas object
+ *  @name CanvasJS
+ *  @function
+ *  @constructor 
+ *  @param  {string} selector a string indicating the id of an HTML Canvas element or the name of the Canvas Element to be createed
+ *  @param {object} params An object containing the following paramters
+ *      params.fillStyle - default fill style. Defaults to "#000000";
+ *      params.font - default font. Defaults to "10px sans-serif";
+ *      params.globalAlpha - default alpha. Defaults to 1;
+ *      params.globalCompositeOperation - Default global composition operation. Defaults to "source-over";
+ *      params.lineCap - Default line cap. Defaults to "butt";
+ *      params.lineJoin - Default line join. Defaults to "miter";
+ *      params.lineWidth - Default line width. Defaults to 1;
+ *      params.miterLimit - Default miter limit. Defaults to 10;
+ *      params.shadowBlur - Default shadowBlur. Defaults to 0;
+ *      params.shadowColor - Default shadowColor. Defaults to "rgba(0, 0, 0, 0)";
+ *      params.shadowOffsetX - Default shadodOffsetX. Defaults to 0;
+ *      params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
+ *      params.strokeStyle - Default strokeStyle. Defaults to "#000000";
+ *      params.textAlign - Default textAlign. Defaults to "start";
+ *      params.textBaseline - Default textBaseline. Defaults to "alphabetic";
+ */
+
+
+            _init: function( selector, params ) {
                 params = params || {};
                 var container;
                 if ( document.getElementById( selector ) ) {
@@ -105,37 +132,13 @@
                 context.textAlign = params.textAlign || "start";
                 context.textBaseline = params.textBaseline || "alphabetic";
 
-/*
-* Function: currrentPos
-*
-* Intializes the Canvas object.  Accepts an optional params object which sets a variety of context level properties
-*
-* Parameters:
-* params.fillStyle - default fill style. Defaults to "#000000";
-* params.font - default font. Defaults to "10px sans-serif";
-* params.globalAlpha - default alpha. Defaults to 1;
-* params.globalCompositeOperation - Default global composition operation. Defaults to "source-over";
-* params.lineCap - Default line cap. Defaults to "butt";
-* params.lineJoin - Default line join. Defaults to "miter";
-* params.lineWidth - Default line width. Defaults to 1;
-* params.miterLimit - Default miter limit. Defaults to 10;
-* params.shadowBlur - Default shadowBlur. Defaults to 0;
-* params.shadowColor - Default shadowColor. Defaults to "rgba(0, 0, 0, 0)";
-* params.shadowOffsetX - Default shadodOffsetX. Defaults to 0;
-* params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
-* params.strokeStyle - Default strokeStyle. Defaults to "#000000";
-* params.textAlign - Default textAlign. Defaults to "start";
-* params.textBaseline - Default textBaseline. Defaults to "alphabetic";
-*
-* Returns:
-*  An hainable Canvas object.
-*
-* See Also:
-*
-*  <circle>
-*  <rectangle>
-*/
-
+/**
+ * Get or set the current x and y coordinates of the 'cursor'
+ * @name currentPos
+ * @function
+ * @param {integer} x The id of the employee.
+ * @param {integer} y The new role of the employee.
+ */
                 var currentPos = function( x , y) {
                     if (x !== undefined &&
                         y !== undefined &&
@@ -144,6 +147,7 @@
 
                         xCurrentPos = x;
                         yCurrentPos = y;
+						context.moveTo(x,y);
                         return {
                             x: xCurrentPos,
                             y: yCurrentPos
@@ -156,7 +160,8 @@
                             }
                         }
                     },
-                    valOrDefault = function(x, current){
+/** @ignore */
+                    _valOrDefault = function(x, current){
                         if( x !== undefined &&
                             typeof(x) === "number"){
                             return x;
@@ -165,10 +170,11 @@
                             return current;
                         }
                     },
+					
                     arc = function(params) {
                         params = params || {};
-                        var x = valOrDefault(params.x, xCurrentPos),
-                            y = valOrDefault(params.y, yCurrentPos),
+                        var x = _valOrDefault(params.x, xCurrentPos),
+                            y = _valOrDefault(params.y, yCurrentPos),
                             radius = params.radius || 0,
                             start = params.start || 0,
                             end = params.end || Math.PI * 2,
@@ -258,8 +264,8 @@
                         //TODO: it shouldn't always stroke the circle.
                         // ODO: sugar for strokeCircle and fillCircle
                         params = params || {};
-                        var x = valOrDefault(params.x, xCurrentPos),
-                            y = valOrDefault(params.y, yCurrentPos),
+                        var x = _valOrDefault(params.x, xCurrentPos),
+                            y = _valOrDefault(params.y, yCurrentPos),
                             radius = params.radius || 10,
                             fillStyle = params.fillStyle || false;
                         moveTo(x, y);
@@ -302,8 +308,8 @@
                      */
                     clearRect = function(params) {
                         params = params || {};
-                        var x = valOrDefault(params.x, xCurrentPos),
-                            y = valOrDefault(params.y, yCurrentPos),
+                        var x = _valOrDefault(params.x, xCurrentPos),
+                            y = _valOrDefault(params.y, yCurrentPos),
                             width = params.width || 0,
                             height = params.height || 0;
                         context.clearRect(x, y, width, height);
@@ -345,8 +351,8 @@
                         img.onload = function() {
                             context.drawImage(img, x, y);
                         };
-                        var x = valOrDefault(x, xCurrentPos),
-                            y = valOrDefault(y, yCurrentPos);
+                        var x = _valOrDefault(x, xCurrentPos),
+                            y = _valOrDefault(y, yCurrentPos);
                         currentPos(x,y);
                         return this;
                     },
@@ -422,8 +428,8 @@
                     },
                     line = function(params) {
                         params = params || {};
-                        var x = valOrDefault(params.x, xCurrentPos),
-                            y = valOrDefault(params.y, yCurrentPos),
+                        var x = _valOrDefault(params.x, xCurrentPos),
+                            y = _valOrDefault(params.y, yCurrentPos),
                             hypotenuse = params.distance || 0,
                             angle = params.angle % 360 || 0,
                             radians = math.radians(angle),
@@ -595,8 +601,8 @@
                             params.x2 !== undefined &&
                             params.y2 !== undefined){
 
-                            x = valOrDefault(params.x1, xCurrentPos);
-                            y = valOrDefault(params.y1, yCurrentPos);
+                            x = _valOrDefault(params.x1, xCurrentPos);
+                            y = _valOrDefault(params.y1, yCurrentPos);
                             width = Math.abs(x - params.x2);
                             height = Math.abs(y - params.y2);
                         }
@@ -605,10 +611,10 @@
                                 params.width !== undefined &&
                                 params.height !== undefined){
 
-                            x = valOrDefault(params.x, xCurrentPos);
-                            y = valOrDefault(params.y, yCurrentPos);
-                            width = valOrDefault(params.width, 0);
-                            height = valOrDefault(params.height, 0);
+                            x = _valOrDefault(params.x, xCurrentPos);
+                            y = _valOrDefault(params.y, yCurrentPos);
+                            width = _valOrDefault(params.width, 0);
+                            height = _valOrDefault(params.height, 0);
                         }
                         else {
                             return this;
@@ -837,7 +843,7 @@
             }
         }
 
-        Canvas.prototype.init.prototype = Canvas.prototype;
+        Canvas.prototype._init.prototype = Canvas.prototype;
 
         return Canvas;
     }());
