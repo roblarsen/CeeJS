@@ -1,8 +1,3 @@
-/**
- * @fileOverview CanvasJS, a helper library for the Canvas element
- * @name CanvasJS
- */
-
 /*!
  * Canvas JavaScript Library v0.1
  * some day:
@@ -30,31 +25,6 @@
 (function(window) {
     "use strict";
     var document = window.document;
-
-/*	Creates a new Canvas object
- *  @name CanvasJS
- *  @function
- *  @constructor 
- *  @param  {string} selector a string indicating the id of an HTML Canvas element or the name of the Canvas Element to be createed
- *  @param {object} params An object containing the following paramters
- *      params.fillStyle - default fill style. Defaults to "#000000";
- *      params.font - default font. Defaults to "10px sans-serif";
- *      params.globalAlpha - default alpha. Defaults to 1;
- *      params.globalCompositeOperation - Default global composition operation. Defaults to "source-over";
- *      params.lineCap - Default line cap. Defaults to "butt";
- *      params.lineJoin - Default line join. Defaults to "miter";
- *      params.lineWidth - Default line width. Defaults to 1;
- *      params.miterLimit - Default miter limit. Defaults to 10;
- *      params.shadowBlur - Default shadowBlur. Defaults to 0;
- *      params.shadowColor - Default shadowColor. Defaults to "rgba(0, 0, 0, 0)";
- *      params.shadowOffsetX - Default shadodOffsetX. Defaults to 0;
- *      params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
- *      params.strokeStyle - Default strokeStyle. Defaults to "#000000";
- *      params.textAlign - Default textAlign. Defaults to "start";
- *      params.textBaseline - Default textBaseline. Defaults to "alphabetic";
- */
-
-
     var Canvas = (function() {
 
         // Define a local copy of Canvas
@@ -63,30 +33,30 @@
         };
 
         Canvas.prototype = {
-/*	Creates a new Canvas object
+
+/**
+ * Creates a new Canvas object
  *  @name CanvasJS
  *  @function
  *  @constructor 
  *  @param  {string} selector a string indicating the id of an HTML Canvas element or the name of the Canvas Element to be createed
  *  @param {object} params An object containing the following paramters
- *      params.fillStyle - default fill style. Defaults to "#000000";
- *      params.font - default font. Defaults to "10px sans-serif";
- *      params.globalAlpha - default alpha. Defaults to 1;
- *      params.globalCompositeOperation - Default global composition operation. Defaults to "source-over";
- *      params.lineCap - Default line cap. Defaults to "butt";
- *      params.lineJoin - Default line join. Defaults to "miter";
- *      params.lineWidth - Default line width. Defaults to 1;
- *      params.miterLimit - Default miter limit. Defaults to 10;
- *      params.shadowBlur - Default shadowBlur. Defaults to 0;
- *      params.shadowColor - Default shadowColor. Defaults to "rgba(0, 0, 0, 0)";
- *      params.shadowOffsetX - Default shadodOffsetX. Defaults to 0;
- *      params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
- *      params.strokeStyle - Default strokeStyle. Defaults to "#000000";
- *      params.textAlign - Default textAlign. Defaults to "start";
- *      params.textBaseline - Default textBaseline. Defaults to "alphabetic";
+ *  @param  {string} params.fillStyle - default fill style. Defaults to "#000000";
+ *  @param  {string} params.font - default font. Defaults to "10px sans-serif";
+ *  @param  {string} params.globalAlpha - default alpha. Defaults to 1;
+ *  @param  {string} params.globalCompositeOperation - Default global composition operation. Defaults to "source-over";
+ *  @param  {string} params.lineCap - Default line cap. Defaults to "butt";
+ *  @param  {string} params.lineJoin - Default line join. Defaults to "miter";
+ *  @param  {string} params.lineWidth - Default line width. Defaults to 1;
+ *  @param  {string} params.miterLimit - Default miter limit. Defaults to 10;
+ *  @param  {string} params.shadowBlur - Default shadowBlur. Defaults to 0;
+ *  @param  {string} params.shadowColor - Default shadowColor. Defaults to "rgba(0, 0, 0, 0)";
+ *  @param  {string} params.shadowOffsetX - Default shadodOffsetX. Defaults to 0;
+ *  @param  {string} params.shadowOffsetY - Default shadowOffsetY. Defaults to 0;
+ *  @param  {string} params.strokeStyle - Default strokeStyle. Defaults to "#000000";
+ *  @param  {string} params.textAlign - Default textAlign. Defaults to "start";
+ *  @param  {string} params.textBaseline - Default textBaseline. Defaults to "alphabetic";
  */
-
-
             _init: function( selector, params ) {
                 params = params || {};
                 var container;
@@ -136,8 +106,8 @@
  * Get or set the current x and y coordinates of the 'cursor'
  * @name currentPos
  * @function
- * @param {integer} x The id of the employee.
- * @param {integer} y The new role of the employee.
+ * @param {integer} x the x coordinate
+ * @param {integer} y the new y coordinate
  */
                 var currentPos = function( x , y) {
                     if (x !== undefined &&
@@ -170,6 +140,15 @@
                             return current;
                         }
                     },
+/**
+ * Adds an arc with the given control points and radius to the current subpath, connected to the previous point by a straight line.
+ * @param {integer} params.x the x coordinate
+ * @param {integer} params.y the y coordinate
+ * @param {integer} params.radius the radius of the arc
+ * @param {integer} params.start the starting angle
+ * @param {integer} params.end the ending angle
+ * @param {Boolean} [params.counter] Omitted or set to false this argument will arc counter/anti clockwise 
+ */
 					
                     arc = function(params) {
                         params = params || {};
@@ -183,21 +162,42 @@
                         context.arc(x, y, radius, start, end, counter);
                         return this;
                     },
-                    arcTo = function(x1, y1, x2, y2, radius) {
+/**
+ * Adds points to the subpath such that the arc described by the circumference of the circle described by the arguments, starting at the given start angle and ending at the given end angle, going in the given direction (defaulting to clockwise), is added to the path, connected to the previous point by a straight line.
+ * @param {integer} x1 the starting x coordinate
+ * @param {integer} y1 the starting y coordinate
+ * @param {integer} x2 the ending x coordinate
+ * @param {integer} y2 the ending y coordinate
+ * @param {integer} params.x the x coordinate
+ * @param {integer} params.y the y coordinate
+ */ 					
+ 					arcTo = function(x1, y1, x2, y2, radius) {
                         context.arcTo(x1, y1, x2, y2, radius);
                         currentPos(x2,y2);
                         return this;
                     },
-                    beginPath = function() {
+/**
+ * Resets the current path.
+ */ 
+ 					beginPath = function() {
                         context.beginPath();
                         return this;
                     },
+/**
+ * Adds the given point to the current subpath, connected to the previous one by a cubic Bézier curve with the given control points.
+ * @param {integer} cp1x the starting control point x coordinate
+ * @param {integer} cp1y the starting control point x coordinate
+ * @param {integer} cp2y the ending control point x coordinate
+ * @param {integer} cp2y the ending control point x coordinate
+ * @param {integer} x the ending x coordinate
+ * @param {integer} y the ending y coordinate
+ */ 					
                     bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x, y) {
                         context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
                         currentPos(x,y);
                         return this;
                     },
-                    boundingBox = function(params){
+					boundingBox = function(params){
                         var h,w,leftx,topy;
                         if(params === undefined){
                             return bbCurrent;
