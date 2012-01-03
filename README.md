@@ -13,8 +13,8 @@ There are currently two areas of focus
 A simple example might look like this
 
 ```javascript
-    var drawCanvas = function(id){
-        var ctx = new Canvas(id); // creates a new Canvas object in the canvas with id="ctx"
+   
+        var ctx = new Canvas("ctx"); 
         ctx.reset();
         for (var i = 0; i<1000; i++){
             var color = 'rgb(0,' + Math.floor(255 - i/7) + ',' +   
@@ -23,6 +23,6 @@ A simple example might look like this
             ctx.beginPath().line({x:.4*i,y:.4*i,angle: i, distance:i * .40 }).strokeStyle(color).stroke();
         }
         
-    };
+   
 ```    
     
