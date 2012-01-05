@@ -25,4 +25,14 @@ A simple example might look like this
         
    
 ```    
-    
+##Credits
+
+So far...
+
+Dreamed up by Rob Larsen with active encouragement by the Isobar Creative Technology team. 
+
+Kicked off by Bob Holt
+
+Smart stuff added by Marc Neuwirth
+
+Continuing housekeeping and project sheperding by Rob Larsen
