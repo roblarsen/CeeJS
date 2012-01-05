@@ -197,6 +197,13 @@
                         currentPos(x,y);
                         return this;
                     },
+/**
+ * Called without parameters, it returns the current bounding box of the last drawn shape- specifically an object containing the top left, top, top right, right, bottom right, bottom, bottom left and left coordinates.
+ *
+ * it's also called internally to set the property whenever an applicable shape is drawn.
+ */
+
+
 					boundingBox = function(params){
                         var h,w,leftx,topy;
                         if(params === undefined){
@@ -259,10 +266,18 @@
 
                         return bbCurrent;
                     },
+/**
+ * Draws a circle with the supplied starting x,y, radius and fillStyle
+ * @params.x {integer} the starting x coordinate
+ * @params.y {integer} the starting y coordinate
+ * @params.radius {radius} the radius of the circle
+ * @params.fillStyle {Any} the fill style for the circle or false to suppress the fill
+ */ 					
+					
                     circle = function( params ) {
                         //TODO: expand params to set any style appliable to a rectangle
                         //TODO: it shouldn't always stroke the circle.
-                        // ODO: sugar for strokeCircle and fillCircle
+                        //TODO: sugar for strokeCircle and fillCircle
                         params = params || {};
                         var x = _valOrDefault(params.x, xCurrentPos),
                             y = _valOrDefault(params.y, yCurrentPos),
@@ -287,25 +302,14 @@
                         return this;
                     },
 
-                    /*
-                     * Function: clearRect
-                     *
-                     * Clears a rectangular area, making it fully transparent
-                     *
-                     * Parameters:
-                     *  params.x - (Integer) Starting x coordinate. Defaults to the current position.
-                     *  params.y - (Integer) Starting y coordinate. Defaults to the current position.
-                     *  params.width - (Integer) Rectangle width. Defaults to 0.
-                     *  params.height - (Integer) Rectangle height. Defaults to 0.
-                     *
-                     * Returns:
-                     *  An object containing the current x and y positions.
-                     *
-                     * See Also:
-                     *
-                     *  <circle>
-                     *  <rectangle>
-                     */
+/**
+ * Clears a rectangular area, making it fully transparent
+ *
+ *  @params.x  {Integer} Starting x coordinate. Defaults to the current position.
+ *  @params.y  {Integer} Starting y coordinate. Defaults to the current position.
+ *  @params.width {Integer} Rectangle width. Defaults to 0.
+ *  @params.height {Integer} Rectangle height. Defaults to 0.
+ */
                     clearRect = function(params) {
                         params = params || {};
                         var x = _valOrDefault(params.x, xCurrentPos),
