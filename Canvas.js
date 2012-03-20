@@ -63,12 +63,12 @@
                 if ( document.getElementById( selector ) ) {
                     container = document.getElementById( selector );
                 } else {
-                  	container = document.createElement("canvas");
-                	container.width = params.width || "100";
-                	container.height = params.height || "100";
-					container.id= selector;
+                    container = document.createElement("canvas");
+                    container.width = params.width || "100";
+                    container.height = params.height || "100";
+                    container.id= selector;
 
-				}
+                }
                 if (container.nodeName.toLowerCase() !== "canvas") {
                     var canvas = document.createElement("canvas");
                     canvas.width = container.offsetHeight;
@@ -76,7 +76,7 @@
                     canvas.id = "bigc";
                     container.appendChild(canvas);
                     context = document.getElementById("bigc");
-					throw "The provided ID wasn't a canvas element. A canvas element with id 'bigc' created as a child of the supplied node."
+                    throw "The provided ID wasn't a canvas element. A canvas element with id 'bigc' created as a child of the supplied node."
                 }
                 var xCurrentPos = 0,
                     yCurrentPos = 0,
@@ -86,21 +86,21 @@
                 *  These are all available to set at intialization
                 */
 
-                context.fillStyle = params.fillStyle || "#ffffff";
-                context.font = params.font || "10px sans-serif";
-                context.globalAlpha = params.globalAlpha || 1;
-                context.globalCompositeOperation = params.globalCompositeOperation || "source-over";
-                context.lineCap = params.lineCap || "butt";
-                context.lineJoin = params.lineJoin || "miter";
-                context.lineWidth = params.lineWidth || 1;
-                context.miterLimit = params.miterLimit || 10;
-                context.shadowBlur = params.shadowBlur || 0;
-                context.shadowColor = params.shadowColor || "rgba(0, 0, 0, 0)";
-                context.shadowOffsetX = params.shadodOffsetX || 0;
-                context.shadowOffsetY = params.shadowOffsetY || 0;
-                context.strokeStyle = params.strokeStyle || "#000000";
-                context.textAlign = params.textAlign || "start";
-                context.textBaseline = params.textBaseline || "alphabetic";
+                context.fillStyle = params.fillStyle || context.fillStyle;
+                context.font = params.font || context.font;
+                context.globalAlpha = params.globalAlpha || context.globalAlpha;
+                context.globalCompositeOperation = params.globalCompositeOperation || context.globalCompositeOperation;
+                context.lineCap = params.lineCap || context.lineCap;
+                context.lineJoin = params.lineJoin || context.lineJoin;
+                context.lineWidth = params.lineWidth || context.lineWidth;
+                context.miterLimit = params.miterLimit || context.miterLimit;
+                context.shadowBlur = params.shadowBlur || context.shadowBlur;
+                context.shadowColor = params.shadowColor || context.shadowColor;
+                context.shadowOffsetX = params.shadodOffsetX || context.shadowOffsetX;
+                context.shadowOffsetY = params.shadowOffsetY || context.shadowOffsetY;
+                context.strokeStyle = params.strokeStyle || context.strokeStyle;
+                context.textAlign = params.textAlign || context.textAlign;
+                context.textBaseline = params.textBaseline || context.textBaseline;
 
 /**
  * Get or set the current x and y coordinates of the 'cursor'
@@ -117,7 +117,6 @@
 
                         xCurrentPos = x;
                         yCurrentPos = y;
-						context.moveTo(x,y);
                         return {
                             x: xCurrentPos,
                             y: yCurrentPos
@@ -149,7 +148,7 @@
  * @param {integer} params.end the ending angle
  * @param {Boolean} [params.counter] Omitted or set to false this argument will arc counter/anti clockwise 
  */
-					
+                    
                     arc = function(params) {
                         params = params || {};
                         var x = _valOrDefault(params.x, xCurrentPos),
@@ -170,8 +169,8 @@
  * @param {integer} y2 the ending y coordinate
  * @param {integer} params.x the x coordinate
  * @param {integer} params.y the y coordinate
- */ 					
- 					arcTo = function(x1, y1, x2, y2, radius) {
+ */                     
+                    arcTo = function(x1, y1, x2, y2, radius) {
                         context.arcTo(x1, y1, x2, y2, radius);
                         currentPos(x2,y2);
                         return this;
@@ -179,7 +178,7 @@
 /**
  * Resets the current path.
  */ 
- 					beginPath = function() {
+                    beginPath = function() {
                         context.beginPath();
                         return this;
                     },
@@ -191,7 +190,7 @@
  * @param {integer} cp2y the ending control point x coordinate
  * @param {integer} x the ending x coordinate
  * @param {integer} y the ending y coordinate
- */ 					
+ */                     
                     bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x, y) {
                         context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
                         currentPos(x,y);
@@ -204,7 +203,7 @@
  */
 
 
-					boundingBox = function(params){
+                    boundingBox = function(params){
                         var h,w,leftx,topy;
                         if(params === undefined){
                             return bbCurrent;
@@ -272,8 +271,8 @@
  * @params.y {integer} the starting y coordinate
  * @params.radius {radius} the radius of the circle
  * @params.fillStyle {Any} the fill style for the circle or false to suppress the fill
- */ 					
-					
+ */                     
+                    
                     circle = function( params ) {
                         //TODO: expand params to set any style appliable to a rectangle
                         //TODO: it shouldn't always stroke the circle.
