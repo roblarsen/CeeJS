@@ -372,15 +372,14 @@
                         var x = _valOrDefault(params.x, xCurrentPos),
                             y = _valOrDefault(params.y, yCurrentPos),
                             radius = params.radius || 10,
-                            fillStyle = params.fillStyle || context.fillStyle,
-							strokeStyle = params.strokeStyle || false;
+                            fillStyle = params.fillStyle || context.fillStyle;
 
 						this.circle({
 							x: x,
 							y: y,
 							radius: radius,
 							fillStyle: fillStyle,
-							strokeStyle: strokeStyle
+							strokeStyle: false
 						});
 
 						return this;
