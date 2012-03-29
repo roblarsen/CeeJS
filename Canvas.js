@@ -38,7 +38,7 @@
  * Creates a new Canvas object
  *  @name CanvasJS
  *  @function
- *  @constructor 
+ *  @constructor
  *  @param  {string} selector a string indicating the id of an HTML Canvas element or the name of the Canvas Element to be createed
  *  @param {object} params An object containing the following paramters
  *  @param  {string} params.fillStyle - default fill style. Defaults to "#000000";
@@ -146,9 +146,9 @@
  * @param {integer} params.radius the radius of the arc
  * @param {integer} params.start the starting angle
  * @param {integer} params.end the ending angle
- * @param {Boolean} [params.counter] Omitted or set to false this argument will arc counter/anti clockwise 
+ * @param {Boolean} [params.counter] Omitted or set to false this argument will arc counter/anti clockwise
  */
-                    
+
                     arc = function(params) {
                         params = params || {};
                         var x = _valOrDefault(params.x, xCurrentPos),
@@ -169,7 +169,7 @@
  * @param {integer} y2 the ending y coordinate
  * @param {integer} params.x the x coordinate
  * @param {integer} params.y the y coordinate
- */                     
+ */
                     arcTo = function(x1, y1, x2, y2, radius) {
                         context.arcTo(x1, y1, x2, y2, radius);
                         currentPos(x2,y2);
@@ -177,20 +177,20 @@
                     },
 /**
  * Resets the current path.
- */ 
+ */
                     beginPath = function() {
                         context.beginPath();
                         return this;
                     },
 /**
- * Adds the given point to the current subpath, connected to the previous one by a cubic Bézier curve with the given control points.
+ * Adds the given point to the current subpath, connected to the previous one by a cubic Bï¿½zier curve with the given control points.
  * @param {integer} cp1x the starting control point x coordinate
  * @param {integer} cp1y the starting control point x coordinate
  * @param {integer} cp2y the ending control point x coordinate
  * @param {integer} cp2y the ending control point x coordinate
  * @param {integer} x the ending x coordinate
  * @param {integer} y the ending y coordinate
- */                     
+ */
                     bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x, y) {
                         context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
                         currentPos(x,y);
@@ -271,8 +271,8 @@
  * @params.y {integer} the starting y coordinate
  * @params.radius {radius} the radius of the circle
  * @params.fillStyle {Any} the fill style for the circle or false to suppress the fill
- */                     
-                    
+ */
+
                     circle = function( params ) {
                         //TODO: expand params to set any style appliable to a rectangle
                         //TODO: it shouldn't always stroke the circle.
@@ -281,7 +281,8 @@
                         var x = _valOrDefault(params.x, xCurrentPos),
                             y = _valOrDefault(params.y, yCurrentPos),
                             radius = params.radius || 10,
-                            fillStyle = params.fillStyle || false;
+                            fillStyle = params.fillStyle || false,
+                            strokeStyle = params.strokeStyle || false;
                         moveTo(x, y);
                         beginPath();
                         arc({
@@ -289,11 +290,14 @@
                             y: y,
                             radius: radius
                         });
-                        stroke();
                         if (fillStyle) {
                             context.fillStyle = fillStyle;
                             context.fill();
                         }
+						if (strokeStyle) {
+							context.strokeStyle = strokeStyle;
+	                        stroke();
+						}
                         closePath();
 
                         boundingBox({cx:x,cy:y,r:radius});
@@ -363,8 +367,23 @@
                         context.fill();
                         return this;
                     },
-                    fillCircle = function(){
-                        //TODO implement
+                    fillCircle = function(params){
+                        params = params || {};
+                        var x = _valOrDefault(params.x, xCurrentPos),
+                            y = _valOrDefault(params.y, yCurrentPos),
+                            radius = params.radius || 10,
+                            fillStyle = params.fillStyle || context.fillStyle,
+							strokeStyle = params.strokeStyle || false;
+
+						this.circle({
+							x: x,
+							y: y,
+							radius: radius,
+							fillStyle: fillStyle,
+							strokeStyle: strokeStyle
+						});
+
+						return this;
                     },
                     fillRect = function(x, y, width, height) {
                         context.fillRect(x, y, width, height);
@@ -729,8 +748,22 @@
                     shadowOffset = function() {
                         //TODO, make one call if we need to set both!
                     },
-                    strokeCircle = function(){
-                        //TODO implement
+                    strokeCircle = function(params){
+                        params = params || {};
+                        var x = _valOrDefault(params.x, xCurrentPos),
+                            y = _valOrDefault(params.y, yCurrentPos),
+                            radius = params.radius || 10,
+							strokeStyle = params.strokeStyle || context.strokeStyle;
+
+						this.circle({
+							x: x,
+							y: y,
+							radius: radius,
+							fillStyle: false,
+							strokeStyle: strokeStyle
+						});
+
+						return this;
                     },
                     strokeStyle = function(color) {
                         if (color !== undefined) {
@@ -800,6 +833,7 @@
                     createRadialGradient : createRadialGradient,
                     drawImage: drawImage,
                     fill: fill,
+					fillCircle: fillCircle,
                     fillRect: fillRect,
                     fillStyle: fillStyle,
                     fillText: fillText,
@@ -835,6 +869,7 @@
                     shadowOffsetX: shadowOffsetX,
                     shadowOffsetY: shadowOffsetY,
                     stroke: stroke,
+					strokeCircle: strokeCircle,
                     strokeStyle: strokeStyle,
                     strokeText: strokeText,
                     strokeRect: strokeRect,
