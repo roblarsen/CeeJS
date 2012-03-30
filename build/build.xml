@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+<project name="CanvasJS Build" default="build" basedir="../"> <!-- one back since we're in build/ -->
+
+
+    <!-- Load in Ant-Contrib to give us access to some very useful tasks! -->
+    <!-- the .jar file is located in the tools directory -->
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="${basedir}/build/tools/ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+
+    <!-- load shell environment -->
+    <property environment="ENV" />
+
+    <!-- load property file -->
+    <property file="build/config/ant.properties"/>
+
+    <!-- Test for Ant Version Delete this task and all instances of overwrite='no' if you can't upgrade to latest-->
+    <fail message="All features of the build script require Ant version 1.8.2 or greater. Please upgrade to the latest version or remove all instances of 'overwrite=no' (and this fail task) from the build script to continue">
+        <condition>
+            <not>
+                 <antversion atleast="1.8.2"/>
+            </not>
+        </condition>
+    </fail>
+
+    <target name="build" depends="-build"/>
+
+    <target name="clean" depends="-clean"/>
+
+    <!-- JSHint target, run separately -->
+    <target name="jshint">
+      <apply dir="${basedir}" executable="java" parallel="false" failonerror="true">
+            <fileset file="Canvas.js"></fileset>
+            <arg value="-jar" />
+            <arg path="./${dir.build.tools}/${tool.rhino}" />
+            <arg path="./${dir.build.tools}/${tool.jshint}" />
+            <srcfile/>
+            <arg value="${tool.jshint.opts}" />
+        </apply>
+        <echo>JSHint Successful</echo>
+    </target>
+
+    <!--
+    *************************************************
+    * BUILD TARGETS                                 *
+    *************************************************
+    -->
+
+	<target name="-build"
+          depends="-intro,
+				   -clean,
+                   -js.all.minify,
+				   -jsdoc"/>
+
+  <!--
+  *************************************************
+  * FUNCTION TARGETS                              *
+  *************************************************
+  -->
+
+  <target name="-clean" description="(PRIVATE) Wipe the previous build (Deletes Canvas.min.js)">
+  <!-- This is a private target -->
+      <echo message="Cleaning up previous build..."/>
+	  <delete file="${basedir}/Canvas.min.js" />
+      <delete dir="./${dir.docs}/"/>
+  </target>
+
+  <target name="-intro" description="(PRIVATE) Kindly inform the developer about the impending magic">
+  <!-- This is a private target -->
+
+        <echo message=" "/>
+        <echo message="====================================================================="/>
+        <echo message="Welcome to the CanvasJS Build Script!"/>
+        <echo message=" "/>
+        <echo message="(Based off the HTML5 Boilerplate Build Script)"/>
+        <echo message=" "/>
+        <echo message="====================================================================="/>
+        <echo message=" "/>
+        <echo message=" "/>
+
+  </target>
+
+  <!-- JAVASCRIPT -->
+  <target name="-js.all.minify" description="(PRIVATE) Minifies the scripts.js files created by js.scripts.concat">
+      <echo message="Minifying scripts"/>
+
+      <apply executable="java" parallel="false">
+		<fileset file="Canvas.js"></fileset>
+		<arg line="-jar"/>
+		<arg path="./${dir.build.tools}/closure-compiler-v1346.jar"/>
+		<arg line="--js"/>
+		<srcfile/>
+		<arg line="--compilation_level" />
+		<arg value="${scripts.compilation.level}" />
+		<arg line="--warning_level" />
+		<arg value="${scripts.compilation.warninglevel}" />
+		<arg line="--js_output_file" />
+		<mapper type="glob" from="*.js" to="${basedir}/*.min.js"/>
+		<targetfile/>
+      </apply>
+  </target>
+
+	<target name="-jsdoc" description="(PRIVATE) Publishes documentation">
+		<echo message="Building documentation"/>
+		<apply executable="java" parallel="false" dir="./${dir.jsdoc}">
+			<fileset file="Canvas.js"></fileset>
+			<arg line="-classpath"/>
+			<arg path="./${dir.jsdoc}/lib/js.jar"/>
+			<arg value="org.mozilla.javascript.tools.shell.Main"/>
+			<arg line="-modules" />
+			<arg value="node_modules"/>
+			<arg line="-modules" />
+			<arg value="rhino_modules"/>
+			<arg path="${dir.jsdoc}/jsdoc.js"/>
+			<arg line="--destination"/>
+			<arg value="../../../docs"/>
+		</apply>
+	</target>
+
+</project>
