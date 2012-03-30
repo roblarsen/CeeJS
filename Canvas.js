@@ -754,7 +754,7 @@
  * Gets/Sets shadowOffsetX and shadowOffsetY in one call.
  * Passing no parameters returns an object containing the x and y offsets
  * shadowOffset().x === shadowOffsetX() && shadowOffset().y === shadowOffsetY()
- * 
+ *
  * @param {integer} x shadowOffsetX
  * @param {integer} y shadowOffsetY
  */
@@ -765,8 +765,11 @@
 							context.shadowOffsetX = x;
 							context.shadowOffsetY = y;
 							return this;
-						}
-						else {
+						} else if (x !== undefined) {
+							context.shadowOffsetX = x;
+							context.shadowOffsetY = x;
+							return this;
+						} else {
 							return {
 								x: context.shadowOffsetX,
 								y: context.shadowOffsetY
