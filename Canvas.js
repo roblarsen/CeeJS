@@ -750,8 +750,31 @@
                             return context.shadowOffsetY;
                         }
                     },
-                    shadowOffset = function() {
-                        //TODO, make one call if we need to set both!
+/**
+ * Gets/Sets shadowOffsetX and shadowOffsetY in one call.
+ * Passing one parameter sets both shadowOffsetX and shadowOffsetY to the same value
+ * Passing no parameters returns an object containing the x and y offsets
+ * shadowOffset().x === shadowOffsetX() && shadowOffset().y === shadowOffsetY()
+ *
+ * @param {integer} x shadowOffsetX
+ * @param {integer} y shadowOffsetY
+ */
+					shadowOffset = function(x, y) {
+						if (x !== undefined) {
+							context.shadowOffsetX = x;
+
+							if (y !== undefined) {
+								context.shadowOffsetY = y;
+							} else {
+								context.shadowOffsetY = x;
+							}
+							return this;
+						} else {
+							return {
+								x: context.shadowOffsetX,
+								y: context.shadowOffsetY
+							}
+						}
                     },
 /**
  * Draws a circle with the supplied starting x,y, radius and strokeStyle and no fill
@@ -878,6 +901,7 @@
                     setTransform : setTransform,
                     shadowBlur: shadowBlur,
                     shadowColor: shadowColor,
+					shadowOffset: shadowOffset,
                     shadowOffsetX: shadowOffsetX,
                     shadowOffsetY: shadowOffsetY,
                     stroke: stroke,
