@@ -266,17 +266,16 @@
                         return bbCurrent;
                     },
 /**
- * Draws a circle with the supplied starting x,y, radius and fillStyle
+ * Draws a circle with the supplied starting x,y, radius, fillStyle, and strokeStyle
  * @params.x {integer} the starting x coordinate
  * @params.y {integer} the starting y coordinate
  * @params.radius {radius} the radius of the circle
  * @params.fillStyle {Any} the fill style for the circle or false to suppress the fill
+ * @params.strokeStyle {Any} the stroke style for the circle or false to suppress the stroke
  */
 
                     circle = function( params ) {
                         //TODO: expand params to set any style appliable to a rectangle
-                        //TODO: it shouldn't always stroke the circle.
-                        //TODO: sugar for strokeCircle and fillCircle
                         params = params || {};
                         var x = _valOrDefault(params.x, xCurrentPos),
                             y = _valOrDefault(params.y, yCurrentPos),
@@ -367,6 +366,13 @@
                         context.fill();
                         return this;
                     },
+/**
+ * Draws a circle with the supplied starting x,y, radius and fillStyle and no stroke
+ * @params.x {integer} the starting x coordinate
+ * @params.y {integer} the starting y coordinate
+ * @params.radius {radius} the radius of the circle
+ * @params.fillStyle {Any} the fill style for the circle. a falsey value will use the current context fillStyle
+ */
                     fillCircle = function(params){
                         params = params || {};
                         var x = _valOrDefault(params.x, xCurrentPos),
@@ -747,6 +753,13 @@
                     shadowOffset = function() {
                         //TODO, make one call if we need to set both!
                     },
+/**
+ * Draws a circle with the supplied starting x,y, radius and strokeStyle and no fill
+ * @params.x {integer} the starting x coordinate
+ * @params.y {integer} the starting y coordinate
+ * @params.radius {radius} the radius of the circle
+ * @params.strokeStyle {Any} the stroke style for the circle. a falsey value will use the current context strokeStyle
+ */
                     strokeCircle = function(params){
                         params = params || {};
                         var x = _valOrDefault(params.x, xCurrentPos),
