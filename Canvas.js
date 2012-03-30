@@ -760,15 +760,14 @@
  * @param {integer} y shadowOffsetY
  */
 					shadowOffset = function(x, y) {
-						if (x !== undefined &&
-							y !== undefined){
+						if (x !== undefined) {
+							context.shadowOffsetX = x;
 
-							context.shadowOffsetX = x;
-							context.shadowOffsetY = y;
-							return this;
-						} else if (x !== undefined) {
-							context.shadowOffsetX = x;
-							context.shadowOffsetY = x;
+							if (y !== undefined) {
+								context.shadowOffsetY = y;
+							} else {
+								context.shadowOffsetY = x;
+							}
 							return this;
 						} else {
 							return {
