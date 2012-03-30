@@ -752,6 +752,7 @@
                     },
 /**
  * Gets/Sets shadowOffsetX and shadowOffsetY in one call.
+ * Passing one parameter sets both shadowOffsetX and shadowOffsetY to the same value
  * Passing no parameters returns an object containing the x and y offsets
  * shadowOffset().x === shadowOffsetX() && shadowOffset().y === shadowOffsetY()
  *
