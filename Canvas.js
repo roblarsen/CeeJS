@@ -76,7 +76,7 @@
                     canvas.id = "bigc";
                     container.appendChild(canvas);
                     context = document.getElementById("bigc");
-                    throw "The provided ID wasn't a canvas element. A canvas element with id 'bigc' created as a child of the supplied node."
+                    throw "The provided ID wasn't a canvas element. A canvas element with id 'bigc' created as a child of the supplied node.";
                 }
                 var xCurrentPos = 0,
                     yCurrentPos = 0,
@@ -120,13 +120,13 @@
                         return {
                             x: xCurrentPos,
                             y: yCurrentPos
-                        }
+                        };
                     }
                     else {
                         return {
                             x: xCurrentPos,
                             y: yCurrentPos
-                            }
+                            };
                         }
                     },
 /** @ignore */
@@ -141,6 +141,8 @@
                     },
 /**
  * Adds an arc with the given control points and radius to the current subpath, connected to the previous point by a straight line.
+ * @name arc
+ * @function
  * @param {integer} params.x the x coordinate
  * @param {integer} params.y the y coordinate
  * @param {integer} params.radius the radius of the arc
@@ -163,6 +165,8 @@
                     },
 /**
  * Adds points to the subpath such that the arc described by the circumference of the circle described by the arguments, starting at the given start angle and ending at the given end angle, going in the given direction (defaulting to clockwise), is added to the path, connected to the previous point by a straight line.
+ * @name arcTo
+ * @function
  * @param {integer} x1 the starting x coordinate
  * @param {integer} y1 the starting y coordinate
  * @param {integer} x2 the ending x coordinate
@@ -177,6 +181,8 @@
                     },
 /**
  * Resets the current path.
+ * @name beginPath
+ * @function
  */
                     beginPath = function() {
                         context.beginPath();
@@ -184,6 +190,8 @@
                     },
 /**
  * Adds the given point to the current subpath, connected to the previous one by a cubic B�zier curve with the given control points.
+ * @name bezierCurveTo
+ * @function
  * @param {integer} cp1x the starting control point x coordinate
  * @param {integer} cp1y the starting control point x coordinate
  * @param {integer} cp2y the ending control point x coordinate
@@ -200,6 +208,9 @@
  * Called without parameters, it returns the current bounding box of the last drawn shape- specifically an object containing the top left, top, top right, right, bottom right, bottom, bottom left and left coordinates.
  *
  * it's also called internally to set the property whenever an applicable shape is drawn.
+ * @name boundingBox
+ * @function
+ *
  */
 
 
@@ -267,6 +278,8 @@
                     },
 /**
  * Draws a circle with the supplied starting x,y, radius, fillStyle, and strokeStyle
+ * @name circle
+ * @function
  * @params.x {integer} the starting x coordinate
  * @params.y {integer} the starting y coordinate
  * @params.radius {radius} the radius of the circle
@@ -306,7 +319,8 @@
 
 /**
  * Clears a rectangular area, making it fully transparent
- *
+ * @name clearRect
+ * @function
  *  @params.x  {Integer} Starting x coordinate. Defaults to the current position.
  *  @params.y  {Integer} Starting y coordinate. Defaults to the current position.
  *  @params.width {Integer} Rectangle width. Defaults to 0.
@@ -324,32 +338,60 @@
 
                         return this;
                     },
+/**
+ * @name clip
+ * @function
+ */
                     clip = function() {
                         context.clip();
                         return this;
                     },
+/**
+ * @name closePath
+ * @function
+ */
                     closePath = function() {
                         context.closePath();
                         return this;
                     },
+/**
+ * @name createImageData
+ * @function
+ */
                     createImageData = function(height, width) {
                         context.closePath(height, width);
                         return this;
                     },
+/**
+ * @name createLinearGradient
+ * @function
+ */
                     createLinearGradient = function(x0, y0, x1, y1) {
                         context.createLinearGradient(x0, y0, x1, y1);
                         return this;
                     },
+/**
+ * @name createPattern
+ * @function
+ */
                     createPattern = function(img, repetition) {
                         context.createPattern(img, repetition);
                         return this;
                     },
+/**
+ * @name createRadialGradient
+ * @function
+ */
                     createRadialGradient = function( x0 , y0 , r0 , x1 , y1 ,  r1  ){
                         context.createRadialGradient( x0 , y0 , r0 , x1 , y1 ,  r1 );
                         return this;
                     },
+/**
+ * @name drawImage
+ * @function
+ */
                     drawImage = function(img, x, y) {
-                        if (img.nodeName == undefined) {
+                        if (img.nodeName == null) {
                             var newImg = new Image();
                             newImg.src = img;
                             img = newImg;
@@ -357,17 +399,23 @@
                         img.onload = function() {
                             context.drawImage(img, x, y);
                         };
-                        var x = _valOrDefault(x, xCurrentPos),
-                            y = _valOrDefault(y, yCurrentPos);
+                        x = _valOrDefault(x, xCurrentPos);
+                        y = _valOrDefault(y, yCurrentPos);
                         currentPos(x,y);
                         return this;
                     },
+/**
+ * @name fill
+ * @function
+ */
                     fill = function() {
                         context.fill();
                         return this;
                     },
 /**
  * Draws a circle with the supplied starting x,y, radius and fillStyle and no stroke
+ * @name fillCircle
+ * @function
  * @params.x {integer} the starting x coordinate
  * @params.y {integer} the starting y coordinate
  * @params.radius {radius} the radius of the circle
@@ -390,6 +438,10 @@
 
 						return this;
                     },
+/**
+ * @name fillRect
+ * @function
+ */
                     fillRect = function(x, y, width, height) {
                         context.fillRect(x, y, width, height);
                         currentPos(x,y);
@@ -398,6 +450,10 @@
 
                         return this;
                     },
+/**
+ * @name fillStyle
+ * @function
+ */
                     fillStyle = function(color) {
                         if (color !== undefined) {
                             context.fillStyle = color;
@@ -407,6 +463,10 @@
                             return context.fillStyle;
                         }
                     },
+/**
+ * @name fillText
+ * @function
+ */
                     fillText = function(text, x, y, maxWidth) {
                         if (maxWidth === undefined ){
                              context.fillText(text, x, y);
@@ -418,6 +478,10 @@
                         currentPos(x,y);
                         return this;
                     },
+/**
+ * @name font
+ * @function
+ */
                     font = function(declaration) {
                         if (declaration !== undefined) {
                             context.font = declaration;
@@ -427,10 +491,18 @@
                             return context.font;
                         }
                     },
+/**
+ * @name getImageData
+ * @function
+ */
                     getImageData = function( x, y, width, height ){
                         currentPos(x,y);
-                        return context.getImageData( x, y, width, height )
+                        return context.getImageData( x, y, width, height );
                     },
+/**
+ * @name globalAlpha
+ * @function
+ */
                     globalAlpha = function(num) {
                         if (num !== undefined) {
                             context.globalAlpha = num;
@@ -440,6 +512,10 @@
                             return context.globalAlpha;
                         }
                     },
+/**
+ * @name globalCompositeOperation
+ * @function
+ */
                     globalCompositeOperation = function(op) {
                         if (op !== undefined) {
                             context.globalCompositeOperation = op;
@@ -449,10 +525,18 @@
                             return context.globalCompositeOperation;
                         }
                     },
+/**
+ * @name isPointInPath
+ * @function
+ */
                     isPointInPath = function( x , y ){
                         //TODO: does this make sense to update the x, y?
                         return context.isPointInPath( x , y );
                     },
+/**
+ * @name line
+ * @function
+ */
                     line = function(params) {
                         params = params || {};
                         var x = _valOrDefault(params.x, xCurrentPos),
@@ -473,6 +557,10 @@
 
                         return this;
                     },
+/**
+ * @name lineCap
+ * @function
+ */
                     lineCap = function(cap) {
                         if (cap !== undefined) {
                             context.lineCap = cap;
@@ -482,6 +570,10 @@
                             return context.lineCap;
                         }
                     },
+/**
+ * @name lineJoin
+ * @function
+ */
                     lineJoin = function(join) {
                         if (join !== undefined) {
                             context.lineJoin = join;
@@ -491,6 +583,10 @@
                             return context.lineJoin;
                         }
                     },
+/**
+ * @name lineTo
+ * @function
+ */
                     lineTo = function(x, y) {
                         context.lineTo(x, y);
                         boundingBox({x:x, y:y});
@@ -499,6 +595,10 @@
 
                         return this;
                     },
+/**
+ * @name lineWidth
+ * @function
+ */
                     lineWidth = function(width) {
                         if (width !== undefined) {
                             context.lineWidth = width;
@@ -508,6 +608,10 @@
                             return context.lineWidth;
                         }
                     },
+/**
+ * @name math
+ * @function
+ */
                     math = {
                         cosec: function( num ) {
                             return 1 / Math.sin(num);
@@ -519,9 +623,17 @@
                             return degrees * (Math.PI / 180);
                         }
                     },
+/**
+ * @name measureText
+ * @function
+ */
                     measureText = function( string ){
                         return context.measureText( string );
                     },
+/**
+ * @name miterLimit
+ * @function
+ */
                     miterLimit = function(limit) {
                         if (limit !== undefined) {
                             context.miterLimit = limit;
@@ -531,24 +643,39 @@
                             return context.miterLimit;
                         }
                     },
+/**
+ * @name moveTo
+ * @function
+ */
                     moveTo = function(x, y) {
                         context.moveTo(x, y);
                         currentPos(x,y);
                         return this;
                     },
+/**
+ * @name putImageData
+ * @function
+ */
                     putImageData = function( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight ) {
                         currentPos(x,y);
                         context.putImageData( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight );
                         return this;
                     },
+/**
+ * @name quadraticCurveTo
+ * @function
+ */
                     quadraticCurveTo = function(cp1x, cp1y, x, y) {
                         currentPos(x,y);
                         context.quadraticCurveTo(cp1x, cp1y, x, y);
                         return this;
                     },
+/**
+ * @name quadraticCurveToFixed
+ * @function
+ */
                     quadraticCurveToFixed = function(cpx, cpy, x, y) {
                         /* for FF1.5 - from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
-                        /*
                         For the equations below the following variable name prefixes are used:
                             qp0 is the quadratic curve starting point (you must keep this from your last point sent to moveTo(), lineTo(), or bezierCurveTo() ).
                             qp1 is the quadratic curve control point (this is the cpx,cpy you would have sent to quadraticCurveTo() ).
@@ -589,6 +716,10 @@
                         currentPos(x,y);
                         return this;
                     },
+/**
+ * @name rect
+ * @function
+ */
                     rect = function(x, y, width, height) {
                         currentPos(x,y);
                         context.rect(x, y, width, height);
@@ -618,6 +749,10 @@
                      *  <circle>
                      *  <clearRect>
                      */
+/**
+ * @name rectangle
+ * @function
+ */
                     rectangle = function(params) {
                         //TODO: expand params to set any style appliable to a rectangle
 
@@ -663,28 +798,37 @@
                         boundingBox({x:x, y:y, w:width, h:height});
                         return this;
                     },
-                    /*
-                     * Function: reset
-                     *
-                     * Resets the canvas container, erasing the currently displayed drawings.
-                     *
-                     * Returns:
-                     *  An object containing the current x and y positions.
-                     *
-                     */
+/**
+ * Resets the canvas container, erasing the currently displayed drawings.
+ * @name reset
+ * @function
+ * @returns An object containing the current x and y positions.
+ */
                     reset = function() {
                         container.width = container.width;
                         currentPos(0,0);
                         return this;
                     },
+/**
+ * @name restore
+ * @function
+ */
                     restore = function() {
                         context.restore();
                         return this;
                     },
+/**
+ * @name rotate
+ * @function
+ */
                     rotate = function( angle ) {
                         context.rotate( angle );
-                        return this
+                        return this;
                     },
+/**
+ * @name roundedRectangle
+ * @function
+ */
                     roundedRectangle = function(x, y, width, height, radius) {
                         // from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
                         beginPath();
@@ -702,18 +846,34 @@
                         boundingBox({x:x, y:y, w:width, h:height});
                         return this;
                     },
+/**
+ * @name save
+ * @function
+ */
                     save = function() {
                         context.save();
                         return this;
                     },
+/**
+ * @name scale
+ * @function
+ */
                     scale = function( x , y ) {
                         context.scale( x , y);
                         return this;
                     },
+/**
+ * @name setTransform
+ * @function
+ */
                     setTransform = function( matrix11 , matrix12 , matrix21 , matrix22 , x , y ){
                         context.setTransform(  matrix11 , matrix12 , matrix21 , matrix22 , x , y );
                         return this;
                     },
+/**
+ * @name shadowBlur
+ * @function
+ */
                     shadowBlur = function(num) {
                         if (num !== undefined) {
                             context.shadowBlur = num;
@@ -723,6 +883,10 @@
                             return context.shadowBlur;
                         }
                     },
+/**
+ * @name shadowColor
+ * @function
+ */
                     shadowColor = function(color) {
                         if (color !== undefined) {
                             context.shadowColor = color;
@@ -732,6 +896,10 @@
                             return context.shadowColor;
                         }
                     },
+/**
+ * @name shadowOffsetX
+ * @function
+ */
                     shadowOffsetX = function(num) {
                         if (num !== undefined) {
                             context.shadowOffsetX = num;
@@ -741,6 +909,10 @@
                             return context.shadowOffsetX;
                         }
                     },
+/**
+ * @name shadowOffsetY
+ * @function
+ */
                     shadowOffsetY = function(num) {
                         if (num !== undefined) {
                             context.shadowOffsetY = num;
@@ -756,6 +928,8 @@
  * Passing no parameters returns an object containing the x and y offsets
  * shadowOffset().x === shadowOffsetX() && shadowOffset().y === shadowOffsetY()
  *
+ * @name shadowOffset
+ * @function
  * @param {integer} x shadowOffsetX
  * @param {integer} y shadowOffsetY
  */
@@ -773,11 +947,13 @@
 							return {
 								x: context.shadowOffsetX,
 								y: context.shadowOffsetY
-							}
+							};
 						}
                     },
 /**
  * Draws a circle with the supplied starting x,y, radius and strokeStyle and no fill
+ * @name strokeCircle
+ * @function
  * @params.x {integer} the starting x coordinate
  * @params.y {integer} the starting y coordinate
  * @params.radius {radius} the radius of the circle
@@ -800,6 +976,10 @@
 
 						return this;
                     },
+/**
+ * @name strokeStyle
+ * @function
+ */
                     strokeStyle = function(color) {
                         if (color !== undefined) {
                             context.strokeStyle = color;
@@ -809,20 +989,36 @@
                             return context.strokeStyle;
                         }
                     },
+/**
+ * @name strokeRect
+ * @function
+ */
                     strokeRect = function(x, y, width, height) {
                         currentPos(x,y);
                         context.strokeRect(x, y, width, height);
                         return this;
                     },
+/**
+ * @name strokeText
+ * @function
+ */
                     strokeText = function(text, x, y, maxWidth) {
                         currentPos(x,y);
                         context.strokeText(text, x, y, maxWidth);
                         return this;
                     },
+/**
+ * @name stroke
+ * @function
+ */
                     stroke = function() {
                         context.stroke();
                         return this;
                     },
+/**
+ * @name textAlign
+ * @function
+ */
                     textAlign = function(align) {
                         if (align !== undefined) {
                             context.textAlign = align;
@@ -832,6 +1028,10 @@
                             return context.textAlign;
                         }
                     },
+/**
+ * @name textBaseline
+ * @function
+ */
                     textBaseline = function(baseline) {
                         if (baseline !== undefined) {
                             context.textBaseline = baseline;
@@ -841,12 +1041,20 @@
                             return context.textBaseline;
                         }
                     },
+/**
+ * @name transform
+ * @function
+ */
                     transform = function( matrix11 , matrix12 , matrix21 , matrix22 , x , y ){
                         currentPos(x,y);
                         context.transform( matrix11 , matrix12 , matrix21 , matrix22 , x , y );
                         return this;
                     },
-                    translate = function(){
+/**
+ * @name translate
+ * @function
+ */
+                    translate = function(x, y){
                         currentPos(x,y);
                         context.translate( x , y );
                         return this;
@@ -913,9 +1121,9 @@
                     textBaseline: textBaseline,
                     transform : transform,
                     translate : translate
-                }
+                };
             }
-        }
+        };
 
         Canvas.prototype._init.prototype = Canvas.prototype;
 
