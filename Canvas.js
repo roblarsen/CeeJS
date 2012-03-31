@@ -1,5 +1,5 @@
-/*!
- * Canvas JavaScript Library v0.1
+/**
+ * @license Canvas JavaScript Library v0.1
  * some day:
  * canvasjs.net
  * for now, visit:
@@ -12,14 +12,16 @@
  * http://bobholtwebdev.com/license
  *
  * Date: 2011.12.1
- *
-* TODO: animations - https://developer.mozilla.org/en/Canvas_tutorial/Basic_animations
-* TODO: Manage current position better. We're fuzzy on what x,y actually means. It's easy enough to give options, we just need to come up with a default.
+ */
+
+/**
+* @todo animations - https://developer.mozilla.org/en/Canvas_tutorial/Basic_animations
+* @todo Manage current position better. We're fuzzy on what x,y actually means. It's easy enough to give options, we just need to come up with a default.
 * For starters, ADD boundingBox property for shapes, which we can then expose as whatever current X,Y scheme we'd default to and then then whatever people want
 * then set up a configruation piece. Set default position when the Canvas is created and then allow overrides at any point.
 * Something like ctx.setOrigin ( args )
-* TODO: DOCUMENTATION
-* TODO: BUILD SCRIPT
+* @todo DOCUMENTATION
+* @todo BUILD SCRIPT
 */
 
 (function(window) {
@@ -288,7 +290,7 @@
  */
 
                     circle = function( params ) {
-                        //TODO: expand params to set any style appliable to a rectangle
+                        //@todo expand params to set any style appliable to a rectangle
                         params = params || {};
                         var x = _valOrDefault(params.x, xCurrentPos),
                             y = _valOrDefault(params.y, yCurrentPos),
@@ -530,7 +532,7 @@
  * @function
  */
                     isPointInPath = function( x , y ){
-                        //TODO: does this make sense to update the x, y?
+                        //@todo does this make sense to update the x, y?
                         return context.isPointInPath( x , y );
                     },
 /**
@@ -754,7 +756,7 @@
  * @function
  */
                     rectangle = function(params) {
-                        //TODO: expand params to set any style appliable to a rectangle
+                        //@todo expand params to set any style appliable to a rectangle
 
                         params = params || {};
                         var x,y,width,height;
@@ -1060,67 +1062,67 @@
                         return this;
                     };
                 return {
-                    arc: arc,
-                    arcTo: arcTo,
-                    beginPath: beginPath,
-                    bezierCurveTo: bezierCurveTo,
-                    boundingBox: boundingBox,
-                    circle: circle,
-                    clearRect: clearRect,
-                    clip: clip,
-                    closePath: closePath,
-                    context: context,
-                    createImageData : createImageData,
-                    createLinearGradient : createLinearGradient ,
-                    createPattern : createPattern,
-                    createRadialGradient : createRadialGradient,
-                    drawImage: drawImage,
-                    fill: fill,
-					fillCircle: fillCircle,
-                    fillRect: fillRect,
-                    fillStyle: fillStyle,
-                    fillText: fillText,
-                    font: font,
-                    currentPos: currentPos,
-                    getImageData : getImageData,
-                    globalAlpha: globalAlpha,
-                    globalCompositeOperation: globalCompositeOperation,
-                    isPointInPath : isPointInPath,
-                    line: line,
-                    lineCap: lineCap,
-                    lineJoin: lineJoin,
-                    lineTo: lineTo,
-                    lineWidth: lineWidth,
-                    miterLimit: miterLimit,
-                    measureText : measureText,
-                    moveTo: moveTo,
-                    putImageData : putImageData,
-                    quadraticCurveTo: quadraticCurveTo,
-                    quadraticCurveToFixed: quadraticCurveToFixed,
-                    rect: rect,
-                    rectangle: rectangle,
-                    reset: reset,
-                    restore: restore,
-                    rotate : rotate,
-                    roundedRectangle: roundedRectangle,
-                    roundedRect: roundedRectangle,
-                    save: save,
-                    scale : scale,
-                    setTransform : setTransform,
-                    shadowBlur: shadowBlur,
-                    shadowColor: shadowColor,
-					shadowOffset: shadowOffset,
-                    shadowOffsetX: shadowOffsetX,
-                    shadowOffsetY: shadowOffsetY,
-                    stroke: stroke,
-					strokeCircle: strokeCircle,
-                    strokeStyle: strokeStyle,
-                    strokeText: strokeText,
-                    strokeRect: strokeRect,
-                    textAlign: textAlign,
-                    textBaseline: textBaseline,
-                    transform : transform,
-                    translate : translate
+                    "arc": arc,
+                    "arcTo": arcTo,
+                    "beginPath": beginPath,
+                    "bezierCurveTo": bezierCurveTo,
+                    "boundingBox": boundingBox,
+                    "circle": circle,
+                    "clearRect": clearRect,
+                    "clip": clip,
+                    "closePath": closePath,
+                    "context": context,
+                    "createImageData" : createImageData,
+                    "createLinearGradient" : createLinearGradient ,
+                    "createPattern" : createPattern,
+                    "createRadialGradient" : createRadialGradient,
+                    "drawImage": drawImage,
+                    "fill": fill,
+					"fillCircle": fillCircle,
+                    "fillRect": fillRect,
+                    "fillStyle": fillStyle,
+                    "fillText": fillText,
+                    "font": font,
+                    "currentPos": currentPos,
+                    "getImageData" : getImageData,
+                    "globalAlpha": globalAlpha,
+                    "globalCompositeOperation": globalCompositeOperation,
+                    "isPointInPath" : isPointInPath,
+                    "line": line,
+                    "lineCap": lineCap,
+                    "lineJoin": lineJoin,
+                    "lineTo": lineTo,
+                    "lineWidth": lineWidth,
+                    "miterLimit": miterLimit,
+                    "measureText" : measureText,
+                    "moveTo": moveTo,
+                    "putImageData" : putImageData,
+                    "quadraticCurveTo": quadraticCurveTo,
+                    "quadraticCurveToFixed": quadraticCurveToFixed,
+                    "rect": rect,
+                    "rectangle": rectangle,
+                    "reset": reset,
+                    "restore": restore,
+                    "rotate" : rotate,
+                    "roundedRectangle": roundedRectangle,
+                    "roundedRect": roundedRectangle,
+                    "save": save,
+                    "scale" : scale,
+                    "setTransform" : setTransform,
+                    "shadowBlur": shadowBlur,
+                    "shadowColor": shadowColor,
+					"shadowOffset": shadowOffset,
+                    "shadowOffsetX": shadowOffsetX,
+                    "shadowOffsetY": shadowOffsetY,
+                    "stroke": stroke,
+					"strokeCircle": strokeCircle,
+                    "strokeStyle": strokeStyle,
+                    "strokeText": strokeText,
+                    "strokeRect": strokeRect,
+                    "textAlign": textAlign,
+                    "textBaseline": textBaseline,
+                    "transform" : transform,
+                    "translate" : translate
                 };
             }
         };
@@ -1129,5 +1131,5 @@
 
         return Canvas;
     }());
-    window.Canvas = Canvas;
+    window['Canvas'] = Canvas;
 }(window));
