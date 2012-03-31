@@ -33,7 +33,7 @@
     <!-- JSHint target, run separately -->
     <target name="jshint">
       <apply dir="${basedir}" executable="java" parallel="false" failonerror="true">
-            <fileset file="Canvas.js"></fileset>
+            <fileset file="${file.script}"></fileset>
             <arg value="-jar" />
             <arg path="./${dir.build.tools}/${tool.rhino}" />
             <arg path="./${dir.build.tools}/${tool.jshint}" />
@@ -62,15 +62,12 @@
   -->
 
   <target name="-clean" description="(PRIVATE) Wipe the previous build (Deletes Canvas.min.js)">
-  <!-- This is a private target -->
       <echo message="Cleaning up previous build..."/>
 	  <delete file="${basedir}/Canvas.min.js" />
       <delete dir="./${dir.docs}/"/>
   </target>
 
   <target name="-intro" description="(PRIVATE) Kindly inform the developer about the impending magic">
-  <!-- This is a private target -->
-
         <echo message=" "/>
         <echo message="====================================================================="/>
         <echo message="Welcome to the CanvasJS Build Script!"/>
@@ -80,15 +77,12 @@
         <echo message="====================================================================="/>
         <echo message=" "/>
         <echo message=" "/>
-
   </target>
 
-  <!-- JAVASCRIPT -->
-  <target name="-js.all.minify" description="(PRIVATE) Minifies the scripts.js files created by js.scripts.concat">
+  <target name="-js.all.minify" description="(PRIVATE) Minifies the script files">
       <echo message="Minifying scripts"/>
-
       <apply executable="java" parallel="false">
-		<fileset file="Canvas.js"></fileset>
+		<fileset file="${file.script}"></fileset>
 		<arg line="-jar"/>
 		<arg path="./${dir.build.tools}/closure-compiler-v1346.jar"/>
 		<arg line="--js"/>
@@ -106,7 +100,7 @@
 	<target name="-jsdoc" description="(PRIVATE) Publishes documentation">
 		<echo message="Building documentation"/>
 		<apply executable="java" parallel="false" dir="./${dir.jsdoc}">
-			<fileset file="Canvas.js"></fileset>
+			<fileset file="${file.script}"></fileset>
 			<arg line="-classpath"/>
 			<arg path="./${dir.jsdoc}/lib/js.jar"/>
 			<arg value="org.mozilla.javascript.tools.shell.Main"/>
@@ -116,7 +110,7 @@
 			<arg value="rhino_modules"/>
 			<arg path="${dir.jsdoc}/jsdoc.js"/>
 			<arg line="--destination"/>
-			<arg value="../../../docs"/>
+			<arg value="../../../${dir.docs}"/>
 		</apply>
 	</target>
 
