@@ -10,8 +10,6 @@
 	<title>CanvasJS: Sandbox</title>
 
 	<meta name="description" content="Sample playground file for CanvasJS">
-
-	<link rel="shortcut icon" href="/favicon.ico" />
 </head>
 
 <body>
@@ -27,16 +25,18 @@
     <canvas id="ctx" width="800" height="600" style="background:url(grids.jpg) no-repeat"></canvas>
 
 <!-- Specific to this page -->
-<script src="Canvas.min.js"></script>
+<script src="Canvas.js"></script>
 
 <h2>"Documentation"</h2>
 <p>This will improve over time, and when it does, I'll remove the quotes. </p>
-<p>For now, in the spirit of keeping moving on this project, here's a list of all the methods and properties available in a new Canvas object. All of the common properties (fillStyle, etc) are actually mapped to getter/setter methods. Anything that doesn't return a value is chainable. </p>
+<p>For now, in the spirit of keeping moving on this project, here's a list of all the methods and properties available in a new Canvas object. All of the common properties (fillStyle, etc) are actually mapped to getter/setter methods. Anything that doesn't return a value is chainable.</p>
+<p>An <a href="docs/CanvasJS.html">API reference</a> has sprouted.</p>
 <ul>
-    <li> arc</li>
+    <li>arc</li>
     <li>arcTo</li>
     <li>beginPath</li>
     <li>bezierCurveTo</li>
+	<li>boundingBox</li>
     <li>circle</li>
     <li>clearRect</li>
     <li>clip</li>
@@ -46,24 +46,25 @@
     <li>createLinearGradient</li>
     <li>createPattern</li>
     <li>createRadialGradient</li>
+	<li>currentPos</li>
     <li>drawImage</li>
     <li>fill</li>
+	<li>fillCircle</li>
     <li>fillRect</li>
     <li>fillStyle</li>
     <li>fillText</li>
     <li>font</li>
-    <li> currentPos</li>
     <li>getImageData</li>
     <li>globalAlpha</li>
     <li>globalCompositeOperation</li>
-    <li>sPointInPath</li>
+    <li>isPointInPath</li>
     <li>line</li>
     <li>lineCap</li>
     <li>lineJoin</li>
     <li>lineTo</li>
     <li>lineWidth</li>
-    <li>miterLimit</li>
     <li>measureText</li>
+    <li>miterLimit</li>
     <li>moveTo</li>
     <li>putImageData</li>
     <li>quadraticCurveTo</li>
@@ -82,9 +83,10 @@
     <li>shadowOffsetX</li>
     <li>shadowOffsetY</li>
     <li>stroke</li>
+	<li>strokeCircle</li>
+    <li>strokeRect</li>
     <li>strokeStyle</li>
     <li>strokeText</li>
-    <li>strokeRect</li>
     <li>textAlign</li>
     <li>textBaseline</li>
     <li>transform </li>
