@@ -1,3 +1,12 @@
 [submodule "test/js-imagediff"]
 	path = test/js-imagediff
 	url = git://github.com/HumbleSoftware/js-imagediff.git
+[submodule "test/qunit"]
+	path = test/qunit
+	url = https://github.com/jquery/qunit.git
+[submodule "jasmine"]
+	path = jasmine
+	url = https://github.com/pivotal/jasmine.git
+[submodule "test/jasmine"]
+	path = test/jasmine
+	url = https://github.com/pivotal/jasmine.git

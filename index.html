@@ -14,15 +14,15 @@
 
 <body>
 	<h1>Canvas JS</h1>
-    <p>There is an 800x600 canvas here. You can play with CanvasJS in browser console.</p>
+	<p>There is an 800x600 canvas here. You can play with CanvasJS in browser console.</p>
 	<pre><code>ctx = new Canvas('ctx'); // creates a new Canvas object in the canvas with id="ctx"
-    //Now you have all the features of CanvasJS available to you.
-    ctx.circle({x:25, y:25, radius: 10, fillStyle:'rgb(200,0,0)'}) //draw a circle
-       .rectangle({x:50, y:75, height: 100, width: 50, fillStyle: 'rgba(0, 0, 200, 0.5)'}) //draw a rectangle
-       .currentPos(); // returns the current x and y coordinates of the 'cursor' // get the current position
+	//Now you have all the features of CanvasJS available to you.
+	ctx.circle({x:25, y:25, radius: 10, fillStyle:'rgb(200,0,0)'}) //draw a circle
+		.rectangle({x:50, y:75, height: 100, width: 50, fillStyle: 'rgba(0, 0, 200, 0.5)'}) //draw a rectangle
+		.currentPos(); // returns the current x and y coordinates of the 'cursor' // get the current position
 
 </code></pre>
-    <canvas id="ctx" width="800" height="600" style="background:url(grids.jpg) no-repeat"></canvas>
+	<canvas id="ctx" width="800" height="600" style="background:url(grids.jpg) no-repeat"></canvas>
 
 <!-- Specific to this page -->
 <script src="Canvas.js"></script>
@@ -32,65 +32,65 @@
 <p>For now, in the spirit of keeping moving on this project, here's a list of all the methods and properties available in a new Canvas object. All of the common properties (fillStyle, etc) are actually mapped to getter/setter methods. Anything that doesn't return a value is chainable.</p>
 <p>An <a href="docs/CanvasJS.html">API reference</a> has sprouted.</p>
 <ul>
-    <li>arc</li>
-    <li>arcTo</li>
-    <li>beginPath</li>
-    <li>bezierCurveTo</li>
+	<li>arc</li>
+	<li>arcTo</li>
+	<li>beginPath</li>
+	<li>bezierCurveTo</li>
 	<li>boundingBox</li>
-    <li>circle</li>
-    <li>clearRect</li>
-    <li>clip</li>
-    <li>closePath</li>
-    <li>context</li>
-    <li>createImageData</li>
-    <li>createLinearGradient</li>
-    <li>createPattern</li>
-    <li>createRadialGradient</li>
+	<li>circle</li>
+	<li>clearRect</li>
+	<li>clip</li>
+	<li>closePath</li>
+	<li>context</li>
+	<li>createImageData</li>
+	<li>createLinearGradient</li>
+	<li>createPattern</li>
+	<li>createRadialGradient</li>
 	<li>currentPos</li>
-    <li>drawImage</li>
-    <li>fill</li>
+	<li>drawImage</li>
+	<li>fill</li>
 	<li>fillCircle</li>
-    <li>fillRect</li>
-    <li>fillStyle</li>
-    <li>fillText</li>
-    <li>font</li>
-    <li>getImageData</li>
-    <li>globalAlpha</li>
-    <li>globalCompositeOperation</li>
-    <li>isPointInPath</li>
-    <li>line</li>
-    <li>lineCap</li>
-    <li>lineJoin</li>
-    <li>lineTo</li>
-    <li>lineWidth</li>
-    <li>measureText</li>
-    <li>miterLimit</li>
-    <li>moveTo</li>
-    <li>putImageData</li>
-    <li>quadraticCurveTo</li>
-    <li>quadraticCurveToFixed</li>
-    <li>rect</li>
-    <li>rectangle</li>
-    <li>reset</li>
-    <li>restore</li>
-    <li>rotate</li>
-    <li>roundedRectangle/roundedRect</li>
-    <li>save</li>
-    <li>scale</li>
-    <li>setTransform </li>
-    <li>shadowBlur</li>
-    <li>shadowColor</li>
-    <li>shadowOffsetX</li>
-    <li>shadowOffsetY</li>
-    <li>stroke</li>
+	<li>fillRect</li>
+	<li>fillStyle</li>
+	<li>fillText</li>
+	<li>font</li>
+	<li>getImageData</li>
+	<li>globalAlpha</li>
+	<li>globalCompositeOperation</li>
+	<li>isPointInPath</li>
+	<li>line</li>
+	<li>lineCap</li>
+	<li>lineJoin</li>
+	<li>lineTo</li>
+	<li>lineWidth</li>
+	<li>measureText</li>
+	<li>miterLimit</li>
+	<li>moveTo</li>
+	<li>putImageData</li>
+	<li>quadraticCurveTo</li>
+	<li>quadraticCurveToFixed</li>
+	<li>rect</li>
+	<li>rectangle</li>
+	<li>reset</li>
+	<li>restore</li>
+	<li>rotate</li>
+	<li>roundedRectangle/roundedRect</li>
+	<li>save</li>
+	<li>scale</li>
+	<li>setTransform </li>
+	<li>shadowBlur</li>
+	<li>shadowColor</li>
+	<li>shadowOffsetX</li>
+	<li>shadowOffsetY</li>
+	<li>stroke</li>
 	<li>strokeCircle</li>
-    <li>strokeRect</li>
-    <li>strokeStyle</li>
-    <li>strokeText</li>
-    <li>textAlign</li>
-    <li>textBaseline</li>
-    <li>transform </li>
-    <li>translate</li>
+	<li>strokeRect</li>
+	<li>strokeStyle</li>
+	<li>strokeText</li>
+	<li>textAlign</li>
+	<li>textBaseline</li>
+	<li>transform </li>
+	<li>translate</li>
 </ul>
 </body>
 </html>
