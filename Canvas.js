@@ -792,7 +792,7 @@
 						}
 						if (fillStyle) {
 							context.fillStyle = fillStyle;
-							fillRect(x, y, width, height);
+							fillRect( x, y, width, height );
 						} else {
 							strokeRect(x, y, width, height);
 						}
@@ -831,6 +831,7 @@
  * @name roundedRectangle
  * @function
  */
+ //TODO: expose params to any options available on a recatangle or circle. 
 					roundedRectangle = function(x, y, width, height, radius) {
 						// from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
 						beginPath();
