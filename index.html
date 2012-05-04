@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Canvasjs by roblarsen</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Canvasjs</h1>
+        <p>An helper library for the canvas 2d API</p>
+        <p class="view"><a href="https://github.com/roblarsen/CanvasJS">View the Project on GitHub <small>roblarsen/CanvasJS</small></a></p>
+        <ul>
+          <li><a href="https://github.com/roblarsen/CanvasJS/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/roblarsen/CanvasJS/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/roblarsen/CanvasJS">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>CanvasJS</h1>
+
+<p>CanvasJS is a small helper library for the canvas 2d API. The goal is to extend and enhance the basic API while still remaining familiar. </p>
+
+<h2>API and Enhancements</h2>
+
+<p>There are currently two areas of focus</p>
+
+<ul>
+<li>
+<em>Chaining</em> any method that doesn't return an explicit value is chainable. </li>
+<li>
+<em>API Enhancements</em> These range from new concepts (getting the boundingBox of the last operation, getting the currentPos (x and y) of the 'cursor',) missing methods (circle, rectangle) to convenience methods (canvas properties are now getter/setter methods.)</li>
+</ul><p>A simple example might look like this</p>
+
+<div class="highlight">
+<pre>
+        <span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Canvas</span><span class="p">(</span><span class="s2">"ctx"</span><span class="p">);</span> 
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="s1">'rgb(0,'</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="s1">','</span> <span class="o">+</span>   
+                         <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s1">')'</span><span class="p">;</span>  
+
+            <span class="nx">ctx</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">().</span><span class="nx">line</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span><span class="p">.</span><span class="mi">4</span><span class="o">*</span><span class="nx">i</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="p">.</span><span class="mi">4</span><span class="o">*</span><span class="nx">i</span><span class="p">,</span><span class="nx">angle</span><span class="o">:</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">distance</span><span class="o">:</span><span class="nx">i</span> <span class="o">*</span> <span class="p">.</span><span class="mi">40</span> <span class="p">}).</span><span class="nx">strokeStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">).</span><span class="nx">stroke</span><span class="p">();</span>
+        <span class="p">}</span>
+
+
+</pre>
+</div>
+
+
+<h2>Credits</h2>
+
+<p>So far...</p>
+
+<p>Dreamed up by Rob Larsen with active encouragement by the Isobar Creative Technology team. </p>
+
+<p>Kicked off by Bob Holt</p>
+
+<p>Smart stuff added by Marc Neuwirth</p>
+
+<p>Continuing housekeeping and project sheperding by Rob Larsen</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/roblarsen">roblarsen</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-251752-14");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
