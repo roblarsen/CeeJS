@@ -207,16 +207,11 @@
 						return this;
 					},
 /**
- * Called without parameters, it returns the current bounding box of the last drawn shape- specifically an object containing the top left, top, top right, right, bottom right, bottom, bottom left and left coordinates.
- *
- * it's also called internally to set the property whenever an applicable shape is drawn.
- * @name boundingBox
+ * @private
+ * @name _boundingBox
  * @function
- *
  */
-
-
-					boundingBox = function(params){
+					_boundingBox = function( params ){
 						var h,w,leftx,topy;
 						if(params === undefined){
 							return bbCurrent;
@@ -250,7 +245,7 @@
 						else if(params.x !== undefined &&
 								params.y !== undefined){
 							var current = currentPos();
-							boundingBox({x1:params.x, y1:params.y, x2: current.x, y2: current.y});
+							_boundingBox({x1:params.x, y1:params.y, x2: current.x, y2: current.y});
 						}
 						else {
 							return bbCurrent;
@@ -276,7 +271,17 @@
 							'l': l
 						};
 
-						return bbCurrent;
+						return bbCurrent;	
+					
+					},
+/**
+ * Returns the current bounding box of the last drawn shape- specifically an object containing the top left, top, top right, right, bottom right, bottom, bottom left and left coordinates.
+ *
+ * @name boundingBox
+ * @function
+ */
+					boundingBox = function(){
+						return _boundingbox();
 					},
 /**
  * Draws a circle with the supplied starting x,y, radius, fillStyle, and strokeStyle
@@ -314,7 +319,7 @@
 						}
 						closePath();
 
-						boundingBox({cx:x,cy:y,r:radius});
+						_boundingBox({cx:x,cy:y,r:radius});
 
 						return this;
 					},
@@ -336,11 +341,12 @@
 							height = params.height || 0;
 						context.clearRect(x, y, width, height);
 
-						boundingBox({x:x, y:y, w:width, h:height});
+						_boundingBox({x:x, y:y, w:width, h:height});
 
 						return this;
 					},
 /**
+ * Further constrains the clipping region to the current default path.
  * @name clip
  * @function
  */
@@ -349,6 +355,7 @@
 						return this;
 					},
 /**
+ * Marks the current subpath as closed, and starts a new subpath with a point the same as the start and end of the newly closed subpath.
  * @name closePath
  * @function
  */
@@ -357,12 +364,21 @@
 						return this;
 					},
 /**
+ * Passed a height and width, returns an ImageData object with the given dimensions in CSS pixels (which might map to a different number of actual device pixels exposed by the object itself). All the pixels in the returned object are transparent black.
+ * passed an imageData object, returns an ImageData object with the same dimensions as the argument. All the pixels in the returned object are transparent black.
  * @name createImageData
  * @function
+ * @param {integer} height the height of the image data object
+ * @param {integer} width the width of the image data object
+ * @param {object} imageData an imageData object
  */
-					createImageData = function(height, width) {
-						context.closePath(height, width);
-						return this;
+					createImageData = function() {
+						if ( arguments[0].data !== undefined){
+							//height is actually imageData
+							return context.createImageData( arguments[0] );	
+						} else {
+							return context.createImageData( arguments[0] , arguments[1] );
+						}
 					},
 /**
  * @name createLinearGradient
@@ -448,7 +464,7 @@
 						context.fillRect(x, y, width, height);
 						currentPos(x,y);
 
-						boundingBox({x:x, y:y, w:width, h:height});
+						_boundingBox({x:x, y:y, w:width, h:height});
 
 						return this;
 					},
@@ -555,7 +571,7 @@
 						context.lineTo(newX, newY);
 						currentPos(newX,newY);
 
-						boundingBox({x1:x, y1:y, x2:newX, y2: newY});
+						_boundingBox({x1:x, y1:y, x2:newX, y2: newY});
 
 						return this;
 					},
@@ -591,7 +607,7 @@
  */
 					lineTo = function(x, y) {
 						context.lineTo(x, y);
-						boundingBox({x:x, y:y});
+						_boundingBox({x:x, y:y});
 
 						currentPos(x,y);
 
@@ -726,7 +742,7 @@
 						currentPos(x,y);
 						context.rect(x, y, width, height);
 
-						boundingBox({x:x, y:y, w:width, h:height});
+						_boundingBox({x:x, y:y, w:width, h:height});
 
 						return this;
 					},
@@ -792,12 +808,12 @@
 						}
 						if (fillStyle) {
 							context.fillStyle = fillStyle;
-							fillRect(x, y, width, height);
+							fillRect( x, y, width, height );
 						} else {
 							strokeRect(x, y, width, height);
 						}
 
-						boundingBox({x:x, y:y, w:width, h:height});
+						_boundingBox({x:x, y:y, w:width, h:height});
 						return this;
 					},
 /**
@@ -831,6 +847,7 @@
  * @name roundedRectangle
  * @function
  */
+ //TODO: expose params to any options available on a recatangle or circle. 
 					roundedRectangle = function(x, y, width, height, radius) {
 						// from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
 						beginPath();
@@ -845,7 +862,7 @@
 						quadraticCurveTo(x, y, x, y + radius);
 						stroke();
 
-						boundingBox({x:x, y:y, w:width, h:height});
+						_boundingBox({x:x, y:y, w:width, h:height});
 						return this;
 					},
 /**
