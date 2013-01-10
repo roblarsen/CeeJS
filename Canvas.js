@@ -6,12 +6,11 @@
  *
  * http://htmlcssjavascript.com
  *
- * Copyright 2011, Rob Larsen
+ * Copyright 2012, Rob Larsen
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://bobholtwebdev.com/license
  *
- * Date: 2011.12.1
+ * Date: 2013.1.10
  */
 
 /**
@@ -24,7 +23,7 @@
 * @todo BUILD SCRIPT
 */
 
-( function( window ) {
+(function( window ){
 	"use strict";
 	var document = window.document;
 	var Canvas = ( function() {
@@ -472,8 +471,10 @@
 						return this;
 					},
 /** Paints a rectangle onto the canvas using the current fill style.
- * @name fillRect
- * @function
+ *  @param {Integer} x Starting x coordinate
+ *  @param {Integer} y Starting y coordinate
+ *  @param {Integer} width Rectangle width
+ *  @param {Integer} height Rectangle height
  */
 					fillRect = function( x, y, width, height ) {
 						context.fillRect( x, y, width, height );
@@ -486,6 +487,7 @@
 /** Called with a color argument, sets the fillStyle. Called without, returns the current fillStyle. 
  * @name fillStyle
  * @function
+ * @param {Any} color the fill style
  */
 					fillStyle = function( color ) {
 						if ( color !== undefined ) {
@@ -496,18 +498,19 @@
 							return context.fillStyle;
 						}
 					},
-/**
+/**Writes text onto the canvas using the current text style.
  * @name fillText
- * @function
+ *  @param {string} text the text to write into the canvas
+ *  @param {Integer} x Starting x coordinate
+ *  @param {Integer} y Starting y coordinate
+ *  @param {Integer} maxWidth the maximum width of the text box
  */
 					fillText = function( text, x, y, maxWidth ) {
 						if ( maxWidth === undefined ){
 							 context.fillText( text, x, y );
 						} else {
 							 context.fillText( text, x, y, maxWidth );
-
 						}
-
 						currentPos( x,y );
 						return this;
 					},
@@ -576,7 +579,7 @@
 							y = _valOrDefault( params.y, yCurrentPos ),
 							hypotenuse = params.distance || 0,
 							angle = params.angle % 360 || 0,
-							radians = math.radians(( angle ),
+							radians = math.radians( angle ),
 							a = Math.sin( radians ) * hypotenuse,
 							b = Math.cos( radians ) * hypotenuse,
 							newX = x + b,

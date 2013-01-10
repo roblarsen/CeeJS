@@ -80,6 +80,58 @@
     
     
     
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="fillText"><span class="type-signature"></span>fillText<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        Writes text onto the canvas using the current text style.
+    </p>
+    
+    
+    
+<dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 501</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
     
     
         <h3 class="subsection-title">Methods</h3>
@@ -314,7 +366,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 144</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 143</li></ul></dd>
 	
     
     
@@ -345,7 +397,7 @@
     
     
     <p class="description">
-        Adds points to the subpath such that the arc described by the circumference of the circle described by the arguments, starting at the given start angle and ending at the given end angle, going in the given direction (defaulting to clockwise), is added to the path, connected to the previous point by a straight line.
+        Adds points to the subpath such that the arc described by the circumference of the circle described by the arguments, starting at the given start angle and ending at the given end angle, going in the given direction ( defaulting to clockwise ), is added to the path, connected to the previous point by a straight line.
     </p>
     
     
@@ -524,7 +576,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 168</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 167</li></ul></dd>
 	
     
     
@@ -583,7 +635,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 184</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 183</li></ul></dd>
 	
     
     
@@ -793,7 +845,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 193</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 192</li></ul></dd>
 	
     
     
@@ -824,7 +876,7 @@
     
     
     <p class="description">
-        Called without parameters, it returns the current bounding box of the last drawn shape- specifically an object containing the top left, top, top right, right, bottom right, bottom, bottom left and left coordinates.it's also called internally to set the property whenever an applicable shape is drawn.
+        Returns the current bounding box of the last drawn shape- specifically an object containing the top left, top, top right, right, bottom right, bottom, bottom left and left coordinates.
     </p>
     
     
@@ -852,7 +904,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 209</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 276</li></ul></dd>
 	
     
     
@@ -911,7 +963,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 281</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 285</li></ul></dd>
 	
     
     
@@ -970,7 +1022,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 322</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 326</li></ul></dd>
 	
     
     
@@ -1000,6 +1052,10 @@
 <dd>
     
     
+    <p class="description">
+        Further constrains the clipping region to the current default path.
+    </p>
+    
     
     
     
@@ -1025,7 +1081,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 343</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 347</li></ul></dd>
 	
     
     
@@ -1055,6 +1111,10 @@
 <dd>
     
     
+    <p class="description">
+        Marks the current subpath as closed, and starts a new subpath with a point the same as the start and end of the newly closed subpath.
+    </p>
+    
     
     
     
@@ -1080,7 +1140,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 351</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 356</li></ul></dd>
 	
     
     
@@ -1110,9 +1170,101 @@
 <dd>
     
     
+    <p class="description">
+        Passed a height and width, returns an ImageData object with the given dimensions in CSS pixels ( which might map to a different number of actual device pixels exposed by the object itself ). All the pixels in the returned object are transparent black.passed an imageData object, returns an ImageData object with the same dimensions as the argument. All the pixels in the returned object are transparent black.
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the height of the image data object</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the width of the image data object</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>imageData</code></td>
+            
+            
+            <td class="type">
+            
+                        object
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">an imageData object</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -1135,7 +1287,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 359</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 365</li></ul></dd>
 	
     
     
@@ -1165,9 +1317,122 @@
 <dd>
     
     
+    <p class="description">
+        Creates a linear gradient. Takes four arguments that represent the start point ( x0, y0) and end point ( x1, y1) of the gradient. The method must return a linear CanvasGradient initialized with the specified line.
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x0</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the starting x coordinate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y0</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the starting y coordinate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>x1</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the ending x coordinate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y1</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the ending y coordinate</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -1190,7 +1455,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 367</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 382</li></ul></dd>
 	
     
     
@@ -1220,9 +1485,80 @@
 <dd>
     
     
+    <p class="description">
+        Returns a CanvasPattern object that repeats the specified img in the specified repetition direction.
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>img</code></td>
+            
+            
+            <td class="type">
+            
+                        HTMLElement
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the image to repeate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>reteptition</code></td>
+            
+            
+            <td class="type">
+            
+                        string
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the direction to repeat. One of four values repeat, repeat-x, repeat-y, no-repeat</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -1245,7 +1581,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 375</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 393</li></ul></dd>
 	
     
     
@@ -1275,9 +1611,164 @@
 <dd>
     
     
+    <p class="description">
+        Returns an object that represents a radial or circular gradient to use in a canvas context.
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x0</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The x-coordinate of the starting circle of the gradient.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y0</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The y-coordinate of the starting circle of the gradient.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>r0</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The radius of the starting circle.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>x1</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The x-coordinate of the ending circle of the gradient.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y1</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The y-coordinate of the ending circle of the gradient.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>r1</code></td>
+            
+            
+            <td class="type">
+            
+                        integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The radius of the ending circle.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -1300,7 +1791,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 383</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 403</li></ul></dd>
 	
     
     
@@ -1426,7 +1917,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 107</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 106</li></ul></dd>
 	
     
     
@@ -1456,9 +1947,101 @@
 <dd>
     
     
+    <p class="description">
+        Draws a specified image onto a canvas
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+                        Integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Starting x coordinate.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                        Integer
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Starting y coordinate.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>img</code></td>
+            
+            
+            <td class="type">
+            
+                        HTMLElement
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the image to draw onto the Canvas</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -1481,7 +2064,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 391</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 417</li></ul></dd>
 	
     
     
@@ -1511,6 +2094,10 @@
 <dd>
     
     
+    <p class="description">
+        Fills subpaths by using the current fill style.
+    </p>
+    
     
     
     
@@ -1536,7 +2123,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 409</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 439</li></ul></dd>
 	
     
     
@@ -1595,62 +2182,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 417</li></ul></dd>
-	
-    
-    
-	
-	
-	
-	
-</dl>
-
-    
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="fillRect"><span class="type-signature"></span>fillRect</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 443</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 447</li></ul></dd>
 	
     
     
@@ -1680,64 +2212,59 @@
 <dd>
     
     
+    <p class="description">
+        Called with a color argument, sets the fillStyle. Called without, returns the current fillStyle.
+    </p>
     
     
     
     
     
-    
-<dl class="details">
-    
+        <h5>Parameters:</h5>
         
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 455</li></ul></dd>
-	
-    
-    
-	
-	
-	
-	
-</dl>
 
-    
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
             
-<dt>
-    <h4 class="name" id="fillText"><span class="type-signature"></span>fillText</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    
-    
-    
+                <td class="name"><code>color</code></td>
+            
+            
+            <td class="type">
+            
+                        Any
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the fill style</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -1760,7 +2287,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 468</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 487</li></ul></dd>
 	
     
     
@@ -1815,7 +2342,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 483</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 517</li></ul></dd>
 	
     
     
@@ -1870,7 +2397,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 496</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 530</li></ul></dd>
 	
     
     
@@ -1925,7 +2452,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 504</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 538</li></ul></dd>
 	
     
     
@@ -1980,7 +2507,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 517</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 551</li></ul></dd>
 	
     
     
@@ -2035,7 +2562,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 530</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 564</li></ul></dd>
 	
     
     
@@ -2090,7 +2617,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 538</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 572</li></ul></dd>
 	
     
     
@@ -2145,7 +2672,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 562</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 596</li></ul></dd>
 	
     
     
@@ -2200,7 +2727,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 575</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 609</li></ul></dd>
 	
     
     
@@ -2255,7 +2782,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 588</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 622</li></ul></dd>
 	
     
     
@@ -2310,7 +2837,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 600</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 634</li></ul></dd>
 	
     
     
@@ -2365,7 +2892,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 613</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 647</li></ul></dd>
 	
     
     
@@ -2420,7 +2947,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 628</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 662</li></ul></dd>
 	
     
     
@@ -2475,7 +3002,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 635</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 669</li></ul></dd>
 	
     
     
@@ -2530,7 +3057,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 648</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 682</li></ul></dd>
 	
     
     
@@ -2585,7 +3112,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 657</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 691</li></ul></dd>
 	
     
     
@@ -2640,7 +3167,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 666</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 700</li></ul></dd>
 	
     
     
@@ -2695,7 +3222,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 675</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 709</li></ul></dd>
 	
     
     
@@ -2750,7 +3277,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 721</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 755</li></ul></dd>
 	
     
     
@@ -2805,7 +3332,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 735</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 769</li></ul></dd>
 	
     
     
@@ -2864,7 +3391,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 803</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 837</li></ul></dd>
 	
     
     
@@ -2929,7 +3456,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 814</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 848</li></ul></dd>
 	
     
     
@@ -2984,7 +3511,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 822</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 856</li></ul></dd>
 	
     
     
@@ -3039,7 +3566,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 830</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 864</li></ul></dd>
 	
     
     
@@ -3094,7 +3621,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 851</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 886</li></ul></dd>
 	
     
     
@@ -3149,7 +3676,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 859</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 894</li></ul></dd>
 	
     
     
@@ -3204,7 +3731,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 867</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 902</li></ul></dd>
 	
     
     
@@ -3259,7 +3786,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 875</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 910</li></ul></dd>
 	
     
     
@@ -3314,7 +3841,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 888</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 923</li></ul></dd>
 	
     
     
@@ -3440,7 +3967,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 927</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 962</li></ul></dd>
 	
     
     
@@ -3495,7 +4022,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 901</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 936</li></ul></dd>
 	
     
     
@@ -3550,7 +4077,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 914</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 949</li></ul></dd>
 	
     
     
@@ -3605,7 +4132,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1012</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1047</li></ul></dd>
 	
     
     
@@ -3664,7 +4191,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 955</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 990</li></ul></dd>
 	
     
     
@@ -3719,7 +4246,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 994</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1029</li></ul></dd>
 	
     
     
@@ -3774,7 +4301,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 981</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1016</li></ul></dd>
 	
     
     
@@ -3829,7 +4356,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1003</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1038</li></ul></dd>
 	
     
     
@@ -3884,7 +4411,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1020</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1055</li></ul></dd>
 	
     
     
@@ -3939,7 +4466,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1033</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1068</li></ul></dd>
 	
     
     
@@ -3994,7 +4521,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1046</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1081</li></ul></dd>
 	
     
     
@@ -4049,7 +4576,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1055</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1090</li></ul></dd>
 	
     
     
@@ -4083,13 +4610,13 @@
 </div>
 
 <nav>
-    <h3>Classes</h3><ul><li><a href="CanvasJS.html">CanvasJS</a></li></ul><h3>Global</h3><ul><li><a href="global.html#arc">arc</a></li><li><a href="global.html#arcTo">arcTo</a></li><li><a href="global.html#beginPath">beginPath</a></li><li><a href="global.html#bezierCurveTo">bezierCurveTo</a></li><li><a href="global.html#boundingBox">boundingBox</a></li><li><a href="global.html#circle">circle</a></li><li><a href="global.html#clearRect">clearRect</a></li><li><a href="global.html#clip">clip</a></li><li><a href="global.html#closePath">closePath</a></li><li><a href="global.html#createImageData">createImageData</a></li><li><a href="global.html#createLinearGradient">createLinearGradient</a></li><li><a href="global.html#createPattern">createPattern</a></li><li><a href="global.html#createRadialGradient">createRadialGradient</a></li><li><a href="global.html#currentPos">currentPos</a></li><li><a href="global.html#drawImage">drawImage</a></li><li><a href="global.html#fill">fill</a></li><li><a href="global.html#fillCircle">fillCircle</a></li><li><a href="global.html#fillRect">fillRect</a></li><li><a href="global.html#fillStyle">fillStyle</a></li><li><a href="global.html#fillText">fillText</a></li><li><a href="global.html#font">font</a></li><li><a href="global.html#getImageData">getImageData</a></li><li><a href="global.html#globalAlpha">globalAlpha</a></li><li><a href="global.html#globalCompositeOperation">globalCompositeOperation</a></li><li><a href="global.html#isPointInPath">isPointInPath</a></li><li><a href="global.html#line">line</a></li><li><a href="global.html#lineCap">lineCap</a></li><li><a href="global.html#lineJoin">lineJoin</a></li><li><a href="global.html#lineTo">lineTo</a></li><li><a href="global.html#lineWidth">lineWidth</a></li><li><a href="global.html#math">math</a></li><li><a href="global.html#measureText">measureText</a></li><li><a href="global.html#miterLimit">miterLimit</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#putImageData">putImageData</a></li><li><a href="global.html#quadraticCurveTo">quadraticCurveTo</a></li><li><a href="global.html#quadraticCurveToFixed">quadraticCurveToFixed</a></li><li><a href="global.html#rect">rect</a></li><li><a href="global.html#rectangle">rectangle</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#restore">restore</a></li><li><a href="global.html#rotate">rotate</a></li><li><a href="global.html#roundedRectangle">roundedRectangle</a></li><li><a href="global.html#save">save</a></li><li><a href="global.html#scale">scale</a></li><li><a href="global.html#setTransform">setTransform</a></li><li><a href="global.html#shadowBlur">shadowBlur</a></li><li><a href="global.html#shadowColor">shadowColor</a></li><li><a href="global.html#shadowOffset">shadowOffset</a></li><li><a href="global.html#shadowOffsetX">shadowOffsetX</a></li><li><a href="global.html#shadowOffsetY">shadowOffsetY</a></li><li><a href="global.html#stroke">stroke</a></li><li><a href="global.html#strokeCircle">strokeCircle</a></li><li><a href="global.html#strokeRect">strokeRect</a></li><li><a href="global.html#strokeStyle">strokeStyle</a></li><li><a href="global.html#strokeText">strokeText</a></li><li><a href="global.html#textAlign">textAlign</a></li><li><a href="global.html#textBaseline">textBaseline</a></li><li><a href="global.html#transform">transform</a></li><li><a href="global.html#translate">translate</a></li></ul>
+    <h3>Classes</h3><ul><li><a href="CanvasJS.html">CanvasJS</a></li></ul><h3>Global</h3><ul><li><a href="global.html#arc">arc</a></li><li><a href="global.html#arcTo">arcTo</a></li><li><a href="global.html#beginPath">beginPath</a></li><li><a href="global.html#bezierCurveTo">bezierCurveTo</a></li><li><a href="global.html#boundingBox">boundingBox</a></li><li><a href="global.html#circle">circle</a></li><li><a href="global.html#clearRect">clearRect</a></li><li><a href="global.html#clip">clip</a></li><li><a href="global.html#closePath">closePath</a></li><li><a href="global.html#createImageData">createImageData</a></li><li><a href="global.html#createLinearGradient">createLinearGradient</a></li><li><a href="global.html#createPattern">createPattern</a></li><li><a href="global.html#createRadialGradient">createRadialGradient</a></li><li><a href="global.html#currentPos">currentPos</a></li><li><a href="global.html#drawImage">drawImage</a></li><li><a href="global.html#fill">fill</a></li><li><a href="global.html#fillCircle">fillCircle</a></li><li><a href="global.html#fillStyle">fillStyle</a></li><li><a href="global.html#fillText">fillText</a></li><li><a href="global.html#font">font</a></li><li><a href="global.html#getImageData">getImageData</a></li><li><a href="global.html#globalAlpha">globalAlpha</a></li><li><a href="global.html#globalCompositeOperation">globalCompositeOperation</a></li><li><a href="global.html#isPointInPath">isPointInPath</a></li><li><a href="global.html#line">line</a></li><li><a href="global.html#lineCap">lineCap</a></li><li><a href="global.html#lineJoin">lineJoin</a></li><li><a href="global.html#lineTo">lineTo</a></li><li><a href="global.html#lineWidth">lineWidth</a></li><li><a href="global.html#math">math</a></li><li><a href="global.html#measureText">measureText</a></li><li><a href="global.html#miterLimit">miterLimit</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#putImageData">putImageData</a></li><li><a href="global.html#quadraticCurveTo">quadraticCurveTo</a></li><li><a href="global.html#quadraticCurveToFixed">quadraticCurveToFixed</a></li><li><a href="global.html#rect">rect</a></li><li><a href="global.html#rectangle">rectangle</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#restore">restore</a></li><li><a href="global.html#rotate">rotate</a></li><li><a href="global.html#roundedRectangle">roundedRectangle</a></li><li><a href="global.html#save">save</a></li><li><a href="global.html#scale">scale</a></li><li><a href="global.html#setTransform">setTransform</a></li><li><a href="global.html#shadowBlur">shadowBlur</a></li><li><a href="global.html#shadowColor">shadowColor</a></li><li><a href="global.html#shadowOffset">shadowOffset</a></li><li><a href="global.html#shadowOffsetX">shadowOffsetX</a></li><li><a href="global.html#shadowOffsetY">shadowOffsetY</a></li><li><a href="global.html#stroke">stroke</a></li><li><a href="global.html#strokeCircle">strokeCircle</a></li><li><a href="global.html#strokeRect">strokeRect</a></li><li><a href="global.html#strokeStyle">strokeStyle</a></li><li><a href="global.html#strokeText">strokeText</a></li><li><a href="global.html#textAlign">textAlign</a></li><li><a href="global.html#textBaseline">textBaseline</a></li><li><a href="global.html#transform">transform</a></li><li><a href="global.html#translate">translate</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Sat Mar 31 2012 06:26:26 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Thu Jan 10 2013 15:18:51 GMT-0500 (EST)
 </footer>
 
 <script> sh_highlightDocument(); </script>
