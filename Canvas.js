@@ -144,6 +144,7 @@
  * Adds an arc with the given control points and radius to the current subpath, connected to the previous point by a straight line.
  * @name arc
  * @function
+ * @param params {object} a parameter object
  * @param {integer} params.x the x coordinate
  * @param {integer} params.y the y coordinate
  * @param {integer} params.radius the radius of the arc
@@ -286,11 +287,12 @@
  * Draws a circle with the supplied starting x,y, radius, fillStyle, and strokeStyle
  * @name circle
  * @function
- * @params.x {integer} the starting x coordinate
- * @params.y {integer} the starting y coordinate
- * @params.radius {radius} the radius of the circle
- * @params.fillStyle {Any} the fill style for the circle or false to suppress the fill
- * @params.strokeStyle {Any} the stroke style for the circle or false to suppress the stroke
+ * @param params {object} a parameter object
+ * @param params.x {integer} the starting x coordinate
+ * @param params.y {integer} the starting y coordinate
+ * @param params.radius {radius} the radius of the circle
+ * @param params.fillStyle {Any} the fill style for the circle or false to suppress the fill
+ * @param params.strokeStyle {Any} the stroke style for the circle or false to suppress the stroke
  */
 
 					circle = function( params ) {
@@ -327,10 +329,11 @@
  * Clears a rectangular area, making it fully transparent
  * @name clearRect
  * @function
- *  @params.x  {Integer} Starting x coordinate. Defaults to the current position.
- *  @params.y  {Integer} Starting y coordinate. Defaults to the current position.
- *  @params.width {Integer} Rectangle width. Defaults to 0.
- *  @params.height {Integer} Rectangle height. Defaults to 0.
+ * @param params {object} a parameter object
+ *  @param params.x  {Integer} Starting x coordinate. Defaults to the current position.
+ *  @param params.y  {Integer} Starting y coordinate. Defaults to the current position.
+ *  @param params.width {Integer} Rectangle width. Defaults to 0.
+ *  @param params.height {Integer} Rectangle height. Defaults to 0.
  */
 					clearRect = function( params ) {
 						params = params || {};
@@ -448,10 +451,11 @@
  * Draws a circle with the supplied starting x,y, radius and fillStyle and no stroke
  * @name fillCircle
  * @function
- * @params.x {integer} the starting x coordinate
- * @params.y {integer} the starting y coordinate
- * @params.radius {radius} the radius of the circle
- * @params.fillStyle {Any} the fill style for the circle. a falsey value will use the current context fillStyle
+ * @param params {object} a parameters object
+ * @param params.x {integer} the starting x coordinate
+ * @param params.y {integer} the starting y coordinate
+ * @param params.radius {radius} the radius of the circle
+ * @param params.fillStyle {Any} the fill style for the circle. a falsey value will use the current context fillStyle
  */
 					fillCircle = function( params ){
 						params = params || {};
@@ -502,6 +506,7 @@
 					},
 /**Writes text onto the canvas using the current text style.
  * @name fillText
+  * @function
  * @param {string} text the text to write into the canvas
  * @param {Integer} x Starting x coordinate
  * @param {Integer} y Starting y coordinate
@@ -542,9 +547,10 @@
 						currentPos( x,y );
 						return context.getImageData( x, y, width, height );
 					},
-/**
+/** Called with a num argument, sets the context alpha/transparency. Called without, returns the current context globalAlpha.
  * @name globalAlpha
  * @function
+ * @param {Floating-point} num the new globalAlpha value in a range between 0 and 1.
  */
 					globalAlpha = function( num ) {
 						if ( num !== undefined ) {
@@ -555,9 +561,35 @@
 							return context.globalAlpha;
 						}
 					},
-/**
+/** Gets or sets a value that indicates how source images are drawn onto a destination image.
  * @name globalCompositeOperation
  * @function
+ * @param {string} op one of the following options (from http://www.w3.org/TR/2dcontext/#compositing)
+ <br>
+<strong>source-atop</strong><br>
+A atop B. Display the source image wherever both images are opaque. Display the destination image wherever the destination image is opaque but the source image is transparent. Display transparency elsewhere.<br>
+<strong>source-in</strong><br>
+A in B. Display the source image wherever both the source image and destination image are opaque. Display transparency elsewhere.<br>
+<strong>source-out</strong><br>
+A out B. Display the source image wherever the source image is opaque and the destination image is transparent. Display transparency elsewhere.<br>
+<strong>source-over (default)</strong><br>
+A over B. Display the source image wherever the source image is opaque. Display the destination image elsewhere.<br>
+<strong>destination-atop</strong><br>
+B atop A. Same as source-atop but using the destination image instead of the source image and vice versa.<br>
+<strong>destination-in</strong><br>
+B in A. Same as source-in but using the destination image instead of the source image and vice versa.<br>
+<strong>destination-out</strong><br>
+B out A. Same as source-out but using the destination image instead of the source image and vice versa.<br>
+<strong>destination-over</strong><br>
+B over A. Same as source-over but using the destination image instead of the source image and vice versa.<br>
+<strong>lighter</strong><br>
+A plus B. Display the sum of the source image and destination image, with color values approaching 255 (100%) as a limit.<br>
+<strong>copy</strong><br>
+A (B is ignored). Display the source image instead of the destination image.<strong><br>
+xor</strong><br>
+A xor B. Exclusive OR of the source image and destination image.<br>
+<strong>vendorName-operationName</strong><br>
+Vendor-specific extensions to the list of composition operators should use this syntax.
  */
 					globalCompositeOperation = function( op ) {
 						if ( op !== undefined ) {
@@ -568,17 +600,24 @@
 							return context.globalCompositeOperation;
 						}
 					},
-/**
+/** Determines if the specified point is in the current path.
  * @name isPointInPath
  * @function
+ * @param {Integer} x The x coordinate to test
+ * @param {Integer} y The y coordinate to test
  */
 					isPointInPath = function( x, y ){
 						//@todo does this make sense to update the x, y?
 						return context.isPointInPath( x, y );
 					},
-/**
+/** Draws a line from a point (x,y) at a pixel distance at a provided angle
  * @name line
  * @function
+ * @param params {object} a parameter object
+ * @param params.x {integer} the starting x coordinate
+ * @param params.y {integer} the starting y coordinate
+ * @param params.distance {integer} the length of the line
+ * @param params.angle The angle of the line
  */
 					line = function( params ) {
 						params = params || {};
@@ -998,10 +1037,14 @@
  * Draws a circle with the supplied starting x,y, radius and strokeStyle and no fill
  * @name strokeCircle
  * @function
- * @params.x {integer} the starting x coordinate
- * @params.y {integer} the starting y coordinate
- * @params.radius {radius} the radius of the circle
- * @params.strokeStyle {Any} the stroke style for the circle. a falsey value will use the current context strokeStyle
+ * @param params
+.x {integer} the starting x coordinate
+ * @param params
+.y {integer} the starting y coordinate
+ * @param params
+.radius {radius} the radius of the circle
+ * @param params
+.strokeStyle {Any} the stroke style for the circle. a falsey value will use the current context strokeStyle
  */
 					strokeCircle = function( params ){
 						params = params || {};

@@ -64,7 +64,6 @@
   <target name="-clean" description="(PRIVATE) Wipe the previous build (Deletes Canvas.min.js)">
       <echo message="Cleaning up previous build..."/>
 	  <delete file="${basedir}/Canvas.min.js" />
-      <delete dir="./${dir.docs}/"/>
   </target>
 
   <target name="-intro" description="(PRIVATE) Kindly inform the developer about the impending magic">
