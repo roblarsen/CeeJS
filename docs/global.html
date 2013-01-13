@@ -3791,13 +3791,16 @@ Vendor-specific extensions to the list of composition operators should use this 
             
             <td class="type">
             
+                        integer
+                        
+                    
             </td>
             
             
             
             
             
-            <td class="description last">{integer} the starting x coordinate</td>
+            <td class="description last">the starting x coordinate</td>
         </tr>
 	
 	
@@ -3809,13 +3812,16 @@ Vendor-specific extensions to the list of composition operators should use this 
             
             <td class="type">
             
+                        integer
+                        
+                    
             </td>
             
             
             
             
             
-            <td class="description last">{integer} the starting y coordinate</td>
+            <td class="description last">the starting y coordinate</td>
         </tr>
 	
 	
@@ -3827,13 +3833,16 @@ Vendor-specific extensions to the list of composition operators should use this 
             
             <td class="type">
             
+                        integer
+                        
+                    
             </td>
             
             
             
             
             
-            <td class="description last">{integer} the length of the line</td>
+            <td class="description last">the length of the line</td>
         </tr>
 	
 	
@@ -3845,6 +3854,9 @@ Vendor-specific extensions to the list of composition operators should use this 
             
             <td class="type">
             
+                        integer
+                        
+                    
             </td>
             
             
@@ -3915,9 +3927,65 @@ Vendor-specific extensions to the list of composition operators should use this 
 <dd>
     
     
+    <p class="description">
+        Gets or sets the lineCap style for lines
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cap</code></td>
+            
+            
+            <td class="type">
+            
+                        string
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">defines the line cap. One of the following three options: <br>
+<b>butt</b><br>
+Default. A flat edge is put perpendicular to each end of the line with no cap added.<br>
+<b>round</b><br>
+A semicircle or rounded end cap is added to each end of the line.<br>
+<b>square</b><br>
+A square end cap is added to each end of the line.<br></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -3970,9 +4038,65 @@ Vendor-specific extensions to the list of composition operators should use this 
 <dd>
     
     
+    <p class="description">
+        Gets or sets the type of connection created when two lines meet
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>join</code></td>
+            
+            
+            <td class="type">
+            
+                        string
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">defines the style of line join. One of the following three options:<br>
+<strong>bevel</strong><br>
+A filled triangle connects the two lines that are joined, creating a beveled corner.<br>
+<strong>round</strong><br>
+A filled arc connects the two lines, creating a rounded corner.<br>
+<strong>miter</strong><br>
+Default. The outside edges of the lines are continued until they intersect and the resulting triangle is filled, creating a sharp or pointed corner.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -3995,7 +4119,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 655</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 662</li></ul></dd>
 	
     
     
@@ -4025,9 +4149,74 @@ Vendor-specific extensions to the list of composition operators should use this 
 <dd>
     
     
+    <p class="description">
+        Draws a line from the current point in the canvas to a new x/y pair provided as an argument
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{integer} the ending x coordinate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{integer} the ending y coordinate</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -4050,7 +4239,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 668</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 682</li></ul></dd>
 	
     
     
@@ -4080,9 +4269,56 @@ Vendor-specific extensions to the list of composition operators should use this 
 <dd>
     
     
+    <p class="description">
+        Gets or sets the width of lines in the context
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{integer} the width of the line.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -4105,7 +4341,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 680</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 696</li></ul></dd>
 	
     
     
@@ -4135,6 +4371,10 @@ Vendor-specific extensions to the list of composition operators should use this 
 <dd>
     
     
+    <p class="description">
+        a utility object containing common math functions
+    </p>
+    
     
     
     
@@ -4160,7 +4400,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 693</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 710</li></ul></dd>
 	
     
     
@@ -4215,7 +4455,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 708</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 741</li></ul></dd>
 	
     
     
@@ -4270,7 +4510,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 715</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 748</li></ul></dd>
 	
     
     
@@ -4325,7 +4565,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 728</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 761</li></ul></dd>
 	
     
     
@@ -4380,7 +4620,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 737</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 770</li></ul></dd>
 	
     
     
@@ -4435,7 +4675,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 746</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 779</li></ul></dd>
 	
     
     
@@ -4490,7 +4730,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 755</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 788</li></ul></dd>
 	
     
     
@@ -4545,7 +4785,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 801</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 834</li></ul></dd>
 	
     
     
@@ -4600,7 +4840,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 815</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 848</li></ul></dd>
 	
     
     
@@ -4659,7 +4899,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 883</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 916</li></ul></dd>
 	
     
     
@@ -4724,7 +4964,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 894</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 927</li></ul></dd>
 	
     
     
@@ -4779,7 +5019,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 902</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 935</li></ul></dd>
 	
     
     
@@ -4834,7 +5074,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 910</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 943</li></ul></dd>
 	
     
     
@@ -4889,7 +5129,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 932</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 965</li></ul></dd>
 	
     
     
@@ -4944,7 +5184,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 940</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 973</li></ul></dd>
 	
     
     
@@ -4999,7 +5239,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 948</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 981</li></ul></dd>
 	
     
     
@@ -5054,7 +5294,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 956</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 989</li></ul></dd>
 	
     
     
@@ -5109,7 +5349,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 969</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1002</li></ul></dd>
 	
     
     
@@ -5235,7 +5475,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1008</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1041</li></ul></dd>
 	
     
     
@@ -5290,7 +5530,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 982</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1015</li></ul></dd>
 	
     
     
@@ -5345,7 +5585,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 995</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1028</li></ul></dd>
 	
     
     
@@ -5400,7 +5640,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1097</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1127</li></ul></dd>
 	
     
     
@@ -5474,14 +5714,33 @@ Vendor-specific extensions to the list of composition operators should use this 
             
             
             
-            <td class="description last">.x {integer} the starting x coordinate</td>
-        </tr>
+            <td class="description last">{object} an object containing options for the circle.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
 	
+	<tbody>
 	
 	
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>x</code></td>
             
             
             <td class="type">
@@ -5492,14 +5751,14 @@ Vendor-specific extensions to the list of composition operators should use this 
             
             
             
-            <td class="description last">.y {integer} the starting y coordinate</td>
+            <td class="description last">{integer} the starting x coordinate</td>
         </tr>
 	
 	
 	
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>y</code></td>
             
             
             <td class="type">
@@ -5510,14 +5769,14 @@ Vendor-specific extensions to the list of composition operators should use this 
             
             
             
-            <td class="description last">.radius {radius} the radius of the circle</td>
+            <td class="description last">{integer} the starting y coordinate</td>
         </tr>
 	
 	
 	
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>radius</code></td>
             
             
             <td class="type">
@@ -5528,7 +5787,31 @@ Vendor-specific extensions to the list of composition operators should use this 
             
             
             
-            <td class="description last">.strokeStyle {Any} the stroke style for the circle. a falsey value will use the current context strokeStyle</td>
+            <td class="description last">{radius} the radius of the circle</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>strokeStyle</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{Any} the stroke style for the circle. a falsey value will use the current context strokeStyle</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
         </tr>
 	
 	
@@ -5556,7 +5839,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1036</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1069</li></ul></dd>
 	
     
     
@@ -5611,7 +5894,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1079</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1109</li></ul></dd>
 	
     
     
@@ -5666,7 +5949,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1066</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1096</li></ul></dd>
 	
     
     
@@ -5721,7 +6004,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1088</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1118</li></ul></dd>
 	
     
     
@@ -5776,7 +6059,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1105</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1135</li></ul></dd>
 	
     
     
@@ -5831,7 +6114,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1118</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1148</li></ul></dd>
 	
     
     
@@ -5886,7 +6169,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1131</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1161</li></ul></dd>
 	
     
     
@@ -5941,7 +6224,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1140</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1170</li></ul></dd>
 	
     
     
@@ -5981,7 +6264,7 @@ Vendor-specific extensions to the list of composition operators should use this 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Sun Jan 13 2013 01:14:48 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Sun Jan 13 2013 14:55:39 GMT-0500 (EST)
 </footer>
 
 <script> sh_highlightDocument(); </script>

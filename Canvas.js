@@ -506,7 +506,7 @@
 					},
 /**Writes text onto the canvas using the current text style.
  * @name fillText
-  * @function
+ * @function
  * @param {string} text the text to write into the canvas
  * @param {Integer} x Starting x coordinate
  * @param {Integer} y Starting y coordinate
@@ -614,10 +614,10 @@ Vendor-specific extensions to the list of composition operators should use this 
  * @name line
  * @function
  * @param params {object} a parameter object
- * @param params.x {integer} the starting x coordinate
- * @param params.y {integer} the starting y coordinate
- * @param params.distance {integer} the length of the line
- * @param params.angle The angle of the line
+ * @param {integer} params.x  the starting x coordinate
+ * @param {integer} params.y  the starting y coordinate
+ * @param {integer} params.distance the length of the line
+ * @param {integer} params.angle The angle of the line
  */
 					line = function( params ) {
 						params = params || {};
@@ -639,9 +639,16 @@ Vendor-specific extensions to the list of composition operators should use this 
 
 						return this;
 					},
-/**
+/** Gets or sets the lineCap style for lines
  * @name lineCap
  * @function
+ * @param {string} cap defines the line cap. One of the following three options: <br>
+<b>butt</b><br>
+Default. A flat edge is put perpendicular to each end of the line with no cap added.<br>
+<b>round</b><br>
+A semicircle or rounded end cap is added to each end of the line.<br>
+<b>square</b><br>
+A square end cap is added to each end of the line.<br>
  */
 					lineCap = function( cap ) {
 						if ( cap !== undefined ) {
@@ -652,9 +659,16 @@ Vendor-specific extensions to the list of composition operators should use this 
 							return context.lineCap;
 						}
 					},
-/**
+/** Gets or sets the type of connection created when two lines meet
  * @name lineJoin
  * @function
+ * @param {string} join defines the style of line join. One of the following three options:<br>
+<strong>bevel</strong><br>
+A filled triangle connects the two lines that are joined, creating a beveled corner.<br>
+<strong>round</strong><br>
+A filled arc connects the two lines, creating a rounded corner.<br>
+<strong>miter</strong><br>
+Default. The outside edges of the lines are continued until they intersect and the resulting triangle is filled, creating a sharp or pointed corner.
  */
 					lineJoin = function( join ) {
 						if ( join !== undefined ) {
@@ -665,10 +679,12 @@ Vendor-specific extensions to the list of composition operators should use this 
 							return context.lineJoin;
 						}
 					},
-/**
+/** Draws a line from the current point in the canvas to a new x/y pair provided as an argument
  * @name lineTo
  * @function
- */
+ * @param x {integer} the ending x coordinate
+ * @param y {integer} the ending y coordinate
+*/
 					lineTo = function( x, y ) {
 						context.lineTo( x, y );
 						_boundingBox({x:x, y:y});
@@ -677,9 +693,10 @@ Vendor-specific extensions to the list of composition operators should use this 
 
 						return this;
 					},
-/**
+/** Gets or sets the width of lines in the context
  * @name lineWidth
  * @function
+ * @param width {integer} the width of the line. 
  */
 					lineWidth = function( width ) {
 						if ( width !== undefined ) {
@@ -690,17 +707,33 @@ Vendor-specific extensions to the list of composition operators should use this 
 							return context.lineWidth;
 						}
 					},
-/**
+/** a utility object containing common math functions
  * @name math
  * @function
  */
 					math = {
+/** Cosecant
+ * @name Canvas.math.cosec
+ * @function
+ * @memberOf Canvas.math
+ */
+
 						cosec: function( num ) {
 							return 1 / Math.sin( num );
 						},
+/** Secant
+ * @name math.sec
+ * @function
+ * @memberOf math
+ */
 						sec: function( num ) {
 							return 1 / Math.cos( num );
 						},
+/** Converts the more commonly understaood degree measurement for an angle to radians
+ * @name math.radians
+ * @function
+ * @memberOf math
+ */						
 						radians: function( degrees ) {
 							return degrees * ( Math.PI / 180);
 						}
@@ -1037,14 +1070,11 @@ Vendor-specific extensions to the list of composition operators should use this 
  * Draws a circle with the supplied starting x,y, radius and strokeStyle and no fill
  * @name strokeCircle
  * @function
- * @param params
-.x {integer} the starting x coordinate
- * @param params
-.y {integer} the starting y coordinate
- * @param params
-.radius {radius} the radius of the circle
- * @param params
-.strokeStyle {Any} the stroke style for the circle. a falsey value will use the current context strokeStyle
+ * @param params {object} an object containing options for the circle.
+ * @param params.x {integer} the starting x coordinate
+ * @param params.y {integer} the starting y coordinate
+ * @param params.radius {radius} the radius of the circle
+ * @param params.strokeStyle {Any} the stroke style for the circle. a falsey value will use the current context strokeStyle
  */
 					strokeCircle = function( params ){
 						params = params || {};
