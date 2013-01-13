@@ -7,7 +7,7 @@ CanvasJS is a small helper library for the canvas 2d API. The goal is to extend 
 
 There are currently two areas of focus
 
-* _Chaining_ any method that doesn't return an explicit value is chainable. 
+* _Chaining_ any method that doesn't return an explicit value or Canvas object (e.g. createPattern, createLinearGradient) is chainable. 
 * _API Enhancements_ These range from new concepts (getting the boundingBox of the last operation, getting the currentPos (x and y) of the 'cursor',) missing methods (circle, rectangle) to convenience methods (canvas properties are now getter/setter methods.)
 
 A simple example might look like this

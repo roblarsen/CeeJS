@@ -52,7 +52,7 @@
 	<target name="-build"
           depends="-intro,
 				   -clean,
-                   -js.all.minify,
+          -js.all.minify,
 				   -jsdoc"/>
 
   <!--
