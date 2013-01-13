@@ -471,6 +471,8 @@
 						return this;
 					},
 /** Paints a rectangle onto the canvas using the current fill style.
+ * @name fillRect
+ * @function
  *  @param {Integer} x Starting x coordinate
  *  @param {Integer} y Starting y coordinate
  *  @param {Integer} width Rectangle width
@@ -500,10 +502,10 @@
 					},
 /**Writes text onto the canvas using the current text style.
  * @name fillText
- *  @param {string} text the text to write into the canvas
- *  @param {Integer} x Starting x coordinate
- *  @param {Integer} y Starting y coordinate
- *  @param {Integer} maxWidth the maximum width of the text box
+ * @param {string} text the text to write into the canvas
+ * @param {Integer} x Starting x coordinate
+ * @param {Integer} y Starting y coordinate
+ * @param {Integer} maxWidth the maximum width of the text box
  */
 					fillText = function( text, x, y, maxWidth ) {
 						if ( maxWidth === undefined ){
@@ -514,9 +516,10 @@
 						currentPos( x,y );
 						return this;
 					},
-/**
+/** Called with a declaration argument, sets the context font. Called without, returns the current context font. 
  * @name font
  * @function
+ * @param {string} declaration the font style
  */
 					font = function( declaration ) {
 						if ( declaration !== undefined ) {
@@ -527,9 +530,13 @@
 							return context.font;
 						}
 					},
-/**
+/** Returns an ImageData object representing the pixel data for the area of the canvas defined by the height and width provided starting at the provided x, y coordinates
  * @name getImageData
  * @function
+ * @param {Integer} x Starting x coordinate
+ * @param {Integer} y Starting y coordinate
+ * @param {Integer} width imageData width
+ * @param {Integer} height imageData height
  */
 					getImageData = function( x, y, width, height ){
 						currentPos( x,y );
