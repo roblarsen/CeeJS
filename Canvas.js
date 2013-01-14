@@ -107,8 +107,8 @@
  * Get or set the current x and y coordinates of the 'cursor'
  * @name currentPos
  * @function
- * @param {integer} x the x coordinate
- * @param {integer} y the new y coordinate
+ * @param {number} x the x coordinate
+ * @param {number} y the new y coordinate
  */
 				var currentPos = function( x, y ) {
 					if ( x !== undefined &&
@@ -145,11 +145,11 @@
  * @name arc
  * @function
  * @param params {object} a parameter object
- * @param {integer} params.x the x coordinate
- * @param {integer} params.y the y coordinate
- * @param {integer} params.radius the radius of the arc
- * @param {integer} params.start the starting angle
- * @param {integer} params.end the ending angle
+ * @param {number} params.x the x coordinate
+ * @param {number} params.y the y coordinate
+ * @param {number} params.radius the radius of the arc
+ * @param {number} params.start the starting angle
+ * @param {number} params.end the ending angle
  * @param {Boolean} [params.counter] Omitted or set to false this argument will arc counter/anti clockwise
  */
 
@@ -169,12 +169,11 @@
  * Adds points to the subpath such that the arc described by the circumference of the circle described by the arguments, starting at the given start angle and ending at the given end angle, going in the given direction ( defaulting to clockwise ), is added to the path, connected to the previous point by a straight line.
  * @name arcTo
  * @function
- * @param {integer} x1 the starting x coordinate
- * @param {integer} y1 the starting y coordinate
- * @param {integer} x2 the ending x coordinate
- * @param {integer} y2 the ending y coordinate
- * @param {integer} params.x the x coordinate
- * @param {integer} params.y the y coordinate
+ * @param {number} x1 the starting x coordinate
+ * @param {number} y1 the starting y coordinate
+ * @param {number} x2 the ending x coordinate
+ * @param {number} y2 the ending y coordinate
+ * @param {number} radius the radius of the arc
  */
 					arcTo = function( x1, y1, x2, y2, radius ) {
 						context.arcTo( x1, y1, x2, y2, radius );
@@ -194,12 +193,12 @@
  * Adds the given point to the current subpath, connected to the previous one by a cubic B�zier curve with the given control points.
  * @name bezierCurveTo
  * @function
- * @param {integer} cp1x the starting control point x coordinate
- * @param {integer} cp1y the starting control point x coordinate
- * @param {integer} cp2y the ending control point x coordinate
- * @param {integer} cp2y the ending control point x coordinate
- * @param {integer} x the ending x coordinate
- * @param {integer} y the ending y coordinate
+ * @param {number} cp1x the starting control point x coordinate
+ * @param {number} cp1y the starting control point x coordinate
+ * @param {number} cp2y the ending control point x coordinate
+ * @param {number} cp2y the ending control point x coordinate
+ * @param {number} x the ending x coordinate
+ * @param {number} y the ending y coordinate
  */
 					bezierCurveTo = function( cp1x, cp1y, cp2x, cp2y, x, y ) {
 						context.bezierCurveTo( cp1x, cp1y, cp2x, cp2y, x, y );
@@ -288,8 +287,8 @@
  * @name circle
  * @function
  * @param params {object} a parameter object
- * @param params.x {integer} the starting x coordinate
- * @param params.y {integer} the starting y coordinate
+ * @param params.x {number} the starting x coordinate
+ * @param params.y {number} the starting y coordinate
  * @param params.radius {radius} the radius of the circle
  * @param params.fillStyle {Any} the fill style for the circle or false to suppress the fill
  * @param params.strokeStyle {Any} the stroke style for the circle or false to suppress the stroke
@@ -330,10 +329,10 @@
  * @name clearRect
  * @function
  * @param params {object} a parameter object
- *  @param params.x  {Integer} Starting x coordinate. Defaults to the current position.
- *  @param params.y  {Integer} Starting y coordinate. Defaults to the current position.
- *  @param params.width {Integer} Rectangle width. Defaults to 0.
- *  @param params.height {Integer} Rectangle height. Defaults to 0.
+ *  @param params.x  {number} Starting x coordinate. Defaults to the current position.
+ *  @param params.y  {number} Starting y coordinate. Defaults to the current position.
+ *  @param params.width {number} Rectangle width. Defaults to 0.
+ *  @param params.height {number} Rectangle height. Defaults to 0.
  */
 					clearRect = function( params ) {
 						params = params || {};
@@ -370,8 +369,8 @@
  * passed an imageData object, returns an ImageData object with the same dimensions as the argument. All the pixels in the returned object are transparent black.
  * @name createImageData
  * @function
- * @param {integer} height the height of the image data object
- * @param {integer} width the width of the image data object
+ * @param {number} height the height of the image data object
+ * @param {number} width the width of the image data object
  * @param {object} imageData an imageData object
  */
 					createImageData = function() {
@@ -385,10 +384,10 @@
 /** Creates a linear gradient. Takes four arguments that represent the start point ( x0, y0) and end point ( x1, y1) of the gradient. The method must return a linear CanvasGradient initialized with the specified line.
  * @name createLinearGradient
  * @function
- * @param {integer} x0 the starting x coordinate
- * @param {integer} y0 the starting y coordinate
- * @param {integer} x1 the ending x coordinate
- * @param {integer} y1 the ending y coordinate
+ * @param {number} x0 the starting x coordinate
+ * @param {number} y0 the starting y coordinate
+ * @param {number} x1 the ending x coordinate
+ * @param {number} y1 the ending y coordinate
  */
 					createLinearGradient = function( x0, y0, x1, y1) {
 						return context.createLinearGradient( x0, y0, x1, y1);
@@ -407,12 +406,12 @@
  * Returns an object that represents a radial or circular gradient to use in a canvas context.
  * @name createRadialGradient
  * @function
- * @param {integer} x0 The x-coordinate of the starting circle of the gradient.
- * @param {integer} y0 The y-coordinate of the starting circle of the gradient.
- * @param {integer} r0 The radius of the starting circle.
- * @param {integer} x1 The x-coordinate of the ending circle of the gradient.
- * @param {integer} y1 The y-coordinate of the ending circle of the gradient.
- * @param {integer} r1 The radius of the ending circle.
+ * @param {number} x0 The x-coordinate of the starting circle of the gradient.
+ * @param {number} y0 The y-coordinate of the starting circle of the gradient.
+ * @param {number} r0 The radius of the starting circle.
+ * @param {number} x1 The x-coordinate of the ending circle of the gradient.
+ * @param {number} y1 The y-coordinate of the ending circle of the gradient.
+ * @param {number} r1 The radius of the ending circle.
  */
 					createRadialGradient = function( x0, y0, r0, x1, y1, r1  ){
 						return context.createRadialGradient( x0, y0, r0, x1, y1, r1 );
@@ -420,8 +419,8 @@
 /** Draws a specified image onto a canvas
  * @name drawImage
  * @function
- * @param {Integer} x Starting x coordinate. 
- * @param {Integer} y Starting y coordinate. 
+ * @param {number} x Starting x coordinate. 
+ * @param {number} y Starting y coordinate. 
  * @param {HTMLElement} img the image to draw onto the Canvas
  *
  */
@@ -452,8 +451,8 @@
  * @name fillCircle
  * @function
  * @param params {object} a parameters object
- * @param params.x {integer} the starting x coordinate
- * @param params.y {integer} the starting y coordinate
+ * @param params.x {number} the starting x coordinate
+ * @param params.y {number} the starting y coordinate
  * @param params.radius {radius} the radius of the circle
  * @param params.fillStyle {Any} the fill style for the circle. a falsey value will use the current context fillStyle
  */
@@ -477,10 +476,10 @@
 /** Paints a rectangle onto the canvas using the current fill style.
  * @name fillRect
  * @function
- *  @param {Integer} x Starting x coordinate
- *  @param {Integer} y Starting y coordinate
- *  @param {Integer} width Rectangle width
- *  @param {Integer} height Rectangle height
+ *  @param {number} x Starting x coordinate
+ *  @param {number} y Starting y coordinate
+ *  @param {number} width Rectangle width
+ *  @param {number} height Rectangle height
  */
 					fillRect = function( x, y, width, height ) {
 						context.fillRect( x, y, width, height );
@@ -508,9 +507,9 @@
  * @name fillText
  * @function
  * @param {string} text the text to write into the canvas
- * @param {Integer} x Starting x coordinate
- * @param {Integer} y Starting y coordinate
- * @param {Integer} maxWidth the maximum width of the text box
+ * @param {number} x Starting x coordinate
+ * @param {number} y Starting y coordinate
+ * @param {number} maxWidth the maximum width of the text box
  */
 					fillText = function( text, x, y, maxWidth ) {
 						if ( maxWidth === undefined ){
@@ -538,10 +537,10 @@
 /** Returns an ImageData object representing the pixel data for the area of the canvas defined by the height and width provided starting at the provided x, y coordinates
  * @name getImageData
  * @function
- * @param {Integer} x Starting x coordinate
- * @param {Integer} y Starting y coordinate
- * @param {Integer} width imageData width
- * @param {Integer} height imageData height
+ * @param {number} x Starting x coordinate
+ * @param {number} y Starting y coordinate
+ * @param {number} width imageData width
+ * @param {number} height imageData height
  */
 					getImageData = function( x, y, width, height ){
 						currentPos( x,y );
@@ -603,8 +602,8 @@ Vendor-specific extensions to the list of composition operators should use this 
 /** Determines if the specified point is in the current path.
  * @name isPointInPath
  * @function
- * @param {Integer} x The x coordinate to test
- * @param {Integer} y The y coordinate to test
+ * @param {number} x The x coordinate to test
+ * @param {number} y The y coordinate to test
  */
 					isPointInPath = function( x, y ){
 						//@todo does this make sense to update the x, y?
@@ -614,10 +613,10 @@ Vendor-specific extensions to the list of composition operators should use this 
  * @name line
  * @function
  * @param params {object} a parameter object
- * @param {integer} params.x  the starting x coordinate
- * @param {integer} params.y  the starting y coordinate
- * @param {integer} params.distance the length of the line
- * @param {integer} params.angle The angle of the line
+ * @param {number} params.x  the starting x coordinate
+ * @param {number} params.y  the starting y coordinate
+ * @param {number} params.distance the length of the line
+ * @param {number} params.angle The angle of the line
  */
 					line = function( params ) {
 						params = params || {};
@@ -682,8 +681,8 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** Draws a line from the current point in the canvas to a new x/y pair provided as an argument
  * @name lineTo
  * @function
- * @param x {integer} the ending x coordinate
- * @param y {integer} the ending y coordinate
+ * @param x {number} the ending x coordinate
+ * @param y {number} the ending y coordinate
 */
 					lineTo = function( x, y ) {
 						context.lineTo( x, y );
@@ -696,7 +695,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** Gets or sets the width of lines in the context
  * @name lineWidth
  * @function
- * @param width {integer} the width of the line. 
+ * @param width {number} the width of the line. 
  */
 					lineWidth = function( width ) {
 						if ( width !== undefined ) {
@@ -708,36 +707,46 @@ Default. The outside edges of the lines are continued until they intersect and t
 						}
 					},
 /** a utility object containing common math functions
- * @name math
- * @function
+ * @name Canvas#math
+ * @namespace
+ * @desc Contains the following :<br>
+ <ul><li>math.cosec</li>
+<li>math.sec</li>
+<li>math.radians</li>
+</ul>
  */
 					math = {
-/** Cosecant
- * @name Canvas.math.cosec
- * @function
- * @memberOf Canvas.math
- */
+	
 
+/**
+ * @name math.cosec
+ * @function
+ * @memberOf math
+ */
 						cosec: function( num ) {
+
 							return 1 / Math.sin( num );
 						},
-/** Secant
- * @name math.sec
+	
+/**
+ * @name math.cosec
  * @function
  * @memberOf math
  */
 						sec: function( num ) {
 							return 1 / Math.cos( num );
 						},
-/** Converts the more commonly understaood degree measurement for an angle to radians
+
+/**
  * @name math.radians
  * @function
  * @memberOf math
- */						
+ */
 						radians: function( degrees ) {
 							return degrees * ( Math.PI / 180);
 						}
 					},
+ 
 /**
  * @name measureText
  * @function
@@ -1046,8 +1055,8 @@ Default. The outside edges of the lines are continued until they intersect and t
  *
  * @name shadowOffset
  * @function
- * @param {integer} x shadowOffsetX
- * @param {integer} y shadowOffsetY
+ * @param {number} x shadowOffsetX
+ * @param {number} y shadowOffsetY
  */
 					shadowOffset = function( x, y ) {
 						if ( x !== undefined ) {
@@ -1071,8 +1080,8 @@ Default. The outside edges of the lines are continued until they intersect and t
  * @name strokeCircle
  * @function
  * @param params {object} an object containing options for the circle.
- * @param params.x {integer} the starting x coordinate
- * @param params.y {integer} the starting y coordinate
+ * @param params.x {number} the starting x coordinate
+ * @param params.y {number} the starting y coordinate
  * @param params.radius {radius} the radius of the circle
  * @param params.strokeStyle {Any} the stroke style for the circle. a falsey value will use the current context strokeStyle
  */
