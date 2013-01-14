@@ -718,38 +718,45 @@ Default. The outside edges of the lines are continued until they intersect and t
 					math = {
 	
 
-/**
+/** Returns the cosecant of a number
  * @name math.cosec
  * @function
  * @memberOf math
+ * @param num {number} the number to produce a cosecant for
+ * @returns returns the cosecant of num
  */
 						cosec: function( num ) {
 
 							return 1 / Math.sin( num );
 						},
 	
-/**
- * @name math.cosec
+/** Returns the secant of a number
+ * @name math.sec
  * @function
  * @memberOf math
+ * @param num {number} the number to produce a secant for
+ * @returns returns the secant of num
  */
 						sec: function( num ) {
 							return 1 / Math.cos( num );
 						},
 
-/**
+/** Converts degrees to radians
  * @name math.radians
  * @function
  * @memberOf math
+ * @param {number} degrees the number of degrees to get radians for
+ * @retuns the number of radians for <code>degrees</code> degrees
  */
 						radians: function( degrees ) {
 							return degrees * ( Math.PI / 180);
 						}
 					},
  
-/**
+/** The width of the text, in CSS pixels.
  * @name measureText
  * @function
+ * @param {string} string the string to measure
  */
 					measureText = function( string ){
 						return context.measureText( string );
