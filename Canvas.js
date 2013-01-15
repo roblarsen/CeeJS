@@ -800,16 +800,7 @@ Default. The outside edges of the lines are continued until they intersect and t
  */
           putImageData = function( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight ) {
             currentPos( x,y );
-            context.putImageData( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight );
-            return this;
-          },
-/**
- * @name quadraticCurveTo
- * @function
- */
-          quadraticCurveTo = function( cp1x, cp1y, x, y ) {
-            currentPos( x,y );
-            context.quadraticCurveTo( cp1x, cp1y, x, y );
+            context.putImageData( imageData, x, y, dirtyX || 0, dirtyY || 0, dirtyWidth || imageData.width, dirtyHeight || imageData.height );
             return this;
           },
 /** Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve.
@@ -820,7 +811,51 @@ Default. The outside edges of the lines are continued until they intersect and t
  * @param {number} x The x coorindate of the new point
  * @param {number} y The y coorindate of the new point
  */
-          quadraticCurveTo = function( cpx, cpy, x, y ) {
+          quadraticCurveTo = function( cp1x, cp1y, x, y ) {
+            currentPos( x,y );
+            context.quadraticCurveTo( cp1x, cp1y, x, y );
+            return this;
+          },
+/** Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve. 
+ * @name quadraticCurveToFixed
+ * @function 
+ * @param {number} cpx The x of the Bézier control point.
+ * @param {number} cpy The y of the Bézier control point.
+ * @param {number} x The x coorindate of the new point
+ * @param {number} y The y coorindate of the new point
+ * @description:
+ for FF1.5 - from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
+            For the equations below the following variable name prefixes are used:
+              qp0 is the quadratic curve starting point ( you must keep this from your last point sent to moveTo(), lineTo(), or bezierCurveTo() ).
+              qp1 is the quadratic curve control point ( this is the cpx,cpy you would have sent to quadraticCurveTo() ).
+              qp2 is the quadratic curve ending point ( this is the x,y arguments you would have sent to quadraticCurveTo() ).
+            We will convert these points to compute the two needed cubic control points ( the starting/ending points are the same for both
+            the quadratic and cubic curves.
+
+            The exact equations for the two cubic control points are:
+              cp0 = qp0 and cp3 = qp2
+              cp1 = qp0 + ( qp1 - qp0) * ratio
+              cp2 = cp1 + ( qp2 - qp0) * (1 - ratio )
+            where ratio = ( sqrt(2) - 1) * 4 / 3 exactly ( approx. 0.5522847498307933984022516322796)
+            if the quadratic is an approximation of an elliptic arc, and the cubic must approximate the same arc, or
+            ratio = 2.0 / 3.0 for keeping the same quadratic curve.
+
+            In the code below, we must compute both the x and y terms for each point separately.
+
+            cp1x = qp0x + ( qp1x - qp0x ) * ratio;
+            cp1y = qp0y + ( qp1y - qp0y ) * ratio;
+            cp2x = cp1x + ( qp2x - qp0x ) * (1 - ratio );
+            cp2y = cp1y + ( qp2y - qp0y ) * (1 - ratio );
+
+            We will now
+              a ) replace the qp0x and qp0y variables with currentX and currentY ( which *you* must store for each moveTo/lineTo/bezierCurveTo )
+              b ) replace the qp1x and qp1y variables with cpx and cpy ( which we would have passed to quadraticCurveTo )
+              c ) replace the qp2x and qp2y variables with x and y.
+            which leaves us with:
+         
+
+ */
+          quadraticCurveToFixed = function( cpx, cpy, x, y ) {
            
             var ratio = 2.0 / 3.0; // 0.5522847498307933984022516322796 if the Bezier is approximating an elliptic arc with best fitting
             var cp1x = xCurrentPos + ( cpx - xCurrentPos ) * ratio;
@@ -1211,7 +1246,6 @@ Default. The outside edges of the lines are continued until they intersect and t
           "moveTo": moveTo,
           "putImageData" : putImageData,
           "quadraticCurveTo": quadraticCurveTo,
-          "quadraticCurveToFixed": quadraticCurveToFixed,
           "rect": rect,
           "rectangle": rectangle,
           "reset": reset,
