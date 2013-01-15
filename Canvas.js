@@ -757,13 +757,15 @@ Default. The outside edges of the lines are continued until they intersect and t
  * @name measureText
  * @function
  * @param {string} string the string to measure
+ * @returns the width of the text in pixels 
  */
           measureText = function( string ){
             return context.measureText( string );
           },
-/**
+/** Ges or sets the miterLimit of the context
  * @name miterLimit
  * @function
+ * @param {number} limit a number between 0 and 10 indicating the miter limit for the context
  */
           miterLimit = function( limit ) {
             if ( limit !== undefined ) {
@@ -774,18 +776,27 @@ Default. The outside edges of the lines are continued until they intersect and t
               return context.miterLimit;
             }
           },
-/**
+/** Moves the context to the supplied x and y coordinates
  * @name moveTo
  * @function
+ * @param x {number} the ending x coordinate
+ * @param y {number} the ending y coordinate
  */
           moveTo = function( x, y ) {
             context.moveTo( x, y );
             currentPos( x,y );
             return this;
           },
-/**
+/** Puts the data from an imageData object onto a canvas.
  * @name putImageData
  * @function
+ * @param {imageData} imageData the image to paint onto the canvas
+ * @param {number} x The x-coordinate, in pixels, of the upper-left corner of the rectangle on the canvas
+ * @param {number} y The y-coordinate, in pixels, of the upper-left corner of the rectangle on the canvas
+ * @param {number} dirtyX The x value, relative to image where to place the image on the canvas.
+ * @param {number} dirtyY The y value, relative to image where to place the image on the canvas.
+ * @param {number} dirtyWidth the width of the image
+ * @param {number} dirtyHeight the height of the image
  */
           putImageData = function( imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight ) {
             currentPos( x,y );
@@ -801,40 +812,16 @@ Default. The outside edges of the lines are continued until they intersect and t
             context.quadraticCurveTo( cp1x, cp1y, x, y );
             return this;
           },
-/**
- * @name quadraticCurveToFixed
- * @function
+/** Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve.
+ * @name quadraticCurveTo
+ * @function 
+ * @param {number} cpx The x of the Bézier control point.
+ * @param {number} cpy The y of the Bézier control point.
+ * @param {number} x The x coorindate of the new point
+ * @param {number} y The y coorindate of the new point
  */
-          quadraticCurveToFixed = function( cpx, cpy, x, y ) {
-            /* for FF1.5 - from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
-            For the equations below the following variable name prefixes are used:
-              qp0 is the quadratic curve starting point ( you must keep this from your last point sent to moveTo(), lineTo(), or bezierCurveTo() ).
-              qp1 is the quadratic curve control point ( this is the cpx,cpy you would have sent to quadraticCurveTo() ).
-              qp2 is the quadratic curve ending point ( this is the x,y arguments you would have sent to quadraticCurveTo() ).
-            We will convert these points to compute the two needed cubic control points ( the starting/ending points are the same for both
-            the quadratic and cubic curves.
-
-            The exact equations for the two cubic control points are:
-              cp0 = qp0 and cp3 = qp2
-              cp1 = qp0 + ( qp1 - qp0) * ratio
-              cp2 = cp1 + ( qp2 - qp0) * (1 - ratio )
-            where ratio = ( sqrt(2) - 1) * 4 / 3 exactly ( approx. 0.5522847498307933984022516322796)
-            if the quadratic is an approximation of an elliptic arc, and the cubic must approximate the same arc, or
-            ratio = 2.0 / 3.0 for keeping the same quadratic curve.
-
-            In the code below, we must compute both the x and y terms for each point separately.
-
-            cp1x = qp0x + ( qp1x - qp0x ) * ratio;
-            cp1y = qp0y + ( qp1y - qp0y ) * ratio;
-            cp2x = cp1x + ( qp2x - qp0x ) * (1 - ratio );
-            cp2y = cp1y + ( qp2y - qp0y ) * (1 - ratio );
-
-            We will now
-              a ) replace the qp0x and qp0y variables with currentX and currentY ( which *you* must store for each moveTo/lineTo/bezierCurveTo )
-              b ) replace the qp1x and qp1y variables with cpx and cpy ( which we would have passed to quadraticCurveTo )
-              c ) replace the qp2x and qp2y variables with x and y.
-            which leaves us with:
-            */
+          quadraticCurveTo = function( cpx, cpy, x, y ) {
+           
             var ratio = 2.0 / 3.0; // 0.5522847498307933984022516322796 if the Bezier is approximating an elliptic arc with best fitting
             var cp1x = xCurrentPos + ( cpx - xCurrentPos ) * ratio;
             var cp1y = yCurrentPos + ( cpy - yCurrentPos ) * ratio;
@@ -860,29 +847,16 @@ Default. The outside edges of the lines are continued until they intersect and t
             return this;
           },
 
-          /*
-           * Function: rectangle
-           *
-           * Draws a rectangle in the canvas container
-           *
-           * Parameters:
-           *  params.x - ( Integer ) Starting x coordinate. Defaults to the current position.
-           *  params.y - ( Integer ) Starting y coordinate. Defaults to the current position.
-           *  params.width - ( Integer ) Rectangle width. Defaults to 0.
-           *  params.height - ( Integer ) Rectangle height. Defaults to 0.
-           *  params.fillStyle - ( String ) The valid fillStyle.
-           *
-           * Returns:
-           *  An object containing the current x and y positions.
-           *
-           * See Also:
-           *
-           *  <circle>
-           *  <clearRect>
-           */
-/**
+/** Draws a rectangle in the canvas container
  * @name rectangle
  * @function
+ * @param params an object containing parameters for the rectangle
+ * @param params.x {Integer} Starting x coordinate. Defaults to the current position.
+ * @param params.y {Integer} Starting y coordinate. Defaults to the current position.
+ * @param params.width {Integer} Rectangle width. Defaults to 0.
+ * @param params.height {Integer} Rectangle height. Defaults to 0.
+ * @param params.fillStyle {String} The valid fillStyle.
+
  */
           rectangle = function( params ) {
             //@todo expand params to set any style appliable to a rectangle
@@ -933,14 +907,13 @@ Default. The outside edges of the lines are continued until they intersect and t
  * Resets the canvas container, erasing the currently displayed drawings.
  * @name reset
  * @function
- * @returns An object containing the current x and y positions.
  */
           reset = function() {
             container.width = container.width;
             currentPos(0,0);
             return this;
           },
-/**
+/** Returns previously saved CanvasRenderingContext2D path state and attributes.
  * @name restore
  * @function
  */
@@ -948,37 +921,45 @@ Default. The outside edges of the lines are continued until they intersect and t
             context.restore();
             return this;
           },
-/**
+/** rotates the canvas context based on a supploed angle argument
  * @name rotate
  * @function
+ * @param angle in radians to rotate the 
  */
           rotate = function( angle ) {
             context.rotate( angle );
             return this;
           },
-/**
+/** Draws a rounded rectlangle to the canvas. 
  * @name roundedRectangle
  * @function
+ * @param params an object containing parameters for the rectangle
+ * @param params.x {Integer} Starting x coordinate. Defaults to the current position.
+ * @param params.y {Integer} Starting y coordinate. Defaults to the current position.
+ * @param params.width {Integer} Rectangle width. Defaults to 0.
+ * @param params.height {Integer} Rectangle height. Defaults to 0.
+ * @param params.fillStyle {String} The valid fillStyle.
  */
  //TODO: expose params to any options available on a rectangle or circle. 
-          roundedRectangle = function( x, y, width, height, radius ) {
+ //also, add smart defaults
+          roundedRectangle = function( params ) {
             // from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
             beginPath();
-            moveTo( x, y + radius );
-            lineTo( x, y + height - radius );
-            quadraticCurveTo( x, y + height, x + radius, y + height );
-            lineTo( x + width - radius, y + height );
-            quadraticCurveTo( x + width, y + height, x + width, y + height - radius );
-            lineTo( x + width, y + radius );
-            quadraticCurveTo( x + width, y, x + width - radius, y );
-            lineTo( x + radius, y );
-            quadraticCurveTo( x, y, x, y + radius );
+            moveTo( params.x, params.y + params.radius );
+            lineTo( params.x, params.y + params.height - params.radius );
+            quadraticCurveTo( params.x, params.y + params.height, params.x + params.radius, params.y + params.height );
+            lineTo( params.x + params.width - params.radius, params.y + params.height );
+            quadraticCurveTo( params.x + params.width, params.y + params.height, params.x + params.width, params.y + params.height - params.radius );
+            lineTo( params.x + params.width, params.y + params.radius );
+            quadraticCurveTo( params.x + params.width, params.y, params.x + params.width - params.radius, params.y );
+            lineTo( params.x + params.radius, params.y );
+            quadraticCurveTo( params.x, params.y, params.x, params.y + params.radius );
             stroke();
 
-            _boundingBox({x:x, y:y, w:width, h:height});
+            _boundingBox({x:params.x, y:params.y, w:params.width, h:params.height});
             return this;
           },
-/**
+/** saves the current state of the canvas
  * @name save
  * @function
  */

@@ -4350,9 +4350,59 @@ Default. The outside edges of the lines are continued until they intersect and t
 <dd>
     
     
+    <p class="description">
+        The width of the text, in CSS pixels.
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>string</code></td>
+            
+            
+            <td class="type">
+            
+                        string
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the string to measure</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -4375,7 +4425,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 750</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 756</li></ul></dd>
 	
     
     
@@ -4391,6 +4441,16 @@ Default. The outside edges of the lines are continued until they intersect and t
     
     
     
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    the width of the text in pixels
+</div>
+
+
+
+        
     
     
 </dd>
@@ -4405,9 +4465,59 @@ Default. The outside edges of the lines are continued until they intersect and t
 <dd>
     
     
+    <p class="description">
+        Ges or sets the miterLimit of the context
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>limit</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">a number between 0 and 10 indicating the miter limit for the context</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -4430,7 +4540,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 757</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 765</li></ul></dd>
 	
     
     
@@ -4460,9 +4570,74 @@ Default. The outside edges of the lines are continued until they intersect and t
 <dd>
     
     
+    <p class="description">
+        Moves the context to the supplied x and y coordinates
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{number} the ending x coordinate</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{number} the ending y coordinate</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -4485,7 +4660,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 770</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 779</li></ul></dd>
 	
     
     
@@ -4515,9 +4690,185 @@ Default. The outside edges of the lines are continued until they intersect and t
 <dd>
     
     
+    <p class="description">
+        Puts the data from an imageData object onto a canvas.
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>imageData</code></td>
+            
+            
+            <td class="type">
+            
+                        imageData
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the image to paint onto the canvas</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The x-coordinate, in pixels, of the upper-left corner of the rectangle on the canvas</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The y-coordinate, in pixels, of the upper-left corner of the rectangle on the canvas</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>dirtyX</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The x value, relative to image where to place the image on the canvas.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>dirtyY</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The y value, relative to image where to place the image on the canvas.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>dirtyWidth</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the width of the image</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>dirtyHeight</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the height of the image</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -4540,7 +4891,175 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 779</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 790</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="quadraticCurveTo"><span class="type-signature"></span>quadraticCurveTo</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve.
+    </p>
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cpx</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The x of the Bézier control point.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>cpy</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The y of the Bézier control point.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The x coorindate of the new point</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The y coorindate of the new point</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 815</li></ul></dd>
 	
     
     
@@ -4595,62 +5114,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 788</li></ul></dd>
-	
-    
-    
-	
-	
-	
-	
-</dl>
-
-    
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="quadraticCurveToFixed"><span class="type-signature"></span>quadraticCurveToFixed</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 797</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 806</li></ul></dd>
 	
     
     
@@ -4705,7 +5169,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 843</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 837</li></ul></dd>
 	
     
     
@@ -4735,9 +5199,171 @@ Default. The outside edges of the lines are continued until they intersect and t
 <dd>
     
     
+    <p class="description">
+        Draws a rectangle in the canvas container
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">an object containing parameters for the rectangle
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{Integer} Starting x coordinate. Defaults to the current position.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{Integer} Starting y coordinate. Defaults to the current position.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{Integer} Rectangle width. Defaults to 0.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{Integer} Rectangle height. Defaults to 0.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>fillStyle</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{String} The valid fillStyle.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -4760,7 +5386,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 857</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 850</li></ul></dd>
 	
     
     
@@ -4819,7 +5445,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 925</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 906</li></ul></dd>
 	
     
     
@@ -4835,16 +5461,6 @@ Default. The outside edges of the lines are continued until they intersect and t
     
     
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    An object containing the current x and y positions.
-</div>
-
-
-
-        
     
     
 </dd>
@@ -4858,6 +5474,10 @@ Default. The outside edges of the lines are continued until they intersect and t
 </dt>
 <dd>
     
+    
+    <p class="description">
+        Returns previously saved CanvasRenderingContext2D path state and attributes.
+    </p>
     
     
     
@@ -4884,7 +5504,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 936</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 916</li></ul></dd>
 	
     
     
@@ -4914,9 +5534,56 @@ Default. The outside edges of the lines are continued until they intersect and t
 <dd>
     
     
+    <p class="description">
+        rotates the canvas context based on a supploed angle argument
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>angle</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">in radians to rotate the</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -4939,7 +5606,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 944</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 924</li></ul></dd>
 	
     
     
@@ -4969,9 +5636,171 @@ Default. The outside edges of the lines are continued until they intersect and t
 <dd>
     
     
+    <p class="description">
+        Draws a rounded rectlangle to the canvas.
+    </p>
     
     
     
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">an object containing parameters for the rectangle
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{Integer} Starting x coordinate. Defaults to the current position.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{Integer} Starting y coordinate. Defaults to the current position.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{Integer} Rectangle width. Defaults to 0.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{Integer} Rectangle height. Defaults to 0.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>fillStyle</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{String} The valid fillStyle.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -4994,7 +5823,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 952</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 933</li></ul></dd>
 	
     
     
@@ -5024,6 +5853,10 @@ Default. The outside edges of the lines are continued until they intersect and t
 <dd>
     
     
+    <p class="description">
+        saves the current state of the canvas
+    </p>
+    
     
     
     
@@ -5049,7 +5882,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 974</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 962</li></ul></dd>
 	
     
     
@@ -5104,7 +5937,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 982</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 970</li></ul></dd>
 	
     
     
@@ -5159,7 +5992,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 990</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 978</li></ul></dd>
 	
     
     
@@ -5214,7 +6047,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 998</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 986</li></ul></dd>
 	
     
     
@@ -5269,7 +6102,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1011</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 999</li></ul></dd>
 	
     
     
@@ -5395,7 +6228,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1050</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1038</li></ul></dd>
 	
     
     
@@ -5450,7 +6283,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1024</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1012</li></ul></dd>
 	
     
     
@@ -5505,7 +6338,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1037</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1025</li></ul></dd>
 	
     
     
@@ -5560,7 +6393,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1136</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1124</li></ul></dd>
 	
     
     
@@ -5759,7 +6592,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1078</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1066</li></ul></dd>
 	
     
     
@@ -5814,7 +6647,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1118</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1106</li></ul></dd>
 	
     
     
@@ -5869,7 +6702,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1105</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1093</li></ul></dd>
 	
     
     
@@ -5924,7 +6757,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1127</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1115</li></ul></dd>
 	
     
     
@@ -5979,7 +6812,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1144</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1132</li></ul></dd>
 	
     
     
@@ -6034,7 +6867,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1157</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1145</li></ul></dd>
 	
     
     
@@ -6089,7 +6922,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1170</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1158</li></ul></dd>
 	
     
     
@@ -6144,7 +6977,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1179</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>Canvas.js, line 1167</li></ul></dd>
 	
     
     
@@ -6178,13 +7011,13 @@ Default. The outside edges of the lines are continued until they intersect and t
 </div>
 
 <nav>
-    <h3>Classes</h3><ul><li><a href="CanvasJS.html">CanvasJS</a></li></ul><h3>Namespaces</h3><ul><li><a href="cc90768c97.html">math</a></li></ul><h3>Global</h3><ul><li><a href="global.html#arc">arc</a></li><li><a href="global.html#arcTo">arcTo</a></li><li><a href="global.html#beginPath">beginPath</a></li><li><a href="global.html#bezierCurveTo">bezierCurveTo</a></li><li><a href="global.html#boundingBox">boundingBox</a></li><li><a href="global.html#circle">circle</a></li><li><a href="global.html#clearRect">clearRect</a></li><li><a href="global.html#clip">clip</a></li><li><a href="global.html#closePath">closePath</a></li><li><a href="global.html#createImageData">createImageData</a></li><li><a href="global.html#createLinearGradient">createLinearGradient</a></li><li><a href="global.html#createPattern">createPattern</a></li><li><a href="global.html#createRadialGradient">createRadialGradient</a></li><li><a href="global.html#currentPos">currentPos</a></li><li><a href="global.html#drawImage">drawImage</a></li><li><a href="global.html#fill">fill</a></li><li><a href="global.html#fillCircle">fillCircle</a></li><li><a href="global.html#fillRect">fillRect</a></li><li><a href="global.html#fillStyle">fillStyle</a></li><li><a href="global.html#fillText">fillText</a></li><li><a href="global.html#font">font</a></li><li><a href="global.html#getImageData">getImageData</a></li><li><a href="global.html#globalAlpha">globalAlpha</a></li><li><a href="global.html#globalCompositeOperation">globalCompositeOperation</a></li><li><a href="global.html#isPointInPath">isPointInPath</a></li><li><a href="global.html#line">line</a></li><li><a href="global.html#lineCap">lineCap</a></li><li><a href="global.html#lineJoin">lineJoin</a></li><li><a href="global.html#lineTo">lineTo</a></li><li><a href="global.html#lineWidth">lineWidth</a></li><li><a href="global.html#measureText">measureText</a></li><li><a href="global.html#miterLimit">miterLimit</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#putImageData">putImageData</a></li><li><a href="global.html#quadraticCurveTo">quadraticCurveTo</a></li><li><a href="global.html#quadraticCurveToFixed">quadraticCurveToFixed</a></li><li><a href="global.html#rect">rect</a></li><li><a href="global.html#rectangle">rectangle</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#restore">restore</a></li><li><a href="global.html#rotate">rotate</a></li><li><a href="global.html#roundedRectangle">roundedRectangle</a></li><li><a href="global.html#save">save</a></li><li><a href="global.html#scale">scale</a></li><li><a href="global.html#setTransform">setTransform</a></li><li><a href="global.html#shadowBlur">shadowBlur</a></li><li><a href="global.html#shadowColor">shadowColor</a></li><li><a href="global.html#shadowOffset">shadowOffset</a></li><li><a href="global.html#shadowOffsetX">shadowOffsetX</a></li><li><a href="global.html#shadowOffsetY">shadowOffsetY</a></li><li><a href="global.html#stroke">stroke</a></li><li><a href="global.html#strokeCircle">strokeCircle</a></li><li><a href="global.html#strokeRect">strokeRect</a></li><li><a href="global.html#strokeStyle">strokeStyle</a></li><li><a href="global.html#strokeText">strokeText</a></li><li><a href="global.html#textAlign">textAlign</a></li><li><a href="global.html#textBaseline">textBaseline</a></li><li><a href="global.html#transform">transform</a></li><li><a href="global.html#translate">translate</a></li></ul>
+    <h3>Classes</h3><ul><li><a href="CanvasJS.html">CanvasJS</a></li></ul><h3>Namespaces</h3><ul><li><a href="cc90768c97.html">math</a></li></ul><h3>Global</h3><ul><li><a href="global.html#arc">arc</a></li><li><a href="global.html#arcTo">arcTo</a></li><li><a href="global.html#beginPath">beginPath</a></li><li><a href="global.html#bezierCurveTo">bezierCurveTo</a></li><li><a href="global.html#boundingBox">boundingBox</a></li><li><a href="global.html#circle">circle</a></li><li><a href="global.html#clearRect">clearRect</a></li><li><a href="global.html#clip">clip</a></li><li><a href="global.html#closePath">closePath</a></li><li><a href="global.html#createImageData">createImageData</a></li><li><a href="global.html#createLinearGradient">createLinearGradient</a></li><li><a href="global.html#createPattern">createPattern</a></li><li><a href="global.html#createRadialGradient">createRadialGradient</a></li><li><a href="global.html#currentPos">currentPos</a></li><li><a href="global.html#drawImage">drawImage</a></li><li><a href="global.html#fill">fill</a></li><li><a href="global.html#fillCircle">fillCircle</a></li><li><a href="global.html#fillRect">fillRect</a></li><li><a href="global.html#fillStyle">fillStyle</a></li><li><a href="global.html#fillText">fillText</a></li><li><a href="global.html#font">font</a></li><li><a href="global.html#getImageData">getImageData</a></li><li><a href="global.html#globalAlpha">globalAlpha</a></li><li><a href="global.html#globalCompositeOperation">globalCompositeOperation</a></li><li><a href="global.html#isPointInPath">isPointInPath</a></li><li><a href="global.html#line">line</a></li><li><a href="global.html#lineCap">lineCap</a></li><li><a href="global.html#lineJoin">lineJoin</a></li><li><a href="global.html#lineTo">lineTo</a></li><li><a href="global.html#lineWidth">lineWidth</a></li><li><a href="global.html#measureText">measureText</a></li><li><a href="global.html#miterLimit">miterLimit</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#putImageData">putImageData</a></li><li><a href="global.html#quadraticCurveTo">quadraticCurveTo</a></li><li><a href="global.html#rect">rect</a></li><li><a href="global.html#rectangle">rectangle</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#restore">restore</a></li><li><a href="global.html#rotate">rotate</a></li><li><a href="global.html#roundedRectangle">roundedRectangle</a></li><li><a href="global.html#save">save</a></li><li><a href="global.html#scale">scale</a></li><li><a href="global.html#setTransform">setTransform</a></li><li><a href="global.html#shadowBlur">shadowBlur</a></li><li><a href="global.html#shadowColor">shadowColor</a></li><li><a href="global.html#shadowOffset">shadowOffset</a></li><li><a href="global.html#shadowOffsetX">shadowOffsetX</a></li><li><a href="global.html#shadowOffsetY">shadowOffsetY</a></li><li><a href="global.html#stroke">stroke</a></li><li><a href="global.html#strokeCircle">strokeCircle</a></li><li><a href="global.html#strokeRect">strokeRect</a></li><li><a href="global.html#strokeStyle">strokeStyle</a></li><li><a href="global.html#strokeText">strokeText</a></li><li><a href="global.html#textAlign">textAlign</a></li><li><a href="global.html#textBaseline">textBaseline</a></li><li><a href="global.html#transform">transform</a></li><li><a href="global.html#translate">translate</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Mon Jan 14 2013 07:44:31 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Tue Jan 15 2013 11:40:33 GMT-0500 (EST)
 </footer>
 
 <script> sh_highlightDocument(); </script>
