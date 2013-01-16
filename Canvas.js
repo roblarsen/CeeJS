@@ -101,7 +101,6 @@
         context.strokeStyle = params.strokeStyle || context.strokeStyle;
         context.textAlign = params.textAlign || context.textAlign;
         context.textBaseline = params.textBaseline || context.textBaseline;
-
 /**
  * Get or set the current x and y coordinates of the 'cursor'
  * @name currentPos
@@ -1320,7 +1319,9 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
           "textAlign": textAlign,
           "textBaseline": textBaseline,
           "transform" : transform,
-          "translate" : translate
+          "translate" : translate,
+          "width" : container.width,
+          "height" : container.height
         };
       }
     };
