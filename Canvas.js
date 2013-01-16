@@ -10,7 +10,8 @@
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * Date: 2013.1.10
+ * Date: 2013.1.16
+ * v.0066 
  */
 
 /**
@@ -19,8 +20,6 @@
 * For starters, ADD boundingBox property for shapes, which we can then expose as whatever current X,Y scheme we'd default to and then then whatever people want
 * then set up a configruation piece. Set default position when the Canvas is created and then allow overrides at any point.
 * Something like ctx.setOrigin ( args )
-* @todo DOCUMENTATION
-* @todo BUILD SCRIPT
 */
 
 (function( window ){
@@ -144,27 +143,20 @@
  * Adds an arc with the given control points and radius to the current subpath, connected to the previous point by a straight line.
  * @name arc
  * @function
- * @param params {object} a parameter object
- * @param {number} params.x the x coordinate
- * @param {number} params.y the y coordinate
- * @param {number} params.radius the radius of the arc
- * @param {number} params.start the starting angle
- * @param {number} params.end the ending angle
- * @param {Boolean} [params.counter] Omitted or set to false this argument will arc counter/anti clockwise
- */
+ * @param {number} x the x coordinate
+ * @param {number} y the y coordinate
+ * @param {number} radius the radius of the arc
+ * @param {number} start the starting angle
+ * @param {number} end the ending angle
+ * @param {Boolean} [counter] Omitted or set to false this argument will arc counter/anti clockwise
+*/
 
-          arc = function( params ) {
-            params = params || {};
-            var x = _valOrDefault( params.x, xCurrentPos ),
-              y = _valOrDefault( params.y, yCurrentPos ),
-              radius = params.radius || 0,
-              start = params.start || 0,
-              end = params.end || Math.PI * 2,
-              counter = params.counter || false;
-
-            context.arc( x, y, radius, start, end, counter );
+          arc = function( x, y, radius, start, end, counter ) {
+           //TODO... what the hell is the current position here.
+            context.arc( x, y, radius, start, end, counter || false );
             return this;
           },
+
 /**
  * Adds points to the subpath such that the arc described by the circumference of the circle described by the arguments, starting at the given start angle and ending at the given end angle, going in the given direction ( defaulting to clockwise ), is added to the path, connected to the previous point by a straight line.
  * @name arcTo
@@ -869,9 +861,13 @@ Default. The outside edges of the lines are continued until they intersect and t
             currentPos( x,y );
             return this;
           },
-/**
+/** Draws a rectangle on the current path
  * @name rect
  * @function
+ * @param x {number} Starting x coordinate. 
+ * @param y {number} Starting y coordinate.
+ * @param width {number} Rectangle width. 
+ * @param height {number} Rectangle height. 
  */
           rect = function( x, y, width, height ) {
             currentPos( x,y );
@@ -886,10 +882,10 @@ Default. The outside edges of the lines are continued until they intersect and t
  * @name rectangle
  * @function
  * @param params an object containing parameters for the rectangle
- * @param params.x {Integer} Starting x coordinate. Defaults to the current position.
- * @param params.y {Integer} Starting y coordinate. Defaults to the current position.
- * @param params.width {Integer} Rectangle width. Defaults to 0.
- * @param params.height {Integer} Rectangle height. Defaults to 0.
+ * @param params.x {number} Starting x coordinate. Defaults to the current position.
+ * @param params.y {number} Starting y coordinate. Defaults to the current position.
+ * @param params.width {number} Rectangle width. Defaults to 0.
+ * @param params.height {number} Rectangle height. Defaults to 0.
  * @param params.fillStyle {String} The valid fillStyle.
 
  */
@@ -969,10 +965,10 @@ Default. The outside edges of the lines are continued until they intersect and t
  * @name roundedRectangle
  * @function
  * @param params an object containing parameters for the rectangle
- * @param params.x {Integer} Starting x coordinate. Defaults to the current position.
- * @param params.y {Integer} Starting y coordinate. Defaults to the current position.
- * @param params.width {Integer} Rectangle width. Defaults to 0.
- * @param params.height {Integer} Rectangle height. Defaults to 0.
+ * @param params.x {number} Starting x coordinate. Defaults to the current position.
+ * @param params.y {number} Starting y coordinate. Defaults to the current position.
+ * @param params.width {number} Rectangle width. Defaults to 0.
+ * @param params.height {number} Rectangle height. Defaults to 0.
  * @param params.fillStyle {String} The valid fillStyle.
  */
  //TODO: expose params to any options available on a rectangle or circle. 
@@ -1002,25 +998,34 @@ Default. The outside edges of the lines are continued until they intersect and t
             context.save();
             return this;
           },
-/**
+/** Scales the current context by the specified horizontal and vertical factors
  * @name scale
  * @function
+ * @param {number} x The x scaling factor
+ * @param {number} y The y scaling factor
  */
           scale = function( x, y ) {
             context.scale( x, y );
             return this;
           },
-/**
+/** Changes the transformation matrix to the matrix given by the arguments
  * @name setTransform
  * @function
+ * @param {number} m11 the m1,1 value in the matrix.
+* @param {number} m12 The m1,2 value in the matrix.
+* @param {number} m21 The m2,1 value in the matrix.
+* @param {number} m22 The m2,2 value in the matrix.
+* @param {number} dx The delta x (dx) value in the matrix.
+* @param {number} dy The delta y (dy) value in the matrix.
  */
-          setTransform = function( matrix11, matrix12, matrix21, matrix22, x, y ){
-            context.setTransform(  matrix11, matrix12, matrix21, matrix22, x, y );
+          setTransform = function( matrix11, matrix12, matrix21, matrix22, dx, dy ){
+            context.setTransform(  matrix11, matrix12, matrix21, matrix22, dx, dy );
             return this;
           },
-/**
+/** gets or sets the amount of blur on shadows
  * @name shadowBlur
  * @function
+ * @param {number} num the amount of blur
  */
           shadowBlur = function( num ) {
             if ( num !== undefined ) {
@@ -1031,9 +1036,10 @@ Default. The outside edges of the lines are continued until they intersect and t
               return context.shadowBlur;
             }
           },
-/**
+/** gets or sets the shadowColor
  * @name shadowColor
  * @function
+ * @param {color} color the valid CSS color value of the shadow 
  */
           shadowColor = function( color ) {
             if ( color !== undefined ) {
@@ -1044,9 +1050,10 @@ Default. The outside edges of the lines are continued until they intersect and t
               return context.shadowColor;
             }
           },
-/**
+/** gets/sets the shadow shadowOffsetX of the context
  * @name shadowOffsetX
  * @function
+ * @param {number} num the amount of offset
  */
           shadowOffsetX = function( num ) {
             if ( num !== undefined ) {
@@ -1057,9 +1064,10 @@ Default. The outside edges of the lines are continued until they intersect and t
               return context.shadowOffsetX;
             }
           },
-/**
+/** gets/sets the shadow shadowOffsetY of the context
  * @name shadowOffsetY
  * @function
+ * @param {number} num the amount of offset
  */
           shadowOffsetY = function( num ) {
             if ( num !== undefined ) {
@@ -1125,9 +1133,10 @@ Default. The outside edges of the lines are continued until they intersect and t
 
             return this;
           },
-/**
+/** gets/sets the strokeStyle for the context
  * @name strokeStyle
  * @function
+ * @param {string} color the valid color
  */
           strokeStyle = function( color ) {
             if ( color !== undefined ) {
@@ -1138,25 +1147,33 @@ Default. The outside edges of the lines are continued until they intersect and t
               return context.strokeStyle;
             }
           },
-/**
+/** Draws a stroked rectangle to the canvas.
  * @name strokeRect
  * @function
+ * @param x {number} Starting x coordinate. 
+ * @param y {number} Starting y coordinate.
+ * @param width {number} Rectangle width. 
+ * @param height {number} Rectangle height. 
  */
           strokeRect = function( x, y, width, height ) {
             currentPos( x,y );
             context.strokeRect( x, y, width, height );
             return this;
           },
-/**
+/** Draws stroked text to the canvas
  * @name strokeText
  * @function
+ * @param text {string} the text to write to the canvas
+ * @param x {number} Starting x coordinate. 
+ * @param y {number} Starting y coordinate.
+ * @param maxWidth {number} the maximum width of the text
  */
           strokeText = function( text, x, y, maxWidth ) {
             currentPos( x,y );
             context.strokeText( text, x, y, maxWidth );
             return this;
           },
-/**
+/** Stokes the current path.
  * @name stroke
  * @function
  */
@@ -1164,9 +1181,21 @@ Default. The outside edges of the lines are continued until they intersect and t
             context.stroke();
             return this;
           },
-/**
+/** gets/sets the textAlign for the context
  * @name textAlign
  * @function
+ * @param {string} align one of the following values<br>
+ <b>start</b><br>
+Default. If the canvas is left-to-right, the anchor point is the left edge of the text. If the canvas is right-to-left, the anchor point is the right edge of the text.<br>
+<b>end</b><br>
+If the canvas is left-to-right, the anchor point is the right edge of the text. If the canvas is right-to-left, the anchor point is the left edge of the text.<br>
+<b>left</b><br>
+The anchor point is the left edge of the text.<br>
+<b>right</b><br>
+The anchor point is the right edge of the text.<br>
+<b>center</b><br>
+The anchor point is centered in the text.<br>
+source : http://msdn.microsoft.com/en-us/library/windows/apps/hh465914.aspx
  */
           textAlign = function( align ) {
             if ( align !== undefined ) {
@@ -1177,9 +1206,23 @@ Default. The outside edges of the lines are continued until they intersect and t
               return context.textAlign;
             }
           },
-/**
+/** gets/sets the textBaseline for the context
  * @name textBaseline
  * @function
+ * @param {string} baseline one of the following values<br>
+ <b>top</b><br>
+The top of the em square.<br>
+<b>hanging</b><br>
+The hanging baseline<br>
+<b>middle</b><br>
+The middle of the em square.<br>
+<b>alphabetic</b><br>
+Default. The alphabetic baseline.<br>
+<b>ideographic</b><br>
+The ideographic baseline.<br>
+<b>bottom</b><br>
+The bottom of the em square. <br>
+source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
  */
           textBaseline = function( baseline ) {
             if ( baseline !== undefined ) {
@@ -1190,18 +1233,26 @@ Default. The outside edges of the lines are continued until they intersect and t
               return context.textBaseline;
             }
           },
-/**
+/** transforms the current context
  * @name transform
  * @function
+ * @param {number} m11 the m1,1 value in the matrix.
+* @param {number} m12 The m1,2 value in the matrix.
+* @param {number} m21 The m2,1 value in the matrix.
+* @param {number} m22 The m2,2 value in the matrix.
+* @param {number} dx The delta x (dx) value in the matrix.
+* @param {number} dy The delta y (dy) value in the matrix.
  */
-          transform = function( matrix11, matrix12, matrix21, matrix22, x, y ){
+          transform = function( matrix11, matrix12, matrix21, matrix22, dx, dy ){
             currentPos( x, y );
-            context.transform( matrix11, matrix12, matrix21, matrix22, x, y );
+            context.transform( matrix11, matrix12, matrix21, matrix22, dx, dy );
             return this;
           },
-/**
+/** Translates the current context
  * @name translate
  * @function
+ * @param x {number} the x transformation 
+ * @param y {number} the y transformation
  */
           translate = function( x, y ){
             currentPos( x,y );
