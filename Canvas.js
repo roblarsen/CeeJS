@@ -10,8 +10,8 @@
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * Date: 2013.1.16
- * v.0066 
+ * Date: 2013.1.17
+ * v.0067
  */
 
 /**
@@ -295,11 +295,7 @@
               strokeStyle = params.strokeStyle || false;
             moveTo( x, y );
             beginPath();
-            arc({
-              x: x,
-              y: y,
-              radius: radius
-            });
+            arc( x, y, radius, 0, 2 * Math.PI);
             if ( fillStyle ) {
               context.fillStyle = fillStyle;
               context.fill();
