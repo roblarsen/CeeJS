@@ -327,7 +327,7 @@
               y = _valOrDefault( params.y, yCurrentPos ),
               width = params.width || 0,
               height = params.height || 0;
-            context.clearRect( x, y, width, height );
+              context.clearRect( x, y, width, height );
 
             _boundingBox({x:x, y:y, w:width, h:height});
 
