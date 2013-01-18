@@ -56,6 +56,8 @@
  *  @param  {string} params.strokeStyle - Default strokeStyle. Defaults to "#000000";
  *  @param  {string} params.textAlign - Default textAlign. Defaults to "start";
  *  @param  {string} params.textBaseline - Default textBaseline. Defaults to "alphabetic";
+ *  @property {number} width The width of the current canvas element
+ *  @property {number} height The height of the current canvas element
  */
       _init: function( selector, params ) {
         params = params || {};
@@ -694,7 +696,7 @@ Default. The outside edges of the lines are continued until they intersect and t
             }
           },
 /** a utility object containing common math functions
- * @name Canvas#math
+ * @name math
  * @namespace
  * @desc Contains the following :<br>
  <ul><li>math.cosec</li>
@@ -965,11 +967,18 @@ Default. The outside edges of the lines are continued until they intersect and t
  * @param params.width {number} Rectangle width. Defaults to 0.
  * @param params.height {number} Rectangle height. Defaults to 0.
  * @param params.fillStyle {String} The valid fillStyle.
+* @param params.radius {String} the radius of the rounded corners
  */
- //TODO: expose params to any options available on a rectangle or circle. 
- //also, add smart defaults
           roundedRectangle = function( params ) {
             // from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
+            params = params || {};
+            var x = _valOrDefault( params.x, xCurrentPos ),
+              y = _valOrDefault( params.y, yCurrentPos ),
+              radius = params.radius || 10,
+              fillStyle = params.fillStyle || false,
+              strokeStyle = params.strokeStyle || false,
+              height = params.height || 10,
+              width = params.width || 10;
             beginPath();
             moveTo( params.x, params.y + params.radius );
             lineTo( params.x, params.y + params.height - params.radius );
@@ -980,7 +989,85 @@ Default. The outside edges of the lines are continued until they intersect and t
             quadraticCurveTo( params.x + params.width, params.y, params.x + params.width - params.radius, params.y );
             lineTo( params.x + params.radius, params.y );
             quadraticCurveTo( params.x, params.y, params.x, params.y + params.radius );
-            stroke();
+           
+             if ( fillStyle ) {
+              context.fillStyle = fillStyle;
+              fill();
+            }
+            if ( strokeStyle ) {
+              context.strokeStyle = strokeStyle;
+              stroke();
+            }
+            closePath();
+
+            _boundingBox({x:params.x, y:params.y, w:params.width, h:params.height});
+            return this;
+          },
+/** Draws a rounded rectlangle to the canvas. 
+ * @name roundedRectangle
+ * @function
+ * @param params an object containing parameters for the rectangle
+ * @param params.x {number} Starting x coordinate. Defaults to the current position.
+ * @param params.y {number} Starting y coordinate. Defaults to the current position.
+ * @param params.width {number} Rectangle width. Defaults to 0.
+ * @param params.height {number} Rectangle height. Defaults to 0.
+ * @param params.fillStyle {String} The valid fillStyle. false to supress the fill
+ * @param params.strokeStyle {String} The valid strokeStyle. false to supress the stroke
+* @param params.radius {String} the radius of the rounded corners
+ */
+
+          fillRoundedRectangle = function( params ) {
+            // from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
+            params = params || {};
+            var x = _valOrDefault( params.x, xCurrentPos ),
+              y = _valOrDefault( params.y, yCurrentPos ),
+              radius = params.radius || 10,
+              fillStyle = params.fillStyle || context.fillStyle,
+              height = params.height || 10,
+              width = params.width || 10;
+            this.roundedRectangle({
+              x: x,
+              y: y,
+              radius: radius,
+              fillStyle: fillStyle,
+              strokeStyle: false,
+              height : height,
+              width : width
+            });
+            _boundingBox({x:params.x, y:params.y, w:params.width, h:params.height});
+            return this;
+          },
+/** Draws a rounded rectlangle to the canvas. 
+ * @name strokeRoundedRectangle
+ * @function
+ * @param params an object containing parameters for the rectangle
+ * @param params.x {number} Starting x coordinate. Defaults to the current position.
+ * @param params.y {number} Starting y coordinate. Defaults to the current position.
+ * @param params.width {number} Rectangle width. Defaults to 0.
+ * @param params.height {number} Rectangle height. Defaults to 0.
+ * @param params.strokeStyle {String} The valid fillStyle.
+ * @param params.radius {String} the radius of the rounded corners
+ */
+          strokeRoundedRectangle = function( params ) {
+            // from MDN: https://developer.mozilla.org/en/Canvas_tutorial/Drawing_shapes
+            params = params || {};
+            var x = _valOrDefault( params.x, xCurrentPos ),
+              y = _valOrDefault( params.y, yCurrentPos ),
+              radius = params.radius || 10,
+              strokeStyle = params.strokeStyle || context.strokeStyle;
+              height = params.height || 10,
+              width = params.width || 10;
+
+
+            this.roundedRectangle({
+              x: x,
+              y: y,
+              radius: radius,
+              fillStyle: false,
+              strokeStyle: strokeStyle,
+              height : height,
+              width : width
+            });
 
             _boundingBox({x:params.x, y:params.y, w:params.width, h:params.height});
             return this;
@@ -1254,6 +1341,7 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
             context.translate( x, y );
             return this;
           };
+      
         return {
           "arc": arc,
           "arcTo": arcTo,
@@ -1298,7 +1386,8 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
           "restore": restore,
           "rotate" : rotate,
           "roundedRectangle": roundedRectangle,
-          "roundedRect": roundedRectangle,
+          "strokeRoundedRectangle": strokeRoundedRectangle,
+          "fillRoundedRectangle": fillRoundedRectangle,
           "save": save,
           "scale" : scale,
           "setTransform" : setTransform,
