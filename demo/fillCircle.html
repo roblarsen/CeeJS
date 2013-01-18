@@ -2,7 +2,7 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>CanvasJS circle Demo</title>
+        <title>CanvasJS fillCircle Demo</title>
     </head>
     <body>
       <canvas id="demo" height="500" width="960">
@@ -18,12 +18,11 @@
       var x = Math.random() * ctx.width,
           y = Math.random() * ctx.height,
           radius = Math.random() * 100;
-      ctx.circle({
+      ctx.fillCircle({
         "x" : x,
         "y" : y,
         "radius" : radius,
-        "fillStyle" : '#'+Math.floor(Math.random()*16777215).toString(16),
-        "strokeStyle" : '#'+Math.floor(Math.random()*16777215).toString(16)
+        "fillStyle" : '#'+Math.floor(Math.random()*16777215).toString(16)
       });
     }
   }
