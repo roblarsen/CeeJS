@@ -153,7 +153,7 @@
 */
 
           arc = function( x, y, radius, start, end, counter ) {
-           //TODO... what the hell is the current position here.
+            currentPos( x+radius*Math.cos(end), y+radius*Math.sin( end ) );
             context.arc( x, y, radius, start, end, counter || false );
             return this;
           },
@@ -307,9 +307,7 @@
               stroke();
             }
             closePath();
-
             _boundingBox({cx:x,cy:y,r:radius});
-
             return this;
           },
 
@@ -980,15 +978,15 @@ Default. The outside edges of the lines are continued until they intersect and t
               height = params.height || 10,
               width = params.width || 10;
             beginPath();
-            moveTo( params.x, params.y + params.radius );
-            lineTo( params.x, params.y + params.height - params.radius );
-            quadraticCurveTo( params.x, params.y + params.height, params.x + params.radius, params.y + params.height );
-            lineTo( params.x + params.width - params.radius, params.y + params.height );
-            quadraticCurveTo( params.x + params.width, params.y + params.height, params.x + params.width, params.y + params.height - params.radius );
-            lineTo( params.x + params.width, params.y + params.radius );
-            quadraticCurveTo( params.x + params.width, params.y, params.x + params.width - params.radius, params.y );
-            lineTo( params.x + params.radius, params.y );
-            quadraticCurveTo( params.x, params.y, params.x, params.y + params.radius );
+            moveTo( x, y + radius );
+            lineTo( x, y + height - radius );
+            quadraticCurveTo( x, y + height, x + radius, y + height );
+            lineTo( x + width - radius, y + height );
+            quadraticCurveTo( x + width, y + height, x + width, y + height - radius );
+            lineTo( x + width, y + radius );
+            quadraticCurveTo( x + width, y, x + width - radius, y );
+            lineTo( x + radius, y );
+            quadraticCurveTo( x, y, x, y + radius );
            
              if ( fillStyle ) {
               context.fillStyle = fillStyle;
@@ -999,8 +997,8 @@ Default. The outside edges of the lines are continued until they intersect and t
               stroke();
             }
             closePath();
-
-            _boundingBox({x:params.x, y:params.y, w:params.width, h:params.height});
+            currentPos( x,y );
+            _boundingBox({x:x, y:y, w:width, h:height});
             return this;
           },
 /** Draws a rounded rectlangle to the canvas. 
@@ -1057,8 +1055,6 @@ Default. The outside edges of the lines are continued until they intersect and t
               strokeStyle = params.strokeStyle || context.strokeStyle;
               height = params.height || 10,
               width = params.width || 10;
-
-
             this.roundedRectangle({
               x: x,
               y: y,
@@ -1068,7 +1064,6 @@ Default. The outside edges of the lines are continued until they intersect and t
               height : height,
               width : width
             });
-
             _boundingBox({x:params.x, y:params.y, w:params.width, h:params.height});
             return this;
           },
@@ -1326,7 +1321,7 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
 * @param {number} dy The delta y (dy) value in the matrix.
  */
           transform = function( matrix11, matrix12, matrix21, matrix22, dx, dy ){
-            currentPos( x, y );
+            currentPos( dx, dy );
             context.transform( matrix11, matrix12, matrix21, matrix22, dx, dy );
             return this;
           },
