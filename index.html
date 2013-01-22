@@ -14,6 +14,8 @@
 </header>
 <article>
 <p>CanvasJS is a small helper library for the canvas 2d API. The goal is to extend and enhance the basic API while still remaining familiar. </p>
+<p>Project home: <a href="http://roblarsen.github.com/CanvasJS/">http://roblarsen.github.com/CanvasJS/</a></p>
+<p>Github: <a href="https://github.com/roblarsen/CanvasJS">https://github.com/roblarsen/CanvasJS</a></p>
 <p>There is an 800x600 canvas here. You can play with CanvasJS in browser console. </p>
 <p>Here's an example of what it might look like. <button id="demo">Run this code.</button> </p>
 <pre> var ctx = new Canvas(&quot;ctx&quot;);<br>    for ( var i = 0; i &lt; 100; i++ ){<br>      var x = Math.random() * ctx.width,<br>          y = Math.random() * ctx.height,<br>          radius = Math.random() * 100;<br>      ctx.fillCircle({<br>        &quot;x&quot; : x,<br>        &quot;y&quot; : y,<br>        &quot;radius&quot; : radius,<br>        &quot;fillStyle&quot; : '#'+Math.floor(Math.random()*16777215).toString(16)<br>      });<br>    }</pre>

@@ -1,8 +1,8 @@
 /**
  * @license Canvas JavaScript Library v0.1
- * some day:
- * canvasjs.net
- * for now, visit:
+ * http://roblarsen.github.com/CanvasJS/
+ *
+ * While you're here, visit:
  *
  * http://htmlcssjavascript.com
  *
@@ -10,8 +10,8 @@
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * Date: 2013.1.17
- * v.0067
+ * Date: 2013.1.22
+ * v.0080
  */
 
 /**
