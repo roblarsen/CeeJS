@@ -6,7 +6,7 @@
  *
  * http://htmlcssjavascript.com
  *
- * Copyright 2012, Rob Larsen
+ * Copyright 2013, Rob Larsen
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
