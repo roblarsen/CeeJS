@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>CanvasJS line Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="500" width="960">
+      </canvas>
+
+<script src="../Canvas.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    var ctx = new Canvas("demo"),
+        x, y, distance, angle;
+    for ( var i = 0; i < 500; i = i + 2 ){
+      x = 0;
+      y = i;
+      distance = 2000;
+      angle = i;
+      ctx.beginPath()
+         .line({ 
+           "x" : x,
+           "y" : y,
+           "distance" : distance,
+           "angle" : angle
+         })
+         .strokeStyle( '#'+Math.floor(Math.random()*16777215).toString(16) )
+         .stroke()
+         .closePath();
+      x = 960;
+      y = i;
+      distance = 2000;
+      angle = i;
+      ctx.beginPath()
+         .line({ 
+           "x" : x,
+           "y" : y,
+           "distance" : distance,
+           "angle" : angle
+         })
+          .strokeStyle( '#'+Math.floor(Math.random()*16777215).toString(16) )
+          .stroke()
+         .closePath();
+      x = i;
+      y = 0;
+      distance = 2000;
+      angle = i;
+      ctx.beginPath()
+         .line({ 
+           "x" : x,
+           "y" : y,
+           "distance" : distance,
+           "angle" : angle
+         })
+         .strokeStyle( '#'+Math.floor(Math.random()*16777215).toString(16) )
+         .stroke()
+         .closePath();
+      x = i;
+      y = 500;
+      distance = 2000;
+      angle = i;
+      ctx.beginPath()
+         .line({ 
+           "x" : x,
+           "y" : y,
+           "distance" : distance,
+           "angle" : angle
+         })
+        .strokeStyle( '#'+Math.floor(Math.random()*16777215).toString(16) )
+        .stroke()
+         .closePath();      
+    }
+  }
+return {
+  init : init
+}})().init();
+
+
+
+</script>
+    </body>
+</html>

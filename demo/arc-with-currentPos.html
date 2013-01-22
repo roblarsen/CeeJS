@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>CanvasJS Arc Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="500" width="960">
+      </canvas>
+
+<script src="../Canvas.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    var ctx = new Canvas("demo");
+    ctx.beginPath()
+      .arc( 300 , 100 , 200 , 0 , 2 )
+      .stroke()
+      .closePath(); 
+    ctx.fillCircle({
+      "x" : ctx.currentPos().x,
+      "y" : ctx.currentPos().y,
+      "radius" : 10,
+      "fillStyle" : "rgba( 255, 0, 0, .5 )"
+    });
+    
+  }
+ return {
+  init : init
+ }})().init();
+
+
+
+</script>
+    </body>
+</html>

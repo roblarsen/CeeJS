@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>CanvasJS line Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="500" width="960">
+      </canvas>
+
+<script src="../Canvas.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    var ctx = new Canvas("demo"),
+        x, y, distance, angle;
+    for ( var i = 1; i < 100; i++ ){
+      x = 0;
+      y = i * 5;
+      distance = 960;
+      angle = 0;
+      ctx.beginPath()
+         .line({ 
+           "x" : x,
+           "y" : y,
+           "distance" : distance,
+           "angle" : angle
+         })
+         .stroke()
+         .closePath();
+    }
+    for ( var i = 1; i < 192; i++ ){
+      x = i * 5;
+      y = 0;
+      distance = 500;
+      angle = 90;
+      ctx.beginPath()
+         .line({ 
+           "x" : x,
+           "y" : y,
+           "distance" : distance,
+           "angle" : angle
+         })
+         .stroke()
+         .closePath();
+    }
+    ctx.lineWidth( 2 )
+      .strokeRect( 0, 0, 960, 500);
+  }
+return {
+  init : init
+}})().init();
+
+
+
+</script>
+    </body>
+</html>

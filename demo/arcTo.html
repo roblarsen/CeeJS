@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>CanvasJS arcTo Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="500" width="960">
+      </canvas>
+
+<script src="../Canvas.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    var ctx = new Canvas("demo");
+    ctx.lineWidth(2);
+    for ( var i = 0; i < 100; i++ ){
+      var x = ctx.width/2,
+          y = 5 * i ,
+          radius = i * 10,
+          startAngle = 0,
+          endAngle = 10; 
+      ctx.beginPath()
+         .arc(x, y, radius, startAngle, endAngle, false)
+         .strokeStyle('#'+Math.floor(Math.random()*16777215).toString(16))
+         .stroke()
+         .closePath()
+    }
+  }
+return {
+  init : init
+}})().init();
+
+
+
+</script>
+    </body>
+</html>

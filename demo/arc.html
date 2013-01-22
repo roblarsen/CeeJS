@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>CanvasJS Arc Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="500" width="960">
+      </canvas>
+
+<script src="../Canvas.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    var ctx = new Canvas("demo");
+    ctx.beginPath()
+      .arc( 1 , 10 , 20 , 0 , 10 )
+      .stroke()
+      .closePath(); 
+    for (var i = 1; i<100; i++ ) {
+      ctx.beginPath()
+        .arc( i * 10 , i * 20 , i * 20 , 0 , 10 )
+        .strokeStyle('#'+Math.floor(Math.random()*16777215).toString(16))
+        .stroke()
+        .closePath(); 
+    }   
+    
+  }
+ return {
+  init : init
+ }})().init();
+
+
+
+</script>
+    </body>
+</html>
