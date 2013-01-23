@@ -1371,6 +1371,7 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
           "lineJoin": lineJoin,
           "lineTo": lineTo,
           "lineWidth": lineWidth,
+          "math" : math,
           "miterLimit": miterLimit,
           "measureText" : measureText,
           "moveTo": moveTo,
