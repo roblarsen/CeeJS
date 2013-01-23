@@ -273,7 +273,7 @@
  * @function
  */
           boundingBox = function(){
-            return _boundingbox();
+            return _boundingBox();
           },
 /**
  * Draws a circle with the supplied starting x,y, radius, fillStyle, and strokeStyle
@@ -1235,6 +1235,7 @@ Default. The outside edges of the lines are continued until they intersect and t
           strokeRect = function( x, y, width, height ) {
             currentPos( x,y );
             context.strokeRect( x, y, width, height );
+            _boundingBox({x:x, y:y, w:width, h:height});
             return this;
           },
 /** Draws stroked text to the canvas
