@@ -24,10 +24,13 @@
            .clearRect( { "x" : x + pos + metrics.square, "y" : y + pos, "width" : square, "height" : square })
            .clearRect( { "x" : x + pos + metrics.square, "y" : y + pos + metrics.square, "width" : square, "height" : square })
            .clearRect( { "x" : x + pos, "y" : y + pos + metrics.square, "width" : square, "height" : square })
-        t( { "square" : square, startX : x, startY : y  } );
-        t( { "square" : square, startX : x + square, startY : y  } ) ;
-        t( { "square" : square, startX : x + square, startY : y + square  } ) ;
-        t( { "square" : square, startX : x, startY : y + square  } ) 
+        var callback = function() {
+          t( { "square" : square, startX : x, startY : y  } );
+          t( { "square" : square, startX : x + square, startY : y  } ) ;
+          t( { "square" : square, startX : x + square, startY : y + square  } ) ;
+          t( { "square" : square, startX : x, startY : y + square  } )
+        }
+        setTimeout( callback, 200 ) 
       }
     }
   }
