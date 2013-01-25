@@ -275,6 +275,9 @@
           boundingBox = function(){
             return _boundingBox();
           },
+
+
+
 /**
  * Draws a circle with the supplied starting x,y, radius, fillStyle, and strokeStyle
  * @name circle
@@ -1183,6 +1186,68 @@ Default. The outside edges of the lines are continued until they intersect and t
               };
             }
           },
+
+/**
+ * Draws a star with the supplied number of points, total diameter, and inner-diameter
+ * @name star
+ * @function
+ * @param params {object} the parameter object
+ * @param params.x {number} the staring x coordinate
+ * @param params.y {number} the staring y coordinate
+ * @param params.points
+ * @param params.innerRadius
+ * @param params.outerRadius
+ * @param params.angle {number = 0}
+ */
+
+    star = function( params ) {
+        if (params.points > 2) {
+            // init vars
+            var step, 
+                halfStep, 
+                start,
+                n, 
+                dx, 
+                dy,
+                fillStyle = params.fillStyle || false,
+                strokeStyle = params.strokeStyle || false;
+        
+            // calculate distance between points
+            step = (Math.PI * 2) / params.points;
+            halfStep = step / 2;
+        
+            // calculate starting angle in radians
+            start = (params.angle / 180) * Math.PI;
+        
+            context.moveTo( params.x + (Math.cos( start ) * params.outerRadius), params.y - (Math.sin( start ) * params.outerRadius) );
+            beginPath();
+
+            // draw shape
+            for ( var n = 1; n <= params.points; n++ ) {
+                dx = params.x + Math.cos( start + (step * n) - halfStep ) * params.innerRadius;
+                dy = params.y - Math.sin( start + (step * n) - halfStep ) * params.innerRadius;
+                context.lineTo( dx, dy );
+                dx = params.x + Math.cos( start + (step * n) ) * params.outerRadius;
+                dy = params.y - Math.sin( start + (step * n) ) * params.outerRadius;
+                context.lineTo( dx, dy );
+            }
+
+            if ( strokeStyle ) {
+                context.strokeStyle = strokeStyle;
+                context.stroke();
+            }
+
+            if ( fillStyle ) {
+                context.fillStyle = fillStyle;
+                context.fill();
+            }
+            closePath();
+            return this;
+        } else {
+            throw("star error: Not enough points to make a star.");
+        }
+    },
+
 /**
  * Draws a circle with the supplied starting x,y, radius and strokeStyle and no fill
  * @name strokeCircle
@@ -1393,6 +1458,7 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
           "shadowOffset": shadowOffset,
           "shadowOffsetX": shadowOffsetX,
           "shadowOffsetY": shadowOffsetY,
+          "star" : star,
           "stroke": stroke,
           "strokeCircle": strokeCircle,
           "strokeStyle": strokeStyle,
