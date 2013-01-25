@@ -1242,6 +1242,7 @@ Default. The outside edges of the lines are continued until they intersect and t
                 context.fill();
             }
             closePath();
+            _boundingBox({cx:params.x,cy:params.y,r:Math.max(params.outerRadius, params.innerRadius)});
             return this;
         } else {
             throw("star error: Not enough points to make a star.");
