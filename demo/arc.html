@@ -21,7 +21,7 @@
     for (var i = 1; i<100; i++ ) {
       ctx.beginPath()
         .arc( i * 10 , i * 20 , i * 20 , 0 , 10 )
-        .strokeStyle('#'+Math.floor(Math.random()*16777215).toString(16))
+        .randomStroke()
         .stroke()
         .closePath(); 
     }   

@@ -859,6 +859,29 @@ Default. The outside edges of the lines are continued until they intersect and t
             currentPos( x,y );
             return this;
           },
+/** @ignore
+*  private, returns a random hex value
+*/
+         randomHex = function(){
+           return '#'+Math.floor(Math.random()*16777215).toString(16);
+         },
+         
+/** Sets a random fill style
+ * @name randomFill
+ */
+          randomStroke = function() {
+              context.strokeStyle = randomHex();
+              return this;
+          },
+
+/** Sets a random stroke style
+ * @name randomStroke
+ */
+          randomFill = function() {
+              context.fillStyle = randomHex();
+              return this;
+          },
+
 /** Draws a rectangle on the current path
  * @name rect
  * @function
@@ -1443,6 +1466,9 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
           "moveTo": moveTo,
           "putImageData" : putImageData,
           "quadraticCurveTo": quadraticCurveTo,
+          "randomStroke": randomStroke,
+          "randomHex" : randomHex,
+          "randomFill": randomFill,
           "rect": rect,
           "rectangle": rectangle,
           "reset": reset,

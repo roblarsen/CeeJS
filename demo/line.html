@@ -27,9 +27,9 @@
            "distance" : distance,
            "angle" : angle
          })
-         .strokeStyle( '#'+Math.floor(Math.random()*16777215).toString(16) )
-         .stroke().
-         closePath();
+         .randomStroke()
+         .stroke()
+         .closePath();
     }
   }
 return {
