@@ -14,16 +14,15 @@
   "use strict"
   function init(){
     var ctx = new Canvas("demo");
-   for (var j = 1; j<20; j++){
-    ctx.randomStroke();
-   for (var i = 0; i<500; i = i+4 ) {
-    ctx.lineWidth(1)
-      .beginPath()
-      .moveTo( j, i )
-      .arcTo( j * 100 , i , j * 200 , parseInt(i / 2), i * j )
-      .stroke()
-      .closePath();
-    }  
+   for (var j = 1; j<960; j= j+20){
+    for (var i = 0; i<500; i = i+20 ) {
+      ctx.lineWidth(1)
+        .beginPath()
+        .moveTo( j, i )
+        .arcTo( 480 , 250 , 960 / j , 500 / i, i )
+        .stroke()
+        .closePath();
+     }  
    } 
    
   }

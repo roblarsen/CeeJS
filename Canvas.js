@@ -740,7 +740,8 @@ Default. The outside edges of the lines are continued until they intersect and t
  */
             radians: function( degrees ) {
               return degrees * ( Math.PI / 180);
-            }
+            },
+            goldenRatio : 1.61803399
           },
  
 /** The width of the text, in CSS pixels.
