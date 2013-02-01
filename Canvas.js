@@ -10,7 +10,7 @@
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * Date: 2013.1.22
+ * Date: 2013.2.1
  * v.0080
  */
 
@@ -68,7 +68,7 @@
           container = document.createElement("canvas");
           container.width = params.width || container.width;
           container.height = params.height || container.height;
-          container.id= selector;
+          container.id = selector;
 
         }
         if ( container.nodeName.toLowerCase() !== "canvas") {
@@ -860,10 +860,12 @@ Default. The outside edges of the lines are continued until they intersect and t
             currentPos( x,y );
             return this;
           },
-/** @ignore
-*  private, returns a random hex value
-*/
+/** returns a randome hex value
+ * @name randomHex
+ * @function         
+ */                   
          randomHex = function(){
+
            return '#'+Math.floor(Math.random()*16777215).toString(16);
          },
          
