@@ -1508,5 +1508,9 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
 
     return Canvas;
   }());
-  window['Canvas'] = Canvas;
+  if (typeof define === 'function' && define.amd) {
+    define(['Canvas'], Canvas);
+  } else {
+    window["Canvas"] = Canvas;
+  }
 }( window ));
