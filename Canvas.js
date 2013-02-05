@@ -453,7 +453,7 @@
               radius = params.radius || 10,
               fillStyle = params.fillStyle || context.fillStyle;
 
-            this.circle({
+            circle({
               x: x,
               y: y,
               radius: radius,
@@ -1052,7 +1052,7 @@ Default. The outside edges of the lines are continued until they intersect and t
               fillStyle = params.fillStyle || context.fillStyle,
               height = params.height || 10,
               width = params.width || 10;
-            this.roundedRectangle({
+            roundedRectangle({
               x: x,
               y: y,
               radius: radius,
@@ -1084,7 +1084,7 @@ Default. The outside edges of the lines are continued until they intersect and t
               strokeStyle = params.strokeStyle || context.strokeStyle;
               height = params.height || 10,
               width = params.width || 10;
-            this.roundedRectangle({
+            roundedRectangle({
               x: x,
               y: y,
               radius: radius,
@@ -1292,7 +1292,7 @@ Default. The outside edges of the lines are continued until they intersect and t
               radius = params.radius || 10,
               strokeStyle = params.strokeStyle || context.strokeStyle;
 
-            this.circle({
+            circle({
               x: x,
               y: y,
               radius: radius,

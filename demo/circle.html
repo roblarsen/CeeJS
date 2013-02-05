@@ -8,7 +8,7 @@
       <canvas id="demo" height="500" width="960">
       </canvas>
 
-<script src="../Canvas.js"></script>
+<script src="../Canvas.min.js"></script>
 <script>
 (function(){
   "use strict"
@@ -18,6 +18,7 @@
       var x = Math.random() * ctx.width,
           y = Math.random() * ctx.height,
           radius = Math.random() * 100;
+          console.log(radius)
       ctx.circle({
         "x" : x,
         "y" : y,
