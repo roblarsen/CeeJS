@@ -1,6 +1,6 @@
 var ERROR_THRESHOLD = 10;
 
-function startTest(description, drawCanvas, drawControl) {
+function startTest(description, drawCanvas, drawControl, error) {
 	var canvas = drawCanvas();
 	var control = drawControl();
 
@@ -9,16 +9,21 @@ function startTest(description, drawCanvas, drawControl) {
 	});
 	it(description, function () {
 		runs(function () {
-			expect(canvas).toImageDiffEqual(control, ERROR_THRESHOLD);
+			if(!error){
+				expect(canvas).toImageDiffEqual(control, ERROR_THRESHOLD);
+			}
+			else {
+				expect(canvas).not.toImageDiffEqual(control, ERROR_THRESHOLD);
+			}
 		});
 	});
 }
 
 
-describe('ImageTest-1', function() {
+describe('BasicTest-1', function() {
 	var drawCanvas = function(){
 		var ctx = new Canvas();
-		
+
 		ctx.circle({x:25, y:25, radius: 10, fillStyle:'rgb(200,0,0)', strokeStyle: '#000000'}); // creates a red circle
 		ctx.circle({x:25, y:55, radius: 15, fillStyle:'rgb(200,0,0)', strokeStyle: '#000000'}); // creates a red circle
 		ctx.circle({x:55, y:25, radius: 30, fillStyle:'rgb(200,30,200)', strokeStyle: '#000000'}); // creates a purple circle
@@ -26,13 +31,13 @@ describe('ImageTest-1', function() {
 
 		return ctx.container;
 	};
-	
+
 	var drawControl = function(){
 		var canvas = document.createElement("canvas");
 		if (canvas && canvas.getContext){
-			
+
 			var ctx = canvas.getContext('2d');
-			
+
 			ctx.moveTo(25,25);
 			ctx.beginPath();
 			ctx.arc(25, 25, 10, 0, Math.PI * 2, false);
@@ -40,7 +45,7 @@ describe('ImageTest-1', function() {
 			ctx.fill();
 			ctx.stroke();
 			ctx.closePath();
-			
+
 			ctx.moveTo(25,55);
 			ctx.beginPath();
 			ctx.arc(25, 55, 15, 0, Math.PI * 2, false);
@@ -56,33 +61,33 @@ describe('ImageTest-1', function() {
 			ctx.fill();
 			ctx.stroke();
 			ctx.closePath();
-			
+
 			ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
 			ctx.fillRect(50, 75, 50, 100);
 		}
 		return canvas;
 	};
-	
+
 	startTest('test-1', drawCanvas, drawControl);
 });
 
-describe('ImageTest-2', function() {
+describe('BasicTest-2', function() {
 	var drawCanvas = function(){
 		var ctx = new Canvas();
 		ctx.reset();
 		for (var i = 0; i<1000; i++){
 			var color = 'rgb(0,' + Math.floor(255 - i/7) + ',' + Math.floor(255 - i/100) + ')';
-			
+
 			ctx.beginPath().line({x: 0.4 * i, y: 0.4 * i, angle: i, distance: i * 0.4 }).strokeStyle(color).stroke();
 		}
 
 		return ctx.container;
 	};
-	
+
 	var drawControl = function(){
 		var canvas = document.createElement("canvas");
 		if (canvas && canvas.getContext){
-			
+
 			var ctx = canvas.getContext('2d');
 			for (var i = 0; i<1000; i++){
 				var color = 'rgb(0,' + Math.floor(255 - i/7) + ',' +
@@ -92,7 +97,7 @@ describe('ImageTest-2', function() {
 					radians = angle * (Math.PI / 180),
 					dy = hypotenuse + Math.sin(radians) * hypotenuse,
 					dx = hypotenuse + Math.cos(radians) * hypotenuse;
-			
+
 				ctx.beginPath();
 				ctx.moveTo(hypotenuse, hypotenuse);
 				ctx.lineTo(dx,dy);
@@ -102,11 +107,11 @@ describe('ImageTest-2', function() {
 		}
 		return canvas;
 	};
-	
+
 	startTest('test-2', drawCanvas, drawControl);
 });
 
-describe('ImageTest-3', function() {
+describe('BasicTest-3', function() {
 
 	var x = 100,
 		y = 100,
@@ -114,7 +119,7 @@ describe('ImageTest-3', function() {
 
 	var drawCanvas = function(){
 		var ctx = new Canvas();
-		
+
 		var bb = ctx
 			.circle({x:x, y:y, radius: radius, fillStyle:'rgb(200,0,0)', strokeStyle: '#000000'}) // creates a red circle
 			.boundingBox(); //get bounding box
@@ -144,11 +149,11 @@ describe('ImageTest-3', function() {
 
 		return ctx.container;
 	};
-	
+
 	var drawControl = function(){
 		var canvas = document.createElement("canvas");
 		if (canvas && canvas.getContext){
-			
+
 			var ctx = canvas.getContext('2d');
 
 			ctx.moveTo(x,y);
@@ -185,12 +190,12 @@ describe('ImageTest-3', function() {
 		}
 		return canvas;
 	};
-	
+
 	startTest('test-3', drawCanvas, drawControl);
 });
 
 
-describe('ImageTest-4', function() {
+describe('BasicTest-4', function() {
 	var drawCanvas = function(){
 		var ctx = new Canvas();
 		// Quadratric curves example
@@ -216,11 +221,11 @@ describe('ImageTest-4', function() {
 
 		return ctx.container;
 	};
-	
+
 	var drawControl = function(){
 		var canvas = document.createElement("canvas");
 		if (canvas && canvas.getContext){
-			
+
 			var ctx = canvas.getContext('2d');
 
 			// Quadratric curves example
@@ -247,27 +252,27 @@ describe('ImageTest-4', function() {
 		}
 		return canvas;
 	};
-	
+
 	startTest('test-4', drawCanvas, drawControl);
 });
 
-describe('ImageTest-fail', function() {
+describe('BasicTest-fail', function() {
 	var drawCanvas = function(){
 		var ctx = new Canvas();
 		ctx.reset();
 		for (var i = 0; i<1000; i++){
 			var color = 'rgb(' + Math.floor(255 - i/7) + ',0,' + Math.floor(255 - i/100) + ')';
-			
+
 			ctx.beginPath().line({x: 0.4 * i, y: 0.4 * i, angle: i, distance: i * 0.4 }).strokeStyle(color).stroke();
 		}
 
 		return ctx.container;
 	};
-	
+
 	var drawControl = function(){
 		var canvas = document.createElement("canvas");
 		if (canvas && canvas.getContext){
-			
+
 			var ctx = canvas.getContext('2d');
 			for (var i = 0; i<1000; i++){
 				var color = 'rgb(0,' + Math.floor(255 - i/7) + ',' +
@@ -277,7 +282,7 @@ describe('ImageTest-fail', function() {
 					radians = angle * (Math.PI / 180),
 					dy = hypotenuse + Math.sin(radians) * hypotenuse,
 					dx = hypotenuse + Math.cos(radians) * hypotenuse;
-			
+
 				ctx.beginPath();
 				ctx.moveTo(hypotenuse, hypotenuse);
 				ctx.lineTo(dx,dy);
@@ -287,6 +292,6 @@ describe('ImageTest-fail', function() {
 		}
 		return canvas;
 	};
-	
-	startTest('test-fail', drawCanvas, drawControl);
+
+	startTest('test-fail', drawCanvas, drawControl, true);
 });

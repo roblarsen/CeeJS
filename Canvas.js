@@ -153,8 +153,63 @@
 */
 
           arc = function( x, y, radius, start, end, counter ) {
-            currentPos( x+radius*Math.cos(end), y+radius*Math.sin( end ) );
+            var relativeStart = start % (2 * Math.PI);
+            var relativeEnd = end % (2 * Math.PI);
+            if (counter){
+              relativeStart = end % (2 * Math.PI);
+              relativeEnd = start % (2 * Math.PI);
+            }
+
+            var fullCircle = start + 2 * Math.PI <= end || end + 2 * Math.PI <= start;
+
+            var xLeft = x - radius;
+            var xRight = x + radius;
+
+            var yTop = y + radius;
+            var yBottom = y - radius;
+
+            var startX = x + radius * Math.cos( start );
+            var startY = y + radius * Math.sin( start );
+
+            var endX = x + radius * Math.cos( end );
+            var endY = y + radius * Math.sin( end );
+
+            var xArr = [startX, endX];
+            var yArr = [startY, endY];
+
+            if (fullCircle || math.isAngleBetween(relativeStart, relativeEnd, 0 * Math.PI)){
+              xArr.push(xRight);
+              yArr.push(y);
+            }
+            if (fullCircle || math.isAngleBetween(relativeStart, relativeEnd, 0.5 * Math.PI)){
+              xArr.push(x);
+              yArr.push(yTop);
+            }
+            if (fullCircle || math.isAngleBetween(relativeStart, relativeEnd, 1 * Math.PI)){
+              xArr.push(xLeft);
+              yArr.push(y);
+            }
+            if (fullCircle || math.isAngleBetween(relativeStart, relativeEnd, 1.5 * Math.PI)){
+              xArr.push(x);
+              yArr.push(yBottom);
+            }
+
+            var maxX = Math.max.apply(this, xArr);
+            var minX = Math.min.apply(this, xArr);
+
+            var maxY = Math.max.apply(this, yArr);
+            var minY = Math.min.apply(this, yArr);
+
             context.arc( x, y, radius, start, end, counter || false );
+            currentPos( x, y );
+
+            _boundingBox({
+                x1: maxX,
+                y1: maxY,
+                x2: minX,
+                y2: minY
+            });
+
             return this;
           },
 
@@ -215,8 +270,8 @@
 
               h  = Math.abs( params.y2 - params.y1);
               w  = Math.abs( params.x2 - params.x1);
-              leftx =  ( params.y1 < params.y2) ? params.y1 : params.y2;
-              topy = ( params.x1 < params.x2) ? params.x1 : params.x2;
+              leftx =  ( params.x1 < params.x2) ? params.x1 : params.x2;
+              topy = ( params.y1 < params.y2) ? params.y1 : params.y2;
             }
             else if( params.x !== undefined &&
                 params.y !== undefined &&
@@ -263,8 +318,8 @@
               'l': l
             };
 
-            return bbCurrent;  
-          
+            return bbCurrent;
+
           },
 /**
  * Returns the current bounding box of the last drawn shape- specifically an object containing the top left, top, top right, right, bottom right, bottom, bottom left and left coordinates.
@@ -366,7 +421,7 @@
           createImageData = function() {
             if ( arguments[0].data !== undefined ){
               //height is actually imageData
-              return context.createImageData( arguments[0] );  
+              return context.createImageData( arguments[0] );
             } else {
               return context.createImageData( arguments[0], arguments[1] );
             }
@@ -409,8 +464,8 @@
 /** Draws a specified image onto a canvas
  * @name drawImage
  * @function
- * @param {number} x Starting x coordinate. 
- * @param {number} y Starting y coordinate. 
+ * @param {number} x Starting x coordinate.
+ * @param {number} y Starting y coordinate.
  * @param {HTMLElement} img the image to draw onto the Canvas
  *
  */
@@ -479,7 +534,7 @@
 
             return this;
           },
-/** Called with a color argument, sets the fillStyle. Called without, returns the current fillStyle. 
+/** Called with a color argument, sets the fillStyle. Called without, returns the current fillStyle.
  * @name fillStyle
  * @function
  * @param {Any} color the fill style
@@ -510,7 +565,7 @@
             currentPos( x,y );
             return this;
           },
-/** Called with a declaration argument, sets the context font. Called without, returns the current context font. 
+/** Called with a declaration argument, sets the context font. Called without, returns the current context font.
  * @name font
  * @function
  * @param {string} declaration the font style
@@ -685,7 +740,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** Gets or sets the width of lines in the context
  * @name lineWidth
  * @function
- * @param width {number} the width of the line. 
+ * @param width {number} the width of the line.
  */
           lineWidth = function( width ) {
             if ( width !== undefined ) {
@@ -706,7 +761,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 </ul>
  */
           math = {
-  
+
 
 /** Returns the cosecant of a number
  * @name math.cosec
@@ -719,7 +774,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 
               return 1 / Math.sin( num );
             },
-  
+
 /** Returns the secant of a number
  * @name math.sec
  * @function
@@ -741,14 +796,44 @@ Default. The outside edges of the lines are continued until they intersect and t
             radians: function( degrees ) {
               return degrees * ( Math.PI / 180);
             },
-            goldenRatio : 1.61803399
+            goldenRatio : 1.61803399,
+
+/** Returns if an angle is between two angles
+ * @name math.isAngleBetween
+ * @function
+ * @memberOf math
+ * @param start {number} the start angle
+ * @param end {number} the end angle
+ * @param angle {number} the angle to test
+ * @returns returns true if the angle is between start and end
+ */
+            isAngleBetween: function(start, end, angle){
+              start = (start + 2 * Math.PI) % (2 * Math.PI);
+              end = (end + 2 *  Math.PI) % (2 * Math.PI);
+              if (start <= end) {
+                if (start <= angle && angle <= end) {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+              else if (start >= end){
+                if (start >= angle && angle >= end){
+                  return false;
+                }
+                else {
+                  return true;
+                }
+              }
+            }
           },
- 
+
 /** The width of the text, in CSS pixels.
  * @name measureText
  * @function
  * @param {string} string the string to measure
- * @returns the width of the text in pixels 
+ * @returns the width of the text in pixels
  */
           measureText = function( string ){
             return context.measureText( string );
@@ -796,7 +881,7 @@ Default. The outside edges of the lines are continued until they intersect and t
           },
 /** Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve.
  * @name quadraticCurveTo
- * @function 
+ * @function
  * @param {number} cpx The x of the Bézier control point.
  * @param {number} cpy The y of the Bézier control point.
  * @param {number} x The x coorindate of the new point
@@ -807,9 +892,9 @@ Default. The outside edges of the lines are continued until they intersect and t
             context.quadraticCurveTo( cp1x, cp1y, x, y );
             return this;
           },
-/** Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve. 
+/** Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve.
  * @name quadraticCurveToFixed
- * @function 
+ * @function
  * @param {number} cpx The x of the Bézier control point.
  * @param {number} cpy The y of the Bézier control point.
  * @param {number} x The x coorindate of the new point
@@ -843,11 +928,11 @@ Default. The outside edges of the lines are continued until they intersect and t
               b ) replace the qp1x and qp1y variables with cpx and cpy ( which we would have passed to quadraticCurveTo )
               c ) replace the qp2x and qp2y variables with x and y.
             which leaves us with:
-         
+
 
  */
           quadraticCurveToFixed = function( cpx, cpy, x, y ) {
-           
+
             var ratio = 2.0 / 3.0; // 0.5522847498307933984022516322796 if the Bezier is approximating an elliptic arc with best fitting
             var cp1x = xCurrentPos + ( cpx - xCurrentPos ) * ratio;
             var cp1y = yCurrentPos + ( cpy - yCurrentPos ) * ratio;
@@ -862,13 +947,13 @@ Default. The outside edges of the lines are continued until they intersect and t
           },
 /** returns a randome hex value
  * @name randomHex
- * @function         
- */                   
+ * @function
+ */
          randomHex = function(){
 
            return '#'+Math.floor(Math.random()*16777215).toString(16);
          },
-         
+
 /** Sets a random fill style
  * @name randomFill
  */
@@ -888,10 +973,10 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** Draws a rectangle on the current path
  * @name rect
  * @function
- * @param x {number} Starting x coordinate. 
+ * @param x {number} Starting x coordinate.
  * @param y {number} Starting y coordinate.
- * @param width {number} Rectangle width. 
- * @param height {number} Rectangle height. 
+ * @param width {number} Rectangle width.
+ * @param height {number} Rectangle height.
  */
           rect = function( x, y, width, height ) {
             currentPos( x,y );
@@ -979,13 +1064,13 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** rotates the canvas context based on a supploed angle argument
  * @name rotate
  * @function
- * @param angle in radians to rotate the 
+ * @param angle in radians to rotate the
  */
           rotate = function( angle ) {
             context.rotate( angle );
             return this;
           },
-/** Draws a rounded rectlangle to the canvas. 
+/** Draws a rounded rectlangle to the canvas.
  * @name roundedRectangle
  * @function
  * @param params an object containing parameters for the rectangle
@@ -1016,7 +1101,7 @@ Default. The outside edges of the lines are continued until they intersect and t
             quadraticCurveTo( x + width, y, x + width - radius, y );
             lineTo( x + radius, y );
             quadraticCurveTo( x, y, x, y + radius );
-           
+
              if ( fillStyle ) {
               context.fillStyle = fillStyle;
               fill();
@@ -1030,7 +1115,7 @@ Default. The outside edges of the lines are continued until they intersect and t
             _boundingBox({x:x, y:y, w:width, h:height});
             return this;
           },
-/** Draws a rounded rectlangle to the canvas. 
+/** Draws a rounded rectlangle to the canvas.
  * @name roundedRectangle
  * @function
  * @param params an object containing parameters for the rectangle
@@ -1064,7 +1149,7 @@ Default. The outside edges of the lines are continued until they intersect and t
             _boundingBox({x:params.x, y:params.y, w:params.width, h:params.height});
             return this;
           },
-/** Draws a rounded rectlangle to the canvas. 
+/** Draws a rounded rectlangle to the canvas.
  * @name strokeRoundedRectangle
  * @function
  * @param params an object containing parameters for the rectangle
@@ -1145,7 +1230,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** gets or sets the shadowColor
  * @name shadowColor
  * @function
- * @param {color} color the valid CSS color value of the shadow 
+ * @param {color} color the valid CSS color value of the shadow
  */
           shadowColor = function( color ) {
             if ( color !== undefined ) {
@@ -1229,22 +1314,22 @@ Default. The outside edges of the lines are continued until they intersect and t
     star = function( params ) {
         if (params.points > 2) {
             // init vars
-            var step, 
-                halfStep, 
+            var step,
+                halfStep,
                 start,
-                n, 
-                dx, 
+                n,
+                dx,
                 dy,
                 fillStyle = params.fillStyle || false,
                 strokeStyle = params.strokeStyle || false;
-        
+
             // calculate distance between points
             step = (Math.PI * 2) / params.points;
             halfStep = step / 2;
-        
+
             // calculate starting angle in radians
             start = (params.angle / 180) * Math.PI;
-        
+
             context.moveTo( params.x + (Math.cos( start ) * params.outerRadius), params.y - (Math.sin( start ) * params.outerRadius) );
             beginPath();
 
@@ -1319,10 +1404,10 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** Draws a stroked rectangle to the canvas.
  * @name strokeRect
  * @function
- * @param x {number} Starting x coordinate. 
+ * @param x {number} Starting x coordinate.
  * @param y {number} Starting y coordinate.
- * @param width {number} Rectangle width. 
- * @param height {number} Rectangle height. 
+ * @param width {number} Rectangle width.
+ * @param height {number} Rectangle height.
  */
           strokeRect = function( x, y, width, height ) {
             currentPos( x,y );
@@ -1334,7 +1419,7 @@ Default. The outside edges of the lines are continued until they intersect and t
  * @name strokeText
  * @function
  * @param text {string} the text to write to the canvas
- * @param x {number} Starting x coordinate. 
+ * @param x {number} Starting x coordinate.
  * @param y {number} Starting y coordinate.
  * @param maxWidth {number} the maximum width of the text
  */
@@ -1421,7 +1506,7 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
 /** Translates the current context
  * @name translate
  * @function
- * @param x {number} the x transformation 
+ * @param x {number} the x transformation
  * @param y {number} the y transformation
  */
           translate = function( x, y ){
@@ -1429,7 +1514,7 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
             context.translate( x, y );
             return this;
           };
-      
+
         return {
           "arc": arc,
           "arcTo": arcTo,
@@ -1509,8 +1594,8 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
     return Canvas;
   }());
   if (typeof define === 'function' && define.amd) {
-    define(function(){ 
-      return Canvas 
+    define(function(){
+      return Canvas
     });
   } else {
     window["Canvas"] = Canvas;
