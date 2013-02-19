@@ -86,7 +86,7 @@ describe('BoundingBox-Line', function() {
     );
 });
 
-describe('BoundingBox-Arc1', function() {
+describe('BoundingBox-Arc-1', function() {
     var ctx = new Canvas();
     var x = 100;
     var y = 100;
@@ -110,7 +110,8 @@ describe('BoundingBox-Arc1', function() {
     );
 });
 
-describe('BoundingBox-Arc2', function() {
+
+describe('BoundingBox-Arc-2', function() {
     var ctx = new Canvas();
     var x = 100;
     var y = 100;
@@ -130,5 +131,32 @@ describe('BoundingBox-Arc2', function() {
         0,
         x - r * Math.cos( start ),
         r * 2
+    );
+});
+
+describe('BoundingBox-ArcTo', function() {
+    var ctx = new Canvas();
+    var x0 = 10;
+    var y0 = 150;
+    var x1 = 100;
+    var y1 = 40;
+    var x2 = 150;
+    var y2 =  120;
+    var r = 30;
+
+
+    ctx.beginPath()
+      .beginPath()
+      .moveTo(x0, y0)
+      .arcTo(x1, y1, x2, y2, r)
+      .stroke()
+      .closePath();
+
+    boundingBoxTest(
+        ctx,
+        10,
+        61.37208401914279,
+        112.17007238690462,
+        89
     );
 });
