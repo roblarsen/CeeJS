@@ -160,25 +160,25 @@
               relativeEnd = start % (2 * Math.PI);
             }
 
+            var extremes = math.getArcCircleExtremes(x, y, radius, relativeStart, relativeEnd);
+
             var startX = x + radius * Math.cos( relativeStart );
             var startY = y + radius * Math.sin( relativeStart );
 
             var endX = x + radius * Math.cos( relativeEnd );
             var endY = y + radius * Math.sin( relativeEnd );
 
-            var xArr = [startX, endX];
-            var yArr = [startY, endY];
-
-            var extremes = math.getArcCircleExtremes(x, y, xArr, yArr, radius, relativeStart, relativeEnd);
+            var xArr = [startX, endX].concat(extremes[0]);
+            var yArr = [startY, endY].concat(extremes[1]);
 
             context.arc( x, y, radius, start, end, counter || false );
             currentPos( x, y );
 
             _boundingBox({
-                x1: Math.max.apply(this, extremes[0]),
-                y1: Math.max.apply(this, extremes[1]),
-                x2: Math.min.apply(this, extremes[0]),
-                y2: Math.min.apply(this, extremes[1])
+                x1: Math.max.apply(this, xArr),
+                y1: Math.max.apply(this, yArr),
+                x2: Math.min.apply(this, xArr),
+                y2: Math.min.apply(this, yArr)
             });
 
             return this;
@@ -290,12 +290,9 @@
               end = temp;
             }
 
-            var xArr = [x0, xi1, xi2];
-            var yArr = [y0, yi1, yi2];
-
-            var extremes = math.getArcCircleExtremes(xc, yc, xArr, yArr, radius, start, end);
-            xArr = xArr.concat(extremes[0]);
-            yArr = yArr.concat(extremes[1]);
+            var extremes = math.getArcCircleExtremes(xc, yc, radius, start, end);
+            var xArr = [x0, xi1, xi2].concat(extremes[0]);
+            var yArr = [y0, yi1, yi2].concat(extremes[1]);
 
             context.moveTo(x0, y0);
 
@@ -880,7 +877,18 @@ Default. The outside edges of the lines are continued until they intersect and t
             goldenRatio : 1.61803399,
 
 
-            getArcCircleExtremes: function(xc, yc, xArr, yArr, radius, start, end){
+/** Find extreme points of a circle that are on the arc
+ * @name math.getArcCircleExtremes
+ * @function
+ * @memberOf math
+ * @param xc {number} x value of the center of the circle
+ * @param yc {number} y value of the center of the circle
+ * @param radius {number} radius of the circle
+ * @param end {number} the end angle
+ * @param angle {number} the angle to test
+ * @retuns [[array of x values on the arc], [array of y values on the arc]]
+ */
+            getArcCircleExtremes: function(xc, yc, radius, start, end){
               var fullCircle = start + 2 * Math.PI <= end || end + 2 * Math.PI <= start;
 
               var xLeft = xc - radius;
@@ -888,6 +896,9 @@ Default. The outside edges of the lines are continued until they intersect and t
 
               var yTop = yc + radius;
               var yBottom = yc - radius;
+
+              var xArr = [];
+              var yArr = [];
 
               if (fullCircle || math.isAngleBetween(start, end, 0 * Math.PI)){
                 xArr.push(xRight);
