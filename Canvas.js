@@ -160,54 +160,25 @@
               relativeEnd = start % (2 * Math.PI);
             }
 
-            var fullCircle = start + 2 * Math.PI <= end || end + 2 * Math.PI <= start;
+            var startX = x + radius * Math.cos( relativeStart );
+            var startY = y + radius * Math.sin( relativeStart );
 
-            var xLeft = x - radius;
-            var xRight = x + radius;
-
-            var yTop = y + radius;
-            var yBottom = y - radius;
-
-            var startX = x + radius * Math.cos( start );
-            var startY = y + radius * Math.sin( start );
-
-            var endX = x + radius * Math.cos( end );
-            var endY = y + radius * Math.sin( end );
+            var endX = x + radius * Math.cos( relativeEnd );
+            var endY = y + radius * Math.sin( relativeEnd );
 
             var xArr = [startX, endX];
             var yArr = [startY, endY];
 
-            if (fullCircle || math.isAngleBetween(relativeStart, relativeEnd, 0 * Math.PI)){
-              xArr.push(xRight);
-              yArr.push(y);
-            }
-            if (fullCircle || math.isAngleBetween(relativeStart, relativeEnd, 0.5 * Math.PI)){
-              xArr.push(x);
-              yArr.push(yTop);
-            }
-            if (fullCircle || math.isAngleBetween(relativeStart, relativeEnd, 1 * Math.PI)){
-              xArr.push(xLeft);
-              yArr.push(y);
-            }
-            if (fullCircle || math.isAngleBetween(relativeStart, relativeEnd, 1.5 * Math.PI)){
-              xArr.push(x);
-              yArr.push(yBottom);
-            }
-
-            var maxX = Math.max.apply(this, xArr);
-            var minX = Math.min.apply(this, xArr);
-
-            var maxY = Math.max.apply(this, yArr);
-            var minY = Math.min.apply(this, yArr);
+            var extremes = math.getArcCircleExtremes(x, y, xArr, yArr, radius, relativeStart, relativeEnd);
 
             context.arc( x, y, radius, start, end, counter || false );
             currentPos( x, y );
 
             _boundingBox({
-                x1: maxX,
-                y1: maxY,
-                x2: minX,
-                y2: minY
+                x1: Math.max.apply(this, extremes[0]),
+                y1: Math.max.apply(this, extremes[1]),
+                x2: Math.min.apply(this, extremes[0]),
+                y2: Math.min.apply(this, extremes[1])
             });
 
             return this;
@@ -224,8 +195,118 @@
  * @param {number} radius the radius of the arc
  */
           arcTo = function( x1, y1, x2, y2, radius ) {
+            var x0 = currentPos().x;
+            var y0 = currentPos().y;
+
+            // calculate lines between control points
+            var m1 = ( y1 - y0 ) / ( x1 - x0 );
+            if (m1 === Infinity){
+              m1 = ( y1 - y0 );
+            }
+            var yL = y0 - m1 * x0;
+            var yR = m1 * container.width - m1 * x1 + y1;
+
+            var m2 = ( y2 - y1 ) / ( x2 - x1 );
+            if (m2 === Infinity){
+              m2 = ( y2 - y1 );
+            }
+            yL = y1 - m2 * x1;
+            yR = m2 * container.width - m2 * x2 + y2;
+
+            // calculate the tangent points
+            var m3 = ( m1 + m2 ) / 2;
+            var theta = Math.atan( ( m1 - m2 ) / ( 1 + m1 * m2 ) );
+            var h = radius / Math.tan( theta / 2);
+            var d = Math.sqrt( h * h + radius * radius );
+
+            var xinc = Math.abs( Math.sqrt( h * h / ( 1 + m1 * m1 ) ) );
+            var yinc = Math.abs( xinc * m1 );
+            var xi1, yi1, xi2, yi2;
+            var xc, yc;
+
+            if( x1 > x0 ) {
+              xi1 = x1 - xinc;
+            }
+            else {
+              xi1 = x1 + xinc;
+            }
+            if(y1 > y0) {
+              yi1 = y1 - yinc;
+            }
+            else{
+              yi1 = y1 + yinc;
+            }
+
+            xinc = Math.abs( Math.sqrt( h * h / ( 1 + m2 * m2 ) ) );
+            yinc = Math.abs( xinc * m2 );
+
+            if(x2 > x1) {
+              xi2 = x1 + xinc;
+            }
+            else {
+              xi2 = x1 - xinc;
+            }
+            if( y2 > y1 ) {
+              yi2 = y1 + yinc;
+            }
+            else {
+              yi2 = y1 - yinc;
+            }
+            var m1inv = -1 / m1;
+
+            xinc = Math.sqrt( radius * radius / ( 1 + m1inv * m1inv ) );
+            yinc = xinc * m1inv;
+
+            if (xi1 < x1 && x1 > xi2){
+              xc = xi1 - xinc;
+            }
+            else {
+              xc = xi1 + xinc;
+            }
+            if (yi1 < y1 && y1 > yi2){
+              yc = yi1 - yinc;
+            }
+            else {
+              yc = yi1 + yinc;
+            }
+
+            var start = Math.atan2(
+              yi1 - yc,
+              xi1 - xc
+            );
+            var end = Math.atan2(
+              yi2 - yc,
+              xi2 - xc
+            );
+
+            if ( ((start < 0) && (end > 0)) || ((start > 0) && (end < 0)) ) {
+              start += Math.PI;
+              end += Math.PI;
+            }
+
+            if (end < start) {
+              var temp = start;
+              start = end;
+              end = temp;
+            }
+
+            var xArr = [x0, xi1, xi2];
+            var yArr = [y0, yi1, yi2];
+
+            var extremes = math.getArcCircleExtremes(xc, yc, xArr, yArr, radius, start, end);
+            xArr = xArr.concat(extremes[0]);
+            yArr = yArr.concat(extremes[1]);
+
+            context.moveTo(x0, y0);
+
             context.arcTo( x1, y1, x2, y2, radius );
-            currentPos( x2,y2);
+            currentPos( xi2, yi2 );
+            _boundingBox({
+                x1: Math.max.apply(this, xArr),
+                y1: Math.max.apply(this, yArr),
+                x2: Math.min.apply(this, xArr),
+                y2: Math.min.apply(this, yArr)
+            });
             return this;
           },
 /**
@@ -798,6 +879,36 @@ Default. The outside edges of the lines are continued until they intersect and t
             },
             goldenRatio : 1.61803399,
 
+
+            getArcCircleExtremes: function(xc, yc, xArr, yArr, radius, start, end){
+              var fullCircle = start + 2 * Math.PI <= end || end + 2 * Math.PI <= start;
+
+              var xLeft = xc - radius;
+              var xRight = xc + radius;
+
+              var yTop = yc + radius;
+              var yBottom = yc - radius;
+
+              if (fullCircle || math.isAngleBetween(start, end, 0 * Math.PI)){
+                xArr.push(xRight);
+                yArr.push(yc);
+              }
+              if (fullCircle || math.isAngleBetween(start, end, 0.5 * Math.PI)){
+                xArr.push(xc);
+                yArr.push(yTop);
+              }
+              if (fullCircle || math.isAngleBetween(start, end, 1 * Math.PI)){
+                xArr.push(xLeft);
+                yArr.push(yc);
+              }
+              if (fullCircle || math.isAngleBetween(start, end, 1.5 * Math.PI)){
+                xArr.push(xc);
+                yArr.push(yBottom);
+              }
+
+              return [xArr, yArr];
+            },
+
 /** Returns if an angle is between two angles
  * @name math.isAngleBetween
  * @function
@@ -809,7 +920,8 @@ Default. The outside edges of the lines are continued until they intersect and t
  */
             isAngleBetween: function(start, end, angle){
               start = (start + 2 * Math.PI) % (2 * Math.PI);
-              end = (end + 2 *  Math.PI) % (2 * Math.PI);
+              end = (end + 2 * Math.PI) % (2 * Math.PI);
+
               if (start <= end) {
                 if (start <= angle && angle <= end) {
                   return true;
