@@ -139,7 +139,7 @@
             else {
               return current;
             }
-          },
+          },          
 /**
  * Adds an arc with the given control points and radius to the current subpath, connected to the previous point by a straight line.
  * @name arc
@@ -1172,7 +1172,7 @@ Default. The outside edges of the lines are continued until they intersect and t
  * @function
  */
           reset = function() {
-            container.width = container.width;
+            context.clearRect( 0, 0, container.width, container.height );
             currentPos(0,0);
             return this;
           },
