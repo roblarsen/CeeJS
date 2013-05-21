@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
-<project name="CanvasJS Build" default="build" basedir="../"> <!-- one back since we're in build/ -->
+<project name="Cee.js Build" default="build" basedir="../"> <!-- one back since we're in build/ -->
 
 
     <!-- Load in Ant-Contrib to give us access to some very useful tasks! -->
@@ -61,15 +61,15 @@
   *************************************************
   -->
 
-  <target name="-clean" description="(PRIVATE) Wipe the previous build (Deletes Canvas.min.js)">
+  <target name="-clean" description="(PRIVATE) Wipe the previous build (Deletes Cee.min.js)">
       <echo message="Cleaning up previous build..."/>
-	  <delete file="${basedir}/Canvas.min.js" />
+	  <delete file="${basedir}/Cee.min.js" />
   </target>
 
   <target name="-intro" description="(PRIVATE) Kindly inform the developer about the impending magic">
         <echo message=" "/>
         <echo message="====================================================================="/>
-        <echo message="Welcome to the CanvasJS Build Script!"/>
+        <echo message="Welcome to the Cee.js Build Script!"/>
         <echo message=" "/>
         <echo message="(Based off the HTML5 Boilerplate Build Script)"/>
         <echo message=" "/>

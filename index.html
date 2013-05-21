@@ -3,27 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>CanvasJS: Sandbox</title>
-<meta name="description" content="Sample playground file for CanvasJS">
+<title>Cee.js: Sandbox</title>
+<meta name="description" content="Sample playground file for Cee.js">
 <link href="_assets/styles/normalize.css" rel="stylesheet">
 <link href="_assets/styles/main.css" rel="stylesheet">
 </head>
 <body>
 <header>
-  <h1>Canvas JS</h1>
+  <h1>Cee.js</h1>
 </header>
 <article>
-<p>CanvasJS is a small helper library for the canvas 2d API. The goal is to extend and enhance the basic API while still remaining familiar. </p>
-<p>Project home: <a href="http://roblarsen.github.com/CanvasJS/">http://roblarsen.github.com/CanvasJS/</a></p>
-<p>Github: <a href="https://github.com/roblarsen/CanvasJS">https://github.com/roblarsen/CanvasJS</a></p>
-<p>There is an 800x600 canvas here. You can play with CanvasJS in browser console. </p>
+<p>Cee.js is a small helper library for the canvas 2d API. The goal is to extend and enhance the basic API while still remaining familiar. </p>
+<p>Project home: <a href="http://roblarsen.github.com/Cee.js/">http://roblarsen.github.com/Cee.js/</a></p>
+<p>Github: <a href="https://github.com/roblarsen/Cee.js">https://github.com/roblarsen/Cee.js</a></p>
+<p>There is an 800x600 canvas here. You can play with Cee.js in browser console. </p>
 <p>Here's an example of what it might look like. <button id="demo">Run this code.</button> </p>
-<pre> var ctx = new Canvas(&quot;ctx&quot;);<br>    for ( var i = 0; i &lt; 100; i++ ){<br>      var x = Math.random() * ctx.width,<br>          y = Math.random() * ctx.height,<br>          radius = Math.random() * 100;<br>      ctx.fillCircle({<br>        &quot;x&quot; : x,<br>        &quot;y&quot; : y,<br>        &quot;radius&quot; : radius,<br>        &quot;fillStyle&quot; : '#'+Math.floor(Math.random()*16777215).toString(16)<br>      });<br>    }</pre>
+<pre> var ctx = new Cee(&quot;ctx&quot;);<br>    for ( var i = 0; i &lt; 100; i++ ){<br>      var x = Math.random() * ctx.width,<br>          y = Math.random() * ctx.height,<br>          radius = Math.random() * 100;<br>      ctx.fillCircle({<br>        &quot;x&quot; : x,<br>        &quot;y&quot; : y,<br>        &quot;radius&quot; : radius,<br>        &quot;fillStyle&quot; : '#'+Math.floor(Math.random()*16777215).toString(16)<br>      });<br>    }</pre>
 <canvas id="ctx" width="960" height="500"> </canvas>
 <p> <a href="demo/index.html">See more demos</a> </p>
 <!-- Specific to this page --> 
 <h2> Documentation </h2>
-<p> An <a href="docs/CanvasJS.html">API reference</a> has sprouted. </p>
+<p> An <a href="docs/Cee.js.html">API reference</a> has sprouted. </p>
 <ul id="docs">
   <li> <a href="docs/global.html#arc">arc</a> </li>
   <li> <a href="docs/global.html#arcTo">arcTo</a> </li>
@@ -90,7 +90,7 @@
 <footer>
 <small>Copyright 2012, Rob Larsen</small>
 </footer>
-<script src="Canvas.js"></script>
+<script src="Cee.js"></script>
 <script src="_assets/scripts/demo.js"></script>
 </body>
 </html>

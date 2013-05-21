@@ -1,19 +1,19 @@
-#CanvasJS
+#Cee.js
 
-CanvasJS is a small helper library for the canvas 2d API. The goal is to extend and enhance the basic API while still remaining familiar. 
+Cee.js is a small helper library for the canvas 2d API. The goal is to extend and enhance the basic API while still remaining familiar. 
 
 ##API and Enhancements
 
 There are currently two areas of focus
 
-* _Chaining_ any method that doesn't return an explicit value or Canvas object (e.g. createPattern, createLinearGradient) is chainable. 
+* _Chaining_ any method that doesn't return an explicit value or Cee object (e.g. createPattern, createLinearGradient) is chainable. 
 * _API Enhancements_ These range from new concepts (getting the boundingBox of the last operation, getting the currentPos (x and y) of the 'cursor',) missing methods (circle, rectangle) to convenience methods (canvas properties are now chainable getter/setter methods)
 
 A simple example might look like this
 
 ```javascript
    
-    var ctx = new Canvas("demo");
+    var ctx = new Cee("demo");
     for ( var i = 0; i < 100; i++ ){
       var x = Math.random() * ctx.width,
           y = Math.random() * ctx.height,

@@ -2,25 +2,25 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>CanvasJS Arc Demo</title>
+        <title>Cee.js Arc Demo</title>
     </head>
     <body>
       <canvas id="demo" height="5000" width="500"></canvas>
       <canvas id="explaination" height="5000" width="500"></canvas>
 
-<script src="../Canvas.js"></script>
+<script src="../Cee.js"></script>
 <script>
 (function(){
   "use strict"
   function init(){
-    // http://www.dbp-consulting.com/tutorials/canvas/CanvasArcTo.html
+    // http://www.dbp-consulting.com/tutorials/canvas/CeeArcTo.html
     var drawArcToDiagram = function(x0, y0, x1, y1, x2, y2, radius) {
       var options = {
         lineWidth: 0.5,
         strokeStyle: 'rgb(0, 100, 0)',
         fillStyle: 'rgb(0, 0, 0)'
       };
-      var demoCtx = new Canvas("demo", options);
+      var demoCtx = new Cee("demo", options);
 
       demoCtx.beginPath()
           .moveTo(x0, y0)
@@ -45,7 +45,7 @@
           y2: bb.b.y
       });
 
-      var ctx = new Canvas("explaination", options);
+      var ctx = new Cee("explaination", options);
 
       ctx.beginPath()
         .arc(x0, y0, 5, 0, 2 * Math.PI, false)

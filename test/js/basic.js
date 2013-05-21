@@ -22,7 +22,7 @@ function startTest(description, drawCanvas, drawControl, error) {
 
 describe('BasicTest-1', function() {
 	var drawCanvas = function(){
-		var ctx = new Canvas();
+		var ctx = new Cee();
 
 		ctx.circle({x:25, y:25, radius: 10, fillStyle:'rgb(200,0,0)', strokeStyle: '#000000'}); // creates a red circle
 		ctx.circle({x:25, y:55, radius: 15, fillStyle:'rgb(200,0,0)', strokeStyle: '#000000'}); // creates a red circle
@@ -73,7 +73,7 @@ describe('BasicTest-1', function() {
 
 describe('BasicTest-2', function() {
 	var drawCanvas = function(){
-		var ctx = new Canvas();
+		var ctx = new Cee();
 		ctx.reset();
 		for (var i = 0; i<1000; i++){
 			var color = 'rgb(0,' + Math.floor(255 - i/7) + ',' + Math.floor(255 - i/100) + ')';
@@ -118,7 +118,7 @@ describe('BasicTest-3', function() {
 		radius = 100;
 
 	var drawCanvas = function(){
-		var ctx = new Canvas();
+		var ctx = new Cee();
 
 		var bb = ctx
 			.circle({x:x, y:y, radius: radius, fillStyle:'rgb(200,0,0)', strokeStyle: '#000000'}) // creates a red circle
@@ -197,7 +197,7 @@ describe('BasicTest-3', function() {
 
 describe('BasicTest-4', function() {
 	var drawCanvas = function(){
-		var ctx = new Canvas();
+		var ctx = new Cee();
 		// Quadratric curves example
 		ctx.beginPath()
 			.moveTo(75,25)
@@ -258,7 +258,7 @@ describe('BasicTest-4', function() {
 
 describe('BasicTest-fail', function() {
 	var drawCanvas = function(){
-		var ctx = new Canvas();
+		var ctx = new Cee();
 		ctx.reset();
 		for (var i = 0; i<1000; i++){
 			var color = 'rgb(' + Math.floor(255 - i/7) + ',0,' + Math.floor(255 - i/100) + ')';

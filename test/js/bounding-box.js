@@ -46,14 +46,14 @@ var boundingBoxTest = function(ctx, x, y, w, h){
 };
 
 describe('BoundingBox-Rectangle', function() {
-    var ctx = new Canvas();
+    var ctx = new Cee();
     ctx.rectangle({x:50, y:75, height: 100, width: 50});
 
     boundingBoxTest(ctx, 50, 75, 50, 100);
 });
 
 describe('BoundingBox-Circle', function() {
-    var ctx = new Canvas();
+    var ctx = new Cee();
     ctx.circle({
         "x" : 100,
         "y" : 100,
@@ -64,7 +64,7 @@ describe('BoundingBox-Circle', function() {
 });
 
 describe('BoundingBox-Line', function() {
-    var ctx = new Canvas();
+    var ctx = new Cee();
     var angle = 45;
     var distance = 100;
 
@@ -87,7 +87,7 @@ describe('BoundingBox-Line', function() {
 });
 
 describe('BoundingBox-Arc-1', function() {
-    var ctx = new Canvas();
+    var ctx = new Cee();
     var x = 100;
     var y = 100;
     var r = 100;
@@ -112,7 +112,7 @@ describe('BoundingBox-Arc-1', function() {
 
 
 describe('BoundingBox-Arc-2', function() {
-    var ctx = new Canvas();
+    var ctx = new Cee();
     var x = 100;
     var y = 100;
     var r = 100;
@@ -135,7 +135,7 @@ describe('BoundingBox-Arc-2', function() {
 });
 
 describe('BoundingBox-ArcTo', function() {
-    var ctx = new Canvas();
+    var ctx = new Cee();
     var x0 = 10;
     var y0 = 150;
     var x1 = 100;
