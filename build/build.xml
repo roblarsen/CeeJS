@@ -52,7 +52,9 @@
 	<target name="-build"
           depends="-intro,
 				   -clean,
-          -js.all.minify,
+           -copy,
+           -version,
+           -js.all.minify,
 				   -jsdoc"/>
 
   <!--
@@ -64,6 +66,7 @@
   <target name="-clean" description="(PRIVATE) Wipe the previous build (Deletes Cee.min.js)">
       <echo message="Cleaning up previous build..."/>
 	  <delete file="${basedir}/Cee.min.js" />
+    <delete file="${basedir}/Cee.js" />
   </target>
 
   <target name="-intro" description="(PRIVATE) Kindly inform the developer about the impending magic">
@@ -77,11 +80,24 @@
         <echo message=" "/>
         <echo message=" "/>
   </target>
-
+  <target name="-copy">
+   <copy file="${file.script.src}" tofile="${file.prod.script}"/>
+  </target> 
+  <target name="-version">
+    <tstamp>
+    <format property="current.time" pattern="yyMMddHHmmss"/>
+  </tstamp>
+  <tstamp>
+    <format property="current.year" pattern="yyyy"/>
+  </tstamp>
+    <replace file="${file.prod.script}" token="@YEAR@" value="${current.year}"/>
+    <replace file="${file.prod.script}" token="@BUILD@" value="${current.time}"/>
+    <replace file="${file.prod.script}" token="@VERSION@" value="${info.version}"/>
+  </target>  
   <target name="-js.all.minify" description="(PRIVATE) Minifies the script files">
       <echo message="Minifying scripts"/>
       <apply executable="java" parallel="false">
-		<fileset file="${file.script}"></fileset>
+		<fileset file="${file.prod.script}"></fileset>
 		<arg line="-jar"/>
 		<arg path="./${dir.build.tools}/closure-compiler-v1346.jar"/>
 		<arg line="--js"/>

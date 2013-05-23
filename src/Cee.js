@@ -1,13 +1,13 @@
 /**
- * @license Cee.js v0.1.0
+ * @license Cee.js v@VERSION@
  * 
  * http://roblarsen.github.com/Cee.js/
  *
- * Copyright 2013, Rob Larsen
+ * Copyright @YEAR@, Rob Larsen
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * build: 130523164441
+ * build: @BUILD@
  * 
  */
 
