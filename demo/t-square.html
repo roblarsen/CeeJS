@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>T-Square Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="600" width="600">
+      </canvas>
+
+<script src="../Cee.min.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    var ctx = new Cee("demo"),
+        w = parseInt(ctx.width);  
+    ctx.fillRect( 0, 0, ctx.height, ctx.width )
+    t( { "square" : w, "startX" : 0, "startY" : 0  } );
+    function t( metrics ){
+      if ( metrics.square >= 8 ) {
+        var square = metrics.square/2, pos = metrics.square/4, x = metrics.startX, y = metrics.startY;
+        ctx.clearRect( { "x" : x + pos, "y" : y + pos, "width" : square, "height" : square })
+           .clearRect( { "x" : x + pos + metrics.square, "y" : y + pos, "width" : square, "height" : square })
+           .clearRect( { "x" : x + pos + metrics.square, "y" : y + pos + metrics.square, "width" : square, "height" : square })
+           .clearRect( { "x" : x + pos, "y" : y + pos + metrics.square, "width" : square, "height" : square })
+        var callback = function() {
+          t( { "square" : square, startX : x, startY : y  } );
+          t( { "square" : square, startX : x + square, startY : y  } ) ;
+          t( { "square" : square, startX : x + square, startY : y + square  } ) ;
+          t( { "square" : square, startX : x, startY : y + square  } )
+        }
+        setTimeout( callback, 200 ) 
+      }
+    }
+  }
+ return {
+  init : init
+ }})().init();
+
+
+
+</script>
+    </body>
+</html>

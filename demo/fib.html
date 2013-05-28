@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>Brute Force Fibonacci Spiral Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="600" width="900">
+      </canvas>
+
+<script src="../Cee.min.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    var ctx = new Cee("demo"),
+        seq = [1, 1, 2, 3, 5, 8, 13, 21, 34];
+    for (var i=0; i<seq.length; i++){
+      seq[i] =  seq[i] * 10;
+    }      
+   ctx.strokeRect( ctx.width/2, ctx.height/2, seq[0], seq[0] )
+      .beginPath()
+      .arc( ctx.boundingBox().br.x, ctx.boundingBox().br.y, seq[0], ctx.math.radians( 270 ) , ctx.math.radians( 180 ), true)
+      .stroke()
+      .closePath()
+      .strokeRect( ctx.boundingBox().bl.x, ctx.boundingBox().bl.y, seq[1], seq[1] )
+      .beginPath()
+      .arc( ctx.boundingBox().tr.x, ctx.boundingBox().tr.y, seq[1], ctx.math.radians( 180 ) , ctx.math.radians( 90 ), true)
+      .stroke()
+      .closePath()
+      .strokeRect( ctx.boundingBox().br.x, ctx.boundingBox().br.y - seq[2], seq[2], seq[2] )
+      .beginPath()
+      .arc( ctx.boundingBox().tl.x, ctx.boundingBox().tl.y, seq[2], ctx.math.radians( 90 ) , ctx.math.radians( 0 ), true)
+      .stroke()
+      .closePath()
+      .strokeRect( ctx.boundingBox().tr.x- seq[3], ctx.boundingBox().tl.y - seq[3], seq[3], seq[3] )
+      .beginPath()
+      .arc( ctx.boundingBox().bl.x, ctx.boundingBox().bl.y, seq[3], ctx.math.radians( 0 ) , ctx.math.radians( 270 ), true)
+      .stroke()
+      .closePath()
+      .strokeRect( ctx.boundingBox().tl.x- seq[4], ctx.boundingBox().tl.y, seq[4], seq[4] )
+      .beginPath()
+      .arc( ctx.boundingBox().br.x, ctx.boundingBox().br.y, seq[4], ctx.math.radians( 270 ) , ctx.math.radians( 180 ), true)
+      .stroke()
+      .closePath()
+      .strokeRect( ctx.boundingBox().bl.x, ctx.boundingBox().bl.y, seq[5], seq[5] )
+      .beginPath()
+      .arc( ctx.boundingBox().tr.x, ctx.boundingBox().tr.y, seq[5], ctx.math.radians( 180 ) , ctx.math.radians( 90 ), true)
+      .stroke()
+      .closePath()
+      .strokeRect( ctx.boundingBox().br.x, ctx.boundingBox().bl.y - seq[6], seq[6], seq[6] )
+      .beginPath()
+      .arc( ctx.boundingBox().tl.x, ctx.boundingBox().tl.y, seq[6], ctx.math.radians( 90 ) , ctx.math.radians( 0 ), true)
+      .stroke()
+      .closePath()
+      .strokeRect( ctx.boundingBox().tr.x - seq[7], ctx.boundingBox().tl.y - seq[7], seq[7], seq[7] )
+      .beginPath()
+      .arc( ctx.boundingBox().bl.x, ctx.boundingBox().bl.y, seq[7], ctx.math.radians( 0 ) , ctx.math.radians( 270 ), true)
+      .stroke()
+      .closePath()
+      .strokeRect( ctx.boundingBox().tl.x - seq[8], ctx.boundingBox().tl.y, seq[8], seq[8] )
+      .beginPath()
+      .arc( ctx.boundingBox().br.x, ctx.boundingBox().br.y, seq[8], ctx.math.radians( 270 ) , ctx.math.radians( 180 ), true)
+      .stroke()
+      .closePath()
+  
+  }
+ return {
+  init : init
+ }})().init();
+
+
+
+</script>
+    </body>
+</html>

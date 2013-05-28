@@ -2,41 +2,41 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>CanvasJS Chaining Demo</title>
+        <title>Cee.js Chaining Demo</title>
     </head>
     <body>
       <canvas id="demo" height="500" width="960">
       </canvas>
 
-<script src="../Canvas.js"></script>
+<script src="../Cee.min.js"></script>
 <script>
 (function(){
   "use strict"
   function init(){
-    var ctx = new Canvas("demo");
+    var ctx = new Cee("demo");
     ctx.beginPath()
       .moveTo( 0,0 )
       .lineWidth( 4 )
       .lineTo( ctx.width/2, ctx.height/2 )
-      .strokeStyle( '#'+Math.floor(Math.random()*16777215).toString(16) ).
-      stroke()
+      .randomStroke()
+      .stroke()
       .closePath()
       .beginPath()
       .moveTo( ctx.width, ctx.height )
-      .strokeStyle( '#'+Math.floor(Math.random()*16777215).toString(16) )
+      .randomStroke()
       .lineTo( ctx.width/2, ctx.height/2 )
       .stroke()
       .closePath()
       .beginPath()
       .moveTo( ctx.width, 0 )
       .lineWidth( 4 )
-      .strokeStyle( '#'+Math.floor(Math.random()*16777215).toString(16) )
+      .randomStroke()
       .lineTo( ctx.width/2, ctx.height/2 )
       .stroke()
       .closePath()
       .beginPath()
       .moveTo( 0, ctx.height )
-      .strokeStyle('#'+Math.floor(Math.random()*16777215).toString(16))
+      .randomStroke()
       .lineTo( ctx.width/2, ctx.height/2 )
       .stroke()
       .closePath()

@@ -1,17 +1,14 @@
 /**
- * @license Canvas JavaScript Library v0.1
- * some day:
- * canvasjs.net
- * for now, visit:
- *
- * http://htmlcssjavascript.com
+ * @license Cee.js v0.2.0
+ * 
+ * http://roblarsen.github.com/Cee.js/
  *
  * Copyright 2013, Rob Larsen
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * Date: 2013.1.17
- * v.0067
+ * build: 130528143323
+ * 
  */
 
 /**
@@ -25,18 +22,18 @@
 (function( window ){
   "use strict";
   var document = window.document;
-  var Canvas = ( function() {
+  var Cee = ( function() {
 
-    // Define a local copy of Canvas
-    var Canvas = function( selector, params ) {
-      return new Canvas.prototype._init( selector );
+    // Define a local copy of Cee
+    var Cee = function( selector, params ) {
+      return new Cee.prototype._init( selector , params );
     };
 
-    Canvas.prototype = {
+    Cee.prototype = {
 
 /**
- * Creates a new Canvas object
- *  @name CanvasJS
+ * Creates a new Cee object
+ *  @name Cee.js
  *  @function
  *  @constructor
  *  @param  {string} selector a string indicating the id of an HTML Canvas element or the name of the Canvas Element to be createed
@@ -68,7 +65,7 @@
           container = document.createElement("canvas");
           container.width = params.width || container.width;
           container.height = params.height || container.height;
-          container.id= selector;
+          container.id = selector;
 
         }
         if ( container.nodeName.toLowerCase() !== "canvas") {
@@ -139,7 +136,7 @@
             else {
               return current;
             }
-          },
+          },          
 /**
  * Adds an arc with the given control points and radius to the current subpath, connected to the previous point by a straight line.
  * @name arc
@@ -153,8 +150,34 @@
 */
 
           arc = function( x, y, radius, start, end, counter ) {
-            currentPos( x+radius*Math.cos(end), y+radius*Math.sin( end ) );
+            var relativeStart = start % (2 * Math.PI);
+            var relativeEnd = end % (2 * Math.PI);
+            if (counter){
+              relativeStart = end % (2 * Math.PI);
+              relativeEnd = start % (2 * Math.PI);
+            }
+
+            var extremes = math.getArcCircleExtremes(x, y, radius, relativeStart, relativeEnd);
+
+            var startX = x + radius * Math.cos( relativeStart );
+            var startY = y + radius * Math.sin( relativeStart );
+
+            var endX = x + radius * Math.cos( relativeEnd );
+            var endY = y + radius * Math.sin( relativeEnd );
+
+            var xArr = [startX, endX].concat(extremes[0]);
+            var yArr = [startY, endY].concat(extremes[1]);
+
             context.arc( x, y, radius, start, end, counter || false );
+            currentPos( x, y );
+
+            _boundingBox({
+                x1: Math.max.apply(this, xArr),
+                y1: Math.max.apply(this, yArr),
+                x2: Math.min.apply(this, xArr),
+                y2: Math.min.apply(this, yArr)
+            });
+
             return this;
           },
 
@@ -169,8 +192,115 @@
  * @param {number} radius the radius of the arc
  */
           arcTo = function( x1, y1, x2, y2, radius ) {
+            var x0 = currentPos().x;
+            var y0 = currentPos().y;
+
+            // calculate lines between control points
+            var m1 = ( y1 - y0 ) / ( x1 - x0 );
+            if (m1 === Infinity){
+              m1 = ( y1 - y0 );
+            }
+            var yL = y0 - m1 * x0;
+            var yR = m1 * container.width - m1 * x1 + y1;
+
+            var m2 = ( y2 - y1 ) / ( x2 - x1 );
+            if (m2 === Infinity){
+              m2 = ( y2 - y1 );
+            }
+            yL = y1 - m2 * x1;
+            yR = m2 * container.width - m2 * x2 + y2;
+
+            // calculate the tangent points
+            var m3 = ( m1 + m2 ) / 2;
+            var theta = Math.atan( ( m1 - m2 ) / ( 1 + m1 * m2 ) );
+            var h = radius / Math.tan( theta / 2);
+            var d = Math.sqrt( h * h + radius * radius );
+
+            var xinc = Math.abs( Math.sqrt( h * h / ( 1 + m1 * m1 ) ) );
+            var yinc = Math.abs( xinc * m1 );
+            var xi1, yi1, xi2, yi2;
+            var xc, yc;
+
+            if( x1 > x0 ) {
+              xi1 = x1 - xinc;
+            }
+            else {
+              xi1 = x1 + xinc;
+            }
+            if(y1 > y0) {
+              yi1 = y1 - yinc;
+            }
+            else{
+              yi1 = y1 + yinc;
+            }
+
+            xinc = Math.abs( Math.sqrt( h * h / ( 1 + m2 * m2 ) ) );
+            yinc = Math.abs( xinc * m2 );
+
+            if(x2 > x1) {
+              xi2 = x1 + xinc;
+            }
+            else {
+              xi2 = x1 - xinc;
+            }
+            if( y2 > y1 ) {
+              yi2 = y1 + yinc;
+            }
+            else {
+              yi2 = y1 - yinc;
+            }
+            var m1inv = -1 / m1;
+
+            xinc = Math.sqrt( radius * radius / ( 1 + m1inv * m1inv ) );
+            yinc = xinc * m1inv;
+
+            if (xi1 < x1 && x1 > xi2){
+              xc = xi1 - xinc;
+            }
+            else {
+              xc = xi1 + xinc;
+            }
+            if (yi1 < y1 && y1 > yi2){
+              yc = yi1 - yinc;
+            }
+            else {
+              yc = yi1 + yinc;
+            }
+
+            var start = Math.atan2(
+              yi1 - yc,
+              xi1 - xc
+            );
+            var end = Math.atan2(
+              yi2 - yc,
+              xi2 - xc
+            );
+
+            if ( ((start < 0) && (end > 0)) || ((start > 0) && (end < 0)) ) {
+              start += Math.PI;
+              end += Math.PI;
+            }
+
+            if (end < start) {
+              var temp = start;
+              start = end;
+              end = temp;
+            }
+
+            var extremes = math.getArcCircleExtremes(xc, yc, radius, start, end);
+            var xArr = [x0, xi1, xi2].concat(extremes[0]);
+            var yArr = [y0, yi1, yi2].concat(extremes[1]);
+
+            context.moveTo(x0, y0);
+
             context.arcTo( x1, y1, x2, y2, radius );
-            currentPos( x2,y2);
+            currentPos( xi2, yi2 );
+            _boundingBox({
+                x1: Math.max.apply(this, xArr),
+                y1: Math.max.apply(this, yArr),
+                x2: Math.min.apply(this, xArr),
+                y2: Math.min.apply(this, yArr)
+            });
             return this;
           },
 /**
@@ -215,8 +345,8 @@
 
               h  = Math.abs( params.y2 - params.y1);
               w  = Math.abs( params.x2 - params.x1);
-              leftx =  ( params.y1 < params.y2) ? params.y1 : params.y2;
-              topy = ( params.x1 < params.x2) ? params.x1 : params.x2;
+              leftx =  ( params.x1 < params.x2) ? params.x1 : params.x2;
+              topy = ( params.y1 < params.y2) ? params.y1 : params.y2;
             }
             else if( params.x !== undefined &&
                 params.y !== undefined &&
@@ -263,8 +393,8 @@
               'l': l
             };
 
-            return bbCurrent;  
-          
+            return bbCurrent;
+
           },
 /**
  * Returns the current bounding box of the last drawn shape- specifically an object containing the top left, top, top right, right, bottom right, bottom, bottom left and left coordinates.
@@ -273,8 +403,11 @@
  * @function
  */
           boundingBox = function(){
-            return _boundingbox();
+            return _boundingBox();
           },
+
+
+
 /**
  * Draws a circle with the supplied starting x,y, radius, fillStyle, and strokeStyle
  * @name circle
@@ -363,7 +496,7 @@
           createImageData = function() {
             if ( arguments[0].data !== undefined ){
               //height is actually imageData
-              return context.createImageData( arguments[0] );  
+              return context.createImageData( arguments[0] );
             } else {
               return context.createImageData( arguments[0], arguments[1] );
             }
@@ -406,8 +539,8 @@
 /** Draws a specified image onto a canvas
  * @name drawImage
  * @function
- * @param {number} x Starting x coordinate. 
- * @param {number} y Starting y coordinate. 
+ * @param {number} x Starting x coordinate.
+ * @param {number} y Starting y coordinate.
  * @param {HTMLElement} img the image to draw onto the Canvas
  *
  */
@@ -450,7 +583,7 @@
               radius = params.radius || 10,
               fillStyle = params.fillStyle || context.fillStyle;
 
-            this.circle({
+            circle({
               x: x,
               y: y,
               radius: radius,
@@ -476,7 +609,7 @@
 
             return this;
           },
-/** Called with a color argument, sets the fillStyle. Called without, returns the current fillStyle. 
+/** Called with a color argument, sets the fillStyle. Called without, returns the current fillStyle.
  * @name fillStyle
  * @function
  * @param {Any} color the fill style
@@ -507,7 +640,7 @@
             currentPos( x,y );
             return this;
           },
-/** Called with a declaration argument, sets the context font. Called without, returns the current context font. 
+/** Called with a declaration argument, sets the context font. Called without, returns the current context font.
  * @name font
  * @function
  * @param {string} declaration the font style
@@ -533,6 +666,50 @@
             currentPos( x,y );
             return context.getImageData( x, y, width, height );
           },
+/** Returns an object with the rgba value of a given pixel
+ * @name getPixelColor
+ * @function
+ * @param {number} x The x coordinate of the pixel to test 
+ * @param {number} y The y coordinate of the pixel to test
+ */          
+
+ /*thanks 
+ https://gist.github.com/codepo8/5631638
+*/
+          getPixelColor = function(x, y) {
+            var pixels = context.getImageData(0, 0, container.width, container.height),
+                index = ((y * (pixels.width * 4)) + (x * 4));
+            return {
+              r:pixels.data[index], 
+              g:pixels.data[index + 1], 
+              b:pixels.data[index + 2], 
+              a:pixels.data[index + 3]
+            };
+          },
+ /** Returns the RGB color of a specific pixel
+ * @name getPixelsByColor
+ * @function
+ * @param {number} r The red value 
+ * @param {number} g The green value
+ * @param {number} b The blue value
+ */          
+ /*thanks 
+ https://gist.github.com/codepo8/5631638
+*/
+          getPixelsByColor = function(r, g, b) {
+            var pixels = context.getImageData(0, 0, container.width, container.height),
+                all = pixels.data.length,
+                amount = 0;
+            for (var i = 0; i < all; i += 4) {
+              if (pixels.data[i] === r && 
+                  pixels.data[i+1] === g && 
+                  pixels.data[i+2] === b) {
+                amount++;
+              }
+            }
+            return amount;
+          },
+          
 /** Called with a num argument, sets the context alpha/transparency. Called without, returns the current context globalAlpha.
  * @name globalAlpha
  * @function
@@ -682,7 +859,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** Gets or sets the width of lines in the context
  * @name lineWidth
  * @function
- * @param width {number} the width of the line. 
+ * @param width {number} the width of the line.
  */
           lineWidth = function( width ) {
             if ( width !== undefined ) {
@@ -703,7 +880,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 </ul>
  */
           math = {
-  
+
 
 /** Returns the cosecant of a number
  * @name math.cosec
@@ -716,7 +893,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 
               return 1 / Math.sin( num );
             },
-  
+
 /** Returns the secant of a number
  * @name math.sec
  * @function
@@ -737,14 +914,90 @@ Default. The outside edges of the lines are continued until they intersect and t
  */
             radians: function( degrees ) {
               return degrees * ( Math.PI / 180);
+            },
+            goldenRatio : 1.61803399,
+
+
+/** Find extreme points of a circle that are on the arc
+ * @name math.getArcCircleExtremes
+ * @function
+ * @memberOf math
+ * @param xc {number} x value of the center of the circle
+ * @param yc {number} y value of the center of the circle
+ * @param radius {number} radius of the circle
+ * @param end {number} the end angle
+ * @param angle {number} the angle to test
+ * @retuns [[array of x values on the arc], [array of y values on the arc]]
+ */
+            getArcCircleExtremes: function(xc, yc, radius, start, end){
+              var fullCircle = start + 2 * Math.PI <= end || end + 2 * Math.PI <= start;
+
+              var xLeft = xc - radius;
+              var xRight = xc + radius;
+
+              var yTop = yc + radius;
+              var yBottom = yc - radius;
+
+              var xArr = [];
+              var yArr = [];
+
+              if (fullCircle || math.isAngleBetween(start, end, 0 * Math.PI)){
+                xArr.push(xRight);
+                yArr.push(yc);
+              }
+              if (fullCircle || math.isAngleBetween(start, end, 0.5 * Math.PI)){
+                xArr.push(xc);
+                yArr.push(yTop);
+              }
+              if (fullCircle || math.isAngleBetween(start, end, 1 * Math.PI)){
+                xArr.push(xLeft);
+                yArr.push(yc);
+              }
+              if (fullCircle || math.isAngleBetween(start, end, 1.5 * Math.PI)){
+                xArr.push(xc);
+                yArr.push(yBottom);
+              }
+
+              return [xArr, yArr];
+            },
+
+/** Returns if an angle is between two angles
+ * @name math.isAngleBetween
+ * @function
+ * @memberOf math
+ * @param start {number} the start angle
+ * @param end {number} the end angle
+ * @param angle {number} the angle to test
+ * @returns returns true if the angle is between start and end
+ */
+            isAngleBetween: function(start, end, angle){
+              start = (start + 2 * Math.PI) % (2 * Math.PI);
+              end = (end + 2 * Math.PI) % (2 * Math.PI);
+
+              if (start <= end) {
+                if (start <= angle && angle <= end) {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+              else if (start >= end){
+                if (start >= angle && angle >= end){
+                  return false;
+                }
+                else {
+                  return true;
+                }
+              }
             }
           },
- 
+
 /** The width of the text, in CSS pixels.
  * @name measureText
  * @function
  * @param {string} string the string to measure
- * @returns the width of the text in pixels 
+ * @returns the width of the text in pixels
  */
           measureText = function( string ){
             return context.measureText( string );
@@ -792,7 +1045,7 @@ Default. The outside edges of the lines are continued until they intersect and t
           },
 /** Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve.
  * @name quadraticCurveTo
- * @function 
+ * @function
  * @param {number} cpx The x of the Bézier control point.
  * @param {number} cpy The y of the Bézier control point.
  * @param {number} x The x coorindate of the new point
@@ -803,9 +1056,9 @@ Default. The outside edges of the lines are continued until they intersect and t
             context.quadraticCurveTo( cp1x, cp1y, x, y );
             return this;
           },
-/** Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve. 
+/** Adds a point to the current subpath by using the specified control points that represent a quadratic Bézier curve.
  * @name quadraticCurveToFixed
- * @function 
+ * @function
  * @param {number} cpx The x of the Bézier control point.
  * @param {number} cpy The y of the Bézier control point.
  * @param {number} x The x coorindate of the new point
@@ -839,11 +1092,11 @@ Default. The outside edges of the lines are continued until they intersect and t
               b ) replace the qp1x and qp1y variables with cpx and cpy ( which we would have passed to quadraticCurveTo )
               c ) replace the qp2x and qp2y variables with x and y.
             which leaves us with:
-         
+
 
  */
           quadraticCurveToFixed = function( cpx, cpy, x, y ) {
-           
+
             var ratio = 2.0 / 3.0; // 0.5522847498307933984022516322796 if the Bezier is approximating an elliptic arc with best fitting
             var cp1x = xCurrentPos + ( cpx - xCurrentPos ) * ratio;
             var cp1y = yCurrentPos + ( cpy - yCurrentPos ) * ratio;
@@ -856,13 +1109,38 @@ Default. The outside edges of the lines are continued until they intersect and t
             currentPos( x,y );
             return this;
           },
+/** returns a randome hex value
+ * @name randomHex
+ * @function
+ */
+         randomHex = function(){
+
+           return '#'+Math.floor(Math.random()*16777215).toString(16);
+         },
+
+/** Sets a random fill style
+ * @name randomFill
+ */
+          randomStroke = function() {
+              context.strokeStyle = randomHex();
+              return this;
+          },
+
+/** Sets a random stroke style
+ * @name randomStroke
+ */
+          randomFill = function() {
+              context.fillStyle = randomHex();
+              return this;
+          },
+
 /** Draws a rectangle on the current path
  * @name rect
  * @function
- * @param x {number} Starting x coordinate. 
+ * @param x {number} Starting x coordinate.
  * @param y {number} Starting y coordinate.
- * @param width {number} Rectangle width. 
- * @param height {number} Rectangle height. 
+ * @param width {number} Rectangle width.
+ * @param height {number} Rectangle height.
  */
           rect = function( x, y, width, height ) {
             currentPos( x,y );
@@ -935,7 +1213,7 @@ Default. The outside edges of the lines are continued until they intersect and t
  * @function
  */
           reset = function() {
-            container.width = container.width;
+            context.clearRect( 0, 0, container.width, container.height );
             currentPos(0,0);
             return this;
           },
@@ -950,13 +1228,13 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** rotates the canvas context based on a supploed angle argument
  * @name rotate
  * @function
- * @param angle in radians to rotate the 
+ * @param angle in radians to rotate the
  */
           rotate = function( angle ) {
             context.rotate( angle );
             return this;
           },
-/** Draws a rounded rectlangle to the canvas. 
+/** Draws a rounded rectlangle to the canvas.
  * @name roundedRectangle
  * @function
  * @param params an object containing parameters for the rectangle
@@ -987,7 +1265,7 @@ Default. The outside edges of the lines are continued until they intersect and t
             quadraticCurveTo( x + width, y, x + width - radius, y );
             lineTo( x + radius, y );
             quadraticCurveTo( x, y, x, y + radius );
-           
+
              if ( fillStyle ) {
               context.fillStyle = fillStyle;
               fill();
@@ -1001,7 +1279,7 @@ Default. The outside edges of the lines are continued until they intersect and t
             _boundingBox({x:x, y:y, w:width, h:height});
             return this;
           },
-/** Draws a rounded rectlangle to the canvas. 
+/** Draws a rounded rectlangle to the canvas.
  * @name roundedRectangle
  * @function
  * @param params an object containing parameters for the rectangle
@@ -1023,7 +1301,7 @@ Default. The outside edges of the lines are continued until they intersect and t
               fillStyle = params.fillStyle || context.fillStyle,
               height = params.height || 10,
               width = params.width || 10;
-            this.roundedRectangle({
+            roundedRectangle({
               x: x,
               y: y,
               radius: radius,
@@ -1035,7 +1313,7 @@ Default. The outside edges of the lines are continued until they intersect and t
             _boundingBox({x:params.x, y:params.y, w:params.width, h:params.height});
             return this;
           },
-/** Draws a rounded rectlangle to the canvas. 
+/** Draws a rounded rectlangle to the canvas.
  * @name strokeRoundedRectangle
  * @function
  * @param params an object containing parameters for the rectangle
@@ -1055,7 +1333,7 @@ Default. The outside edges of the lines are continued until they intersect and t
               strokeStyle = params.strokeStyle || context.strokeStyle;
               height = params.height || 10,
               width = params.width || 10;
-            this.roundedRectangle({
+            roundedRectangle({
               x: x,
               y: y,
               radius: radius,
@@ -1116,7 +1394,7 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** gets or sets the shadowColor
  * @name shadowColor
  * @function
- * @param {color} color the valid CSS color value of the shadow 
+ * @param {color} color the valid CSS color value of the shadow
  */
           shadowColor = function( color ) {
             if ( color !== undefined ) {
@@ -1183,6 +1461,69 @@ Default. The outside edges of the lines are continued until they intersect and t
               };
             }
           },
+
+/**
+ * Draws a star with the supplied number of points, total diameter, and inner-diameter
+ * @name star
+ * @function
+ * @param params {object} the parameter object
+ * @param params.x {number} the staring x coordinate
+ * @param params.y {number} the staring y coordinate
+ * @param params.points
+ * @param params.innerRadius
+ * @param params.outerRadius
+ * @param params.angle {number = 0}
+ */
+
+    star = function( params ) {
+        if (params.points > 2) {
+            // init vars
+            var step,
+                halfStep,
+                start,
+                n,
+                dx,
+                dy,
+                fillStyle = params.fillStyle || false,
+                strokeStyle = params.strokeStyle || false;
+
+            // calculate distance between points
+            step = (Math.PI * 2) / params.points;
+            halfStep = step / 2;
+
+            // calculate starting angle in radians
+            start = (params.angle / 180) * Math.PI;
+
+            context.moveTo( params.x + (Math.cos( start ) * params.outerRadius), params.y - (Math.sin( start ) * params.outerRadius) );
+            beginPath();
+
+            // draw shape
+            for ( var n = 1; n <= params.points; n++ ) {
+                dx = params.x + Math.cos( start + (step * n) - halfStep ) * params.innerRadius;
+                dy = params.y - Math.sin( start + (step * n) - halfStep ) * params.innerRadius;
+                context.lineTo( dx, dy );
+                dx = params.x + Math.cos( start + (step * n) ) * params.outerRadius;
+                dy = params.y - Math.sin( start + (step * n) ) * params.outerRadius;
+                context.lineTo( dx, dy );
+            }
+
+            if ( strokeStyle ) {
+                context.strokeStyle = strokeStyle;
+                context.stroke();
+            }
+
+            if ( fillStyle ) {
+                context.fillStyle = fillStyle;
+                context.fill();
+            }
+            closePath();
+            _boundingBox({cx:params.x,cy:params.y,r:Math.max(params.outerRadius, params.innerRadius)});
+            return this;
+        } else {
+            throw("star error: Not enough points to make a star.");
+        }
+    },
+
 /**
  * Draws a circle with the supplied starting x,y, radius and strokeStyle and no fill
  * @name strokeCircle
@@ -1200,7 +1541,7 @@ Default. The outside edges of the lines are continued until they intersect and t
               radius = params.radius || 10,
               strokeStyle = params.strokeStyle || context.strokeStyle;
 
-            this.circle({
+            circle({
               x: x,
               y: y,
               radius: radius,
@@ -1227,21 +1568,22 @@ Default. The outside edges of the lines are continued until they intersect and t
 /** Draws a stroked rectangle to the canvas.
  * @name strokeRect
  * @function
- * @param x {number} Starting x coordinate. 
+ * @param x {number} Starting x coordinate.
  * @param y {number} Starting y coordinate.
- * @param width {number} Rectangle width. 
- * @param height {number} Rectangle height. 
+ * @param width {number} Rectangle width.
+ * @param height {number} Rectangle height.
  */
           strokeRect = function( x, y, width, height ) {
             currentPos( x,y );
             context.strokeRect( x, y, width, height );
+            _boundingBox({x:x, y:y, w:width, h:height});
             return this;
           },
 /** Draws stroked text to the canvas
  * @name strokeText
  * @function
  * @param text {string} the text to write to the canvas
- * @param x {number} Starting x coordinate. 
+ * @param x {number} Starting x coordinate.
  * @param y {number} Starting y coordinate.
  * @param maxWidth {number} the maximum width of the text
  */
@@ -1328,7 +1670,7 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
 /** Translates the current context
  * @name translate
  * @function
- * @param x {number} the x transformation 
+ * @param x {number} the x transformation
  * @param y {number} the y transformation
  */
           translate = function( x, y ){
@@ -1336,7 +1678,7 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
             context.translate( x, y );
             return this;
           };
-      
+
         return {
           "arc": arc,
           "arcTo": arcTo,
@@ -1362,6 +1704,8 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
           "font": font,
           "currentPos": currentPos,
           "getImageData" : getImageData,
+          "getPixelColor" :  getPixelColor,
+          "getPixelsByColor" : getPixelsByColor, 
           "globalAlpha": globalAlpha,
           "globalCompositeOperation": globalCompositeOperation,
           "isPointInPath" : isPointInPath,
@@ -1370,11 +1714,15 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
           "lineJoin": lineJoin,
           "lineTo": lineTo,
           "lineWidth": lineWidth,
+          "math" : math,
           "miterLimit": miterLimit,
           "measureText" : measureText,
           "moveTo": moveTo,
           "putImageData" : putImageData,
           "quadraticCurveTo": quadraticCurveTo,
+          "randomStroke": randomStroke,
+          "randomHex" : randomHex,
+          "randomFill": randomFill,
           "rect": rect,
           "rectangle": rectangle,
           "reset": reset,
@@ -1391,6 +1739,7 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
           "shadowOffset": shadowOffset,
           "shadowOffsetX": shadowOffsetX,
           "shadowOffsetY": shadowOffsetY,
+          "star" : star,
           "stroke": stroke,
           "strokeCircle": strokeCircle,
           "strokeStyle": strokeStyle,
@@ -1406,9 +1755,15 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
       }
     };
 
-    Canvas.prototype._init.prototype = Canvas.prototype;
+    Cee.prototype._init.prototype = Cee.prototype;
 
-    return Canvas;
+    return Cee;
   }());
-  window['Canvas'] = Canvas;
+  if (typeof define === 'function' && define.amd) {
+    define(function(){
+      return Cee
+    });
+  } else {
+    window["Cee"] = Cee;
+  }
 }( window ));

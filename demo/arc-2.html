@@ -2,7 +2,7 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>Cee.js fillCircle Demo</title>
+        <title>Cee.js arcTo Demo</title>
     </head>
     <body>
       <canvas id="demo" height="500" width="960">
@@ -14,16 +14,18 @@
   "use strict"
   function init(){
     var ctx = new Cee("demo");
+    ctx.lineWidth(2);
     for ( var i = 0; i < 100; i++ ){
-      var x = Math.random() * ctx.width,
-          y = Math.random() * ctx.height,
-          radius = Math.random() * 100;
-      ctx.fillCircle({
-        "x" : x,
-        "y" : y,
-        "radius" : radius,
-        "fillStyle" : ctx.randomHex()
-      });
+      var x = ctx.width/2,
+          y = 5 * i ,
+          radius = i * 10,
+          startAngle = 0,
+          endAngle = 10; 
+      ctx.beginPath()
+         .arc(x, y, radius, startAngle, endAngle, false)
+         .randomStroke()
+         .stroke()
+         .closePath()
     }
   }
 return {

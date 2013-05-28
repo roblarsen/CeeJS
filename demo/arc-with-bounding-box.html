@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>Cee.js Arc Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="500" width="960">
+      </canvas>
+
+<script src="../Cee.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    var ctx = new Cee("demo");
+
+    //Top Left
+    ctx.beginPath()
+      .arc( 100 , 100 , 100 , 21, 27, true)
+      .stroke()
+      .closePath();
+
+    var bb = ctx.boundingBox();
+
+    ctx.rectangle({
+        x1: bb.l.x,
+        y1: bb.t.y,
+        x2: bb.r.x,
+        y2: bb.b.y
+    });
+
+
+    //Top Right
+    ctx.beginPath()
+      .arc( 300 , 100 , 100 , -1, -5)
+      .stroke()
+      .closePath();
+
+    bb = ctx.boundingBox();
+
+    ctx.rectangle({
+        x1: bb.l.x,
+        y1: bb.t.y,
+        x2: bb.r.x,
+        y2: bb.b.y
+    });
+
+
+    //Bottom Left
+    ctx.beginPath()
+      .arc( 100 , 300 , 100 , Math.PI * 0.5, Math.PI * 2, true)
+      .stroke()
+      .closePath();
+
+    bb = ctx.boundingBox();
+
+    ctx.rectangle({
+        x1: bb.l.x,
+        y1: bb.t.y,
+        x2: bb.r.x,
+        y2: bb.b.y
+    });
+
+
+    //Bottom Right
+    ctx.beginPath()
+      .arc( 300 , 300 , 100 , Math.PI * 1, Math.PI * 2)
+      .stroke()
+      .closePath();
+
+    bb = ctx.boundingBox();
+
+    ctx.rectangle({
+        x1: bb.l.x,
+        y1: bb.t.y,
+        x2: bb.r.x,
+        y2: bb.b.y
+    });
+
+  }
+ return {
+  init : init
+ }})().init();
+
+
+
+</script>
+    </body>
+</html>

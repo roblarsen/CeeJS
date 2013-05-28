@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>Audio Demo</title>
+    </head>
+    <body>
+      <p>
+        <canvas id="demo" height="300" width="900">
+        </canvas>
+      </p>
+    <p>Vincent DiMartino (Trumpet)<br>
+      Performers:<br>
+      Saunders, Violin<br>
+      Arnold, Flute<br>
+      Rennick, Oboe<br>
+      Lexington Bach Choir Orchestra<br>
+      Publisher Info.:<br>
+      Vince DiMartino<br>
+      Copyright:<br>
+      Creative Commons Attribution 3.0 <br>
+      <a href="http://imslp.org/wiki/Brandenburg_Concerto_No.2_in_F_major,_BWV_1047_(Bach,_Johann_Sebastian)">http://imslp.org/wiki/Brandenburg_Concerto_No.2_in_F_major,_BWV_1047_(Bach,_Johann_Sebastian)
+      <script src="../Cee.min.js"></script>
+    </a></p>
+      <a href="http://imslp.org/wiki/Brandenburg_Concerto_No.2_in_F_major,_BWV_1047_(Bach,_Johann_Sebastian)">      </a>
+    <script>
+(function(){
+  "use strict"
+  function init(){
+
+window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame       || 
+            window.webkitRequestAnimationFrame || 
+            window.mozRequestAnimationFrame    || 
+            window.oRequestAnimationFrame      || 
+            window.msRequestAnimationFrame     || 
+            function(callback, element){
+              window.setTimeout(callback, 1000 / 60);
+            };
+  })();
+//thanks to http://www.binaura.net/stc/fp/?x=entry:entry120901-200844
+
+var ctx = new Cee("demo"),
+    context,
+    source,
+    analyser,
+    buffer,
+    volumeNode;
+    function start(){
+        if (typeof AudioContext == "function") {
+            context = new AudioContext();
+        } 
+        else if (typeof webkitAudioContext == "function") {
+            context = new webkitAudioContext();
+        } else {
+            throw new Error('AudioContext not supported.');
+        }
+        analyser = context.createAnalyser();
+        var request = new XMLHttpRequest();
+        request.open("GET", 'IMSLP83569-PMLP82078-03_Bach-Mvt_3.mp3' , true);
+        request.responseType = "arraybuffer";
+        request.onload = function() {
+            var data = request.response;
+            graph(data);
+        };
+        request.send();
+    }
+    function play(outputsound) {
+        outputsound.noteOn(context.currentTime);
+        startSpectrumAnalysis()
+    }
+    function stop(index) {
+        source.noteOff(context.currentTime);
+    }
+    function graph(data) { 
+        source = context.createBufferSource();
+        buffer = context.createBuffer(data, true);
+        source.buffer = buffer;
+        source.loop = false;
+        volumeNode = context.createGainNode();
+        volumeNode.gain.value = 1;
+        source.connect(volumeNode);
+        volumeNode.connect(context.destination);
+        volumeNode.connect(analyser);
+        play(source);        
+    }
+	  function startSpectrumAnalysis(){
+      var freqData = new Uint8Array(analyser.frequencyBinCount);
+      analyser.getByteFrequencyData(freqData);
+      draw(freqData);
+      requestAnimationFrame(startSpectrumAnalysis);           
+  	}
+    function draw(data) {
+      ctx.reset();
+      var len = data.length,
+          width = 900/len,
+          gradient;
+      for (var i=0; i<len; i++) {
+        gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(".5", "#003366");
+        gradient.addColorStop("1.0", "#ccff00");
+        ctx.fillStyle(gradient).fillRect(i,300,width,-data[i]);    
+  	  }
+     
+    } 
+  start();
+  }
+ return {
+  init : init
+ }})().init();
+
+
+
+      </script>
+    </body>
+</html>

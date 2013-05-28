@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>Cee.js circle Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="500" width="960">
+      </canvas>
+
+<script src="../Cee.min.js"></script>
+<script>
+(function(){
+    "use strict"
+    function init(){
+        
+        var ctx = new Cee("demo");
+
+        for (var i = 0; i < 100; i++){
+            var p = Math.round(Math.random() * 20 + 3)
+            ctx.star({
+                "x" : Math.random() * ctx.width,
+                "y" : Math.random() * ctx.height,
+                "points" : Math.round(Math.random() * 20 + 3),
+                "innerRadius" : Math.random() * 100,
+                "outerRadius" : Math.random() * 100,
+                "angle" : 27,
+                "fillStyle" : ctx.randomHex(),
+                "strokeStyle" : ctx.randomHex()
+            });
+
+        }
+
+    }
+
+    return {
+        init : init 
+    }
+})().init();
+
+
+
+</script>
+    </body>
+</html>

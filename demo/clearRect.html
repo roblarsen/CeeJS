@@ -2,18 +2,18 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>CanvasJS clearRect Demo</title>
+        <title>Cee.js clearRect Demo</title>
     </head>
     <body>
       <canvas id="demo" height="500" width="960">
       </canvas>
 
-<script src="../Canvas.js"></script>
+<script src="../Cee.min.js"></script>
 <script>
 (function(){
   "use strict"
   function init(){
-    var ctx = new Canvas("demo");
+    var ctx = new Cee("demo");
     for ( var i = 0; i < 500; i++ ){
       var x = Math.random() * ctx.width,
           y = Math.random() * ctx.height,
@@ -23,8 +23,8 @@
         "x" : x,
         "y" : y,
         "radius" : radius,
-        "fillStyle" : '#'+Math.floor(Math.random()*16777215).toString(16),
-        "strokeStyle" : '#'+Math.floor(Math.random()*16777215).toString(16)
+        "fillStyle" : ctx.randomHex(),
+        "strokeStyle" : ctx.randomHex()
       });
     }
     ctx.clearRect({

@@ -2,18 +2,18 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>CanvasJS line Demo</title>
+        <title>Cee.js line Demo</title>
     </head>
     <body>
       <canvas id="demo" height="500" width="960">
       </canvas>
 
-<script src="../Canvas.js"></script>
+<script src="../Cee.min.js"></script>
 <script>
 (function(){
   "use strict"
   function init(){
-    var ctx = new Canvas("demo"),
+    var ctx = new Cee("demo"),
         x, y, distance, angle;
     for ( var i = 0; i < 500; i = i + 2 ){
       x = 0;
@@ -27,7 +27,7 @@
            "distance" : distance,
            "angle" : angle
          })
-         .strokeStyle( '#'+Math.floor(Math.random()*16777215).toString(16) )
+         .randomStroke()
          .stroke()
          .closePath();
       x = 960;

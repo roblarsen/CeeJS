@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>Cee.js Arc Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="5000" width="500"></canvas>
+      <canvas id="explaination" height="5000" width="500"></canvas>
+
+<script src="../Cee.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    // http://www.dbp-consulting.com/tutorials/canvas/CeeArcTo.html
+    var drawArcToDiagram = function(x0, y0, x1, y1, x2, y2, radius) {
+      var options = {
+        lineWidth: 0.5,
+        strokeStyle: 'rgb(0, 100, 0)',
+        fillStyle: 'rgb(0, 0, 0)'
+      };
+      var demoCtx = new Cee("demo", options);
+
+      demoCtx.beginPath()
+          .moveTo(x0, y0)
+          .arcTo(x1, y1, x2, y2, radius)
+          .stroke();
+
+      var bb = demoCtx.boundingBox();
+
+      console.log(bb);
+
+      demoCtx.fillCircle({
+        "x" : demoCtx.currentPos().x,
+        "y" : demoCtx.currentPos().y,
+        "radius" : 10,
+        "fillStyle" : "rgba( 255, 0, 0, .5 )"
+      });
+
+      demoCtx.rectangle({
+          x1: bb.l.x,
+          y1: bb.t.y,
+          x2: bb.r.x,
+          y2: bb.b.y
+      });
+
+      var ctx = new Cee("explaination", options);
+
+      ctx.beginPath()
+        .arc(x0, y0, 5, 0, 2 * Math.PI, false)
+        .fill()
+        .fillText('(x0='+ x0 + ', y0=' +  y0 + ')', x0 + 10, y0);
+
+      ctx.beginPath()
+        .arc(x1, y1, 5, 0, 2 * Math.PI, false)
+        .fill()
+        .fillText('(x1='+ x1 + ', y1=' +  y1 + ')', x1 + 10, y1);
+
+      ctx.beginPath()
+        .arc(x2, y2, 5, 0, 2 * Math.PI, false)
+        .fill()
+        .fillText('(x2='+ x2 + ', y2=' +  y2 + ')', x2 + 10, y2);
+
+      // draw lines between control points
+
+      var m1 = ( y1 - y0 ) / ( x1 - x0 );
+      if (m1 === Infinity){
+        m1 = ( y1 - y0 );
+      }
+      var yL = y0 - m1 * x0;
+      var yR = m1 * ctx.width - m1 * x1 + y1;
+
+      ctx.beginPath()
+        .moveTo(0, yL)
+        .lineTo(ctx.width, yR)
+        .lineWidth(0.5)
+        .strokeStyle('rgb(0, 0, 0)')
+        .stroke();
+
+      var m2 = ( y2 - y1 ) / ( x2 - x1 );
+      if (m2 === Infinity){
+        m2 = ( y2 - y1 );
+      }
+      yL = y1 - m2 * x1;
+      yR = m2 * ctx.width - m2 * x2 + y2;
+
+      ctx.beginPath()
+        .moveTo(0, yL)
+        .lineTo(ctx.width, yR)
+        .lineWidth(0.5)
+        .strokeStyle('rgb(0, 0, 0)')
+        .stroke();
+
+      // draw the tangent points
+      var m3 = ( m1 + m2 ) / 2;
+      var theta = Math.atan( ( m1 - m2 ) / ( 1 + m1 * m2 ) );
+      var h = radius / Math.tan( theta / 2);
+      var d = Math.sqrt( h * h + radius * radius );
+
+      var xinc = Math.abs( Math.sqrt( h * h / ( 1 + m1 * m1 ) ) );
+      var yinc = Math.abs( xinc * m1 );
+      var xi1, yi1, xi2, yi2;
+      var xc, yc;
+
+      if( x1 > x0 ) {
+        xi1 = x1 - xinc;
+      }
+      else {
+        xi1 = x1 + xinc;
+      }
+      if(y1 > y0) {
+        yi1 = y1 - yinc;
+      }
+      else{
+        yi1 = y1 + yinc;
+      }
+
+      ctx.beginPath()
+        .arc(xi1, yi1, 2.5, 0, 2 * Math.PI, false)
+        .fill();
+
+      xinc = Math.abs( Math.sqrt( h * h / ( 1 + m2 * m2 ) ) );
+      yinc = Math.abs( xinc * m2 );
+
+      if(x2 > x1) {
+        xi2 = x1 + xinc;
+      }
+      else {
+        xi2 = x1 - xinc;
+      }
+      if( y2 > y1 ) {
+        yi2 = y1 + yinc;
+      }
+      else {
+        yi2 = y1 - yinc;
+      }
+      var m1inv = -1 / m1;
+
+      ctx.beginPath()
+        .arc(xi2, yi2, 2.5, 0, 2 * Math.PI, false)
+        .fill();
+
+      xinc = Math.sqrt( radius * radius / ( 1 + m1inv * m1inv ) );
+      yinc = xinc * m1inv;
+
+      if (xi1 < x1 && x1 > xi2){
+        xc = xi1 - xinc;
+      }
+      else {
+        xc = xi1 + xinc;
+      }
+      if (yi1 < y1 && y1 > yi2){
+        yc = yi1 - yinc;
+      }
+      else {
+        yc = yi1 + yinc;
+      }
+
+      //dot the center
+      ctx.beginPath()
+        .arc( xc, yc, 2.5, 0, 2 * Math.PI, false )
+        .fill();
+
+      // draw the circle.
+      ctx.beginPath()
+        .arc( xc, yc, radius, 0, 2 * Math.PI, false)
+        .stroke();
+
+      ctx.beginPath()
+        .moveTo(x0, y0)
+        .arcTo(x1, y1, x2, y2, radius)
+        .lineWidth(8)
+        .strokeStyle('rgba(220, 99, 0,.6)')
+        .stroke();
+
+      ctx.fillText('radius: ' + radius, ctx.width / 2 - 15, ctx.height - 10);
+    }
+
+
+    drawArcToDiagram(10, 150, 100, 40, 150, 120, 30);
+    // drawArcToDiagram(80,50,100,10,110,32,70);
+    // drawArcToDiagram(100,10,15,110,150,140,40);
+    // drawArcToDiagram(20,100,-20,10,40,50,100);
+
+
+
+  }
+ return {
+  init : init
+ }})().init();
+
+
+
+</script>
+    </body>
+</html>

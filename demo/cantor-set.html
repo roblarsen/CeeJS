@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>Sierpinski Carpet Demo</title>
+    </head>
+    <body>
+      <canvas id="demo" height="600" width="908">
+      </canvas>
+
+<script src="../Cee.min.js"></script>
+<script>
+(function(){
+  "use strict"
+  function init(){
+    var ctx = new Cee("demo"),
+        count = 2;  
+    ctx.lineWidth("8")
+       .strokeStyle("#000");
+
+    c({ "width" : ctx.width-8, "x" : 4, "y" : 4 });
+    function c( metrics ) {
+      if (metrics.width >= 3 ){
+       ctx.line({"x" : metrics.x, "y" : metrics.y, "angle" : 0, "distance" : metrics.width}).stroke()
+       var distance = metrics.width/3;
+       console.log(metrics.x, distance);
+       
+      
+       c({ "x" : metrics.x, y : metrics.y + 16, "width" : distance});
+      }
+    }
+  }
+ return {
+  init : init
+ }})().init();
+
+
+
+</script>
+    </body>
+</html>

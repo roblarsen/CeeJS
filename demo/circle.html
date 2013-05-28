@@ -2,28 +2,29 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>CanvasJS circle Demo</title>
+        <title>Cee.js circle Demo</title>
     </head>
     <body>
       <canvas id="demo" height="500" width="960">
       </canvas>
 
-<script src="../Canvas.js"></script>
+<script src="../Cee.min.js"></script>
 <script>
 (function(){
   "use strict"
   function init(){
-    var ctx = new Canvas("demo");
+    var ctx = new Cee("demo");
     for ( var i = 0; i < 100; i++ ){
       var x = Math.random() * ctx.width,
           y = Math.random() * ctx.height,
           radius = Math.random() * 100;
+          console.log(radius)
       ctx.circle({
         "x" : x,
         "y" : y,
         "radius" : radius,
-        "fillStyle" : '#'+Math.floor(Math.random()*16777215).toString(16),
-        "strokeStyle" : '#'+Math.floor(Math.random()*16777215).toString(16)
+        "fillStyle" : ctx.randomHex(),
+        "strokeStyle" : ctx.randomHex()
       });
     }
   }
