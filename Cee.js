@@ -7,7 +7,7 @@
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * build: 130527231023
+ * build: 130528143323
  * 
  */
 
@@ -26,7 +26,7 @@
 
     // Define a local copy of Cee
     var Cee = function( selector, params ) {
-      return new Cee.prototype._init( selector );
+      return new Cee.prototype._init( selector , params );
     };
 
     Cee.prototype = {

@@ -26,7 +26,7 @@
 
     // Define a local copy of Cee
     var Cee = function( selector, params ) {
-      return new Cee.prototype._init( selector );
+      return new Cee.prototype._init( selector , params );
     };
 
     Cee.prototype = {
