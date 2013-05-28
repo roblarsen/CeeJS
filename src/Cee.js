@@ -666,6 +666,50 @@
             currentPos( x,y );
             return context.getImageData( x, y, width, height );
           },
+/** Returns an object with the rgba value of a given pixel
+ * @name getPixelColor
+ * @function
+ * @param {number} x The x coordinate of the pixel to test 
+ * @param {number} y The y coordinate of the pixel to test
+ */          
+
+ /*thanks 
+ https://gist.github.com/codepo8/5631638
+*/
+          getPixelColor = function(x, y) {
+            var pixels = context.getImageData(0, 0, container.width, container.height),
+                index = ((y * (pixels.width * 4)) + (x * 4));
+            return {
+              r:pixels.data[index], 
+              g:pixels.data[index + 1], 
+              b:pixels.data[index + 2], 
+              a:pixels.data[index + 3]
+            };
+          },
+ /** Returns the RGB color of a specific pixel
+ * @name getPixelsByColor
+ * @function
+ * @param {number} r The red value 
+ * @param {number} g The green value
+ * @param {number} b The blue value
+ */          
+ /*thanks 
+ https://gist.github.com/codepo8/5631638
+*/
+          getPixelsByColor = function(r, g, b) {
+            var pixels = context.getImageData(0, 0, container.width, container.height),
+                all = pixels.data.length,
+                amount = 0;
+            for (var i = 0; i < all; i += 4) {
+              if (pixels.data[i] === r && 
+                  pixels.data[i+1] === g && 
+                  pixels.data[i+2] === b) {
+                amount++;
+              }
+            }
+            return amount;
+          },
+          
 /** Called with a num argument, sets the context alpha/transparency. Called without, returns the current context globalAlpha.
  * @name globalAlpha
  * @function
@@ -1660,6 +1704,8 @@ source: http://msdn.microsoft.com/en-us/library/windows/apps/hh465918.aspx
           "font": font,
           "currentPos": currentPos,
           "getImageData" : getImageData,
+          "getPixelColor" :  getPixelColor,
+          "getPixelsByColor" : getPixelsByColor, 
           "globalAlpha": globalAlpha,
           "globalCompositeOperation": globalCompositeOperation,
           "isPointInPath" : isPointInPath,
