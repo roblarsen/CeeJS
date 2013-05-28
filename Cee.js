@@ -1,5 +1,5 @@
 /**
- * @license Cee.js v0.1.0
+ * @license Cee.js v0.2.0
  * 
  * http://roblarsen.github.com/Cee.js/
  *
@@ -7,7 +7,7 @@
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * build: 130527230340
+ * build: 130527231023
  * 
  */
 
