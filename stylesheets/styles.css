@@ -23,6 +23,12 @@ h1, h2, h3 {
 h1 {
   font-size:28px;
 }
+header h1 {
+    text-indent:-9999px;
+    background:url(ceejs.svg) no-repeat;
+    height:120px;
+    width:400px;
+}
 
 h2 {
   color:#393939;
