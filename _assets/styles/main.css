@@ -103,14 +103,17 @@ textarea {
   list-style: none;
   font-family: Consolas, Inconsolata, "Courier New", Courier, monospace;
 }
-h1 {
-  font: 36px Verdana, Geneva, sans-serif;
+header h1 {
+    text-indent:-9999px;
+    background:url(ceejs.svg) no-repeat;
+    height:120px;
+    width:400px;
 }
+
 p {
   font: 16px Verdana, Geneva, sans-serif;
 }
 #ctx {
-  background:url(grids.jpg) no-repeat center; 
   border : 1px dotted gray;
 }
 body {
