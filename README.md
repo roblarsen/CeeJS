@@ -29,6 +29,8 @@ A simple example might look like this
         
    
 ```    
+
+You can demo the library in [this handy CeeJS demo plunker](http://plnkr.co/edit/wroi8u?p=preview). 
 ##Credits
 
 So far...
