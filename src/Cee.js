@@ -1109,7 +1109,7 @@ Default. The outside edges of the lines are continued until they intersect and t
             currentPos( x,y );
             return this;
           },
-/** returns a randome hex value
+/** returns a random hex value
  * @name randomHex
  * @function
  */
@@ -1118,8 +1118,8 @@ Default. The outside edges of the lines are continued until they intersect and t
            return '#'+Math.floor(Math.random()*16777215).toString(16);
          },
 
-/** Sets a random fill style
- * @name randomFill
+/** Sets a random stroke style
+ * @name randomStroke
  */
           randomStroke = function() {
               context.strokeStyle = randomHex();
