@@ -1,13 +1,13 @@
 /**
- * @license Cee.js v0.2.2
+ * @license Cee.js v0.2.3
  * 
  * https://github.com/roblarsen/CeeJS
  *
- * Copyright 2013, Rob Larsen
+ * Copyright 2014, Rob Larsen
  *
  * MIT license http://roblarsen.github.io/CeeJS/MIT-license.txt
  *
- * build: 130602210544
+ * build: 141208154632
  * 
  */
 
@@ -877,6 +877,10 @@ Default. The outside edges of the lines are continued until they intersect and t
  <ul><li>math.cosec</li>
 <li>math.sec</li>
 <li>math.radians</li>
+<li>math.degrees</li>
+<li>math.goldenRatio</li>
+<li>math.getArcCircleExtreme</li>
+<li>math.isAngleBetween</li>
 </ul>
  */
           math = {
@@ -914,6 +918,16 @@ Default. The outside edges of the lines are continued until they intersect and t
  */
             radians: function( degrees ) {
               return degrees * ( Math.PI / 180);
+            },
+ /** Converts radians to degrees
+ * @name math.degrees
+ * @function
+ * @memberOf math
+ * @param {number} radians the number of radians to get degrees for
+ * @retuns the number of degrees for <code>radians</code> degrees
+ */
+            degrees: function( radians ) {
+              return radians * ( 180 / Math.PI );
             },
             goldenRatio : 1.61803399,
 
@@ -1109,7 +1123,7 @@ Default. The outside edges of the lines are continued until they intersect and t
             currentPos( x,y );
             return this;
           },
-/** returns a randome hex value
+/** returns a random hex value
  * @name randomHex
  * @function
  */
@@ -1118,8 +1132,8 @@ Default. The outside edges of the lines are continued until they intersect and t
            return '#'+Math.floor(Math.random()*16777215).toString(16);
          },
 
-/** Sets a random fill style
- * @name randomFill
+/** Sets a random stroke style
+ * @name randomStroke
  */
           randomStroke = function() {
               context.strokeStyle = randomHex();

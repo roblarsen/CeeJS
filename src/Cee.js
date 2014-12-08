@@ -877,6 +877,10 @@ Default. The outside edges of the lines are continued until they intersect and t
  <ul><li>math.cosec</li>
 <li>math.sec</li>
 <li>math.radians</li>
+<li>math.degrees</li>
+<li>math.goldenRatio</li>
+<li>math.getArcCircleExtreme</li>
+<li>math.isAngleBetween</li>
 </ul>
  */
           math = {
@@ -914,6 +918,16 @@ Default. The outside edges of the lines are continued until they intersect and t
  */
             radians: function( degrees ) {
               return degrees * ( Math.PI / 180);
+            },
+ /** Converts radians to degrees
+ * @name math.degrees
+ * @function
+ * @memberOf math
+ * @param {number} radians the number of radians to get degrees for
+ * @retuns the number of degrees for <code>radians</code> degrees
+ */
+            degrees: function( radians ) {
+              return radians * ( 180 / Math.PI );
             },
             goldenRatio : 1.61803399,
 
