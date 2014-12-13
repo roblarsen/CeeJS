@@ -14,17 +14,17 @@ module.exports = function(grunt) {
     "Statically analyze the project JavaScript for errors and code style",
     ["jscs", "jshint"]);
 
-  // grunt.registerTask("test",
-  //   "Run the unit tests in a headless browser",
-  //   ["mocha"]);
+  grunt.registerTask("test",
+    "Run the unit tests in a headless browser",
+    ["jasmine"]);
 
   grunt.registerTask("dev",
     "Start a development web server.",
-    ["lint", /* "test", */ "watch"]);
+    ["lint", "test", "watch"]);
 
   grunt.registerTask("dist",
     "Compile for distribution.",
-    ["lint", /* "test", */ "clean:dist", "copy:dist", "uglify:dist", "jsdoc",
+    ["lint", "test", "clean:dist", "copy:dist", "uglify:dist", "jsdoc",
       "rename"]);
 
   grunt.registerTask("default", ["dev"]);

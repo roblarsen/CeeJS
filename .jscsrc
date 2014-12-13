@@ -14,5 +14,11 @@
   "maximumLineLength": 80,
   "validateQuoteMarks": "\"",
   "disallowTrailingWhitespace": true,
-  "excludeFiles": ["web-server.js", "Cee.js", "Cee.min.js"]
+  "excludeFiles": [
+    "web-server.js",
+    "Cee.js",
+    "Cee.min.js",
+    "test/jasmine/**",
+    "test/js-imagediff/**"
+  ]
 }

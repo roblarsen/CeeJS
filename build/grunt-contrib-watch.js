@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     },
     tests: {
       files: ["test/unit/**/*"],
-      tasks: ["jscs", "jshint:test", /*"mocha"*/],
+      tasks: ["jscs", "jshint:test", "test"],
     },
   });
 
