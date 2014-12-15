@@ -106,7 +106,10 @@ header {
   float:left;
   position:fixed;
 }
-
+#demo header {
+  position:static;
+  float:none;
+}
 header ul {
   list-style:none;
   height:40px;
