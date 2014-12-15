@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     options: {
       base: "./",
     },
-    src: ["**"],
+    src: ["**","!**/node_modules/**"],
   });
 
   grunt.loadNpmTasks("grunt-gh-pages");
