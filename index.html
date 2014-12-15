@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Cee.js by roblarsen</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="assets/stylesheets/styles.css">
+    <link rel="stylesheet" href="assets/stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -41,11 +41,11 @@
 
 <div class="highlight">
 <pre>
-        <span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Canvas</span><span class="p">(</span><span class="s2">"ctx"</span><span class="p">);</span> 
+        <span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Canvas</span><span class="p">(</span><span class="s2">"ctx"</span><span class="p">);</span>
         <span class="nx">ctx</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
         <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="s1">'rgb(0,'</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="s1">','</span> <span class="o">+</span>   
-                         <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s1">')'</span><span class="p">;</span>  
+            <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="s1">'rgb(0,'</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="s1">','</span> <span class="o">+</span>
+                         <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s1">')'</span><span class="p">;</span>
 
             <span class="nx">ctx</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">().</span><span class="nx">line</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span><span class="p">.</span><span class="mi">4</span><span class="o">*</span><span class="nx">i</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="p">.</span><span class="mi">4</span><span class="o">*</span><span class="nx">i</span><span class="p">,</span><span class="nx">angle</span><span class="o">:</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">distance</span><span class="o">:</span><span class="nx">i</span> <span class="o">*</span> <span class="p">.</span><span class="mi">40</span> <span class="p">}).</span><span class="nx">strokeStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">).</span><span class="nx">stroke</span><span class="p">();</span>
         <span class="p">}</span>
@@ -70,7 +70,7 @@
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+    <script src="assets/javascripts/scale.fix.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
