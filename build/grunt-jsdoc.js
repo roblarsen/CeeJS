@@ -7,7 +7,7 @@ module.exports = function(grunt) {
       options: {
         destination: "docs"
       }
-    }
+    },
   });
 
   grunt.loadNpmTasks("grunt-jsdoc");

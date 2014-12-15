@@ -24,8 +24,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask("dist",
     "Compile for distribution.",
-    ["lint", "test", "clean:dist", "copy:dist", "uglify:dist", "jsdoc",
-      "rename"]);
+    ["lint", "test", "clean", "copy", "uglify", "jsdoc", "rename",
+      "gh-pages"]);
 
   grunt.registerTask("default", ["dev"]);
 

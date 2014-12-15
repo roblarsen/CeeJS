@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     dist: {
       src: "docs/Cee.js_.html",
       dest: "docs/Cee.js.html"
-    }
+    },
   });
 
   grunt.loadNpmTasks("grunt-rename");

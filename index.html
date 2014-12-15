@@ -1,98 +1,86 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Cee.js: Sandbox</title>
-<meta name="description" content="Sample playground file for Cee.js">
-<link href="_assets/styles/normalize.css" rel="stylesheet">
-<link href="_assets/styles/main.css" rel="stylesheet">
-</head>
-<body>
-<header>
-  <h1>Cee.js</h1>
-</header>
-<article>
-<p>Cee.js is a small helper library for the canvas 2d API. The goal is to extend and enhance the basic API while still remaining familiar. </p>
-<p>Project home: <a href="http://roblarsen.github.com/CeeJS/">http://roblarsen.github.com/CeeJS/</a></p>
-<p>Github: <a href="https://github.com/roblarsen/CeeJS">https://github.com/roblarsen/CeeJS</a></p>
-<p>There is an 800x600 canvas here. You can play with Cee.js in browser console. </p>
-<p>Here's an example of what it might look like. <button id="demo">Run this code.</button> </p>
-<pre> var ctx = new Cee(&quot;ctx&quot;);<br>    for ( var i = 0; i &lt; 100; i++ ){<br>      var x = Math.random() * ctx.width,<br>          y = Math.random() * ctx.height,<br>          radius = Math.random() * 100;<br>      ctx.fillCircle({<br>        &quot;x&quot; : x,<br>        &quot;y&quot; : y,<br>        &quot;radius&quot; : radius,<br>        &quot;fillStyle&quot; : '#'+Math.floor(Math.random()*16777215).toString(16)<br>      });<br>    }</pre>
-<canvas id="ctx" width="960" height="500"> </canvas>
-<p> <a href="demo/index.html">See more demos</a> </p>
-<!-- Specific to this page --> 
-<h2> Documentation </h2>
-<p> An <a href="docs/Cee.js.html">API reference</a> has sprouted. </p>
-<ul id="docs">
-  <li> <a href="docs/global.html#arc">arc</a> </li>
-  <li> <a href="docs/global.html#arcTo">arcTo</a> </li>
-  <li> <a href="docs/global.html#beginPath">beginPath</a> </li>
-  <li> <a href="docs/global.html#bezierCurveTo">bezierCurveTo</a> </li>
-  <li> <a href="docs/global.html#boundingBox">boundingBox</a> </li>
-  <li> <a href="docs/global.html#circle">circle</a> </li>
-  <li> <a href="docs/global.html#clearRect">clearRect</a> </li>
-  <li> <a href="docs/global.html#clip">clip</a> </li>
-  <li> <a href="docs/global.html#closePath">closePath</a> </li>
-  <li> <a href="docs/global.html#createImageData">createImageData</a> </li>
-  <li> <a href="docs/global.html#createLinearGradient">createLinearGradient</a> </li>
-  <li> <a href="docs/global.html#createPattern">createPattern</a> </li>
-  <li> <a href="docs/global.html#createRadialGradient">createRadialGradient</a> </li>
-  <li> <a href="docs/global.html#currentPos">currentPos</a> </li>
-  <li> <a href="docs/global.html#drawImage">drawImage</a> </li>
-  <li> <a href="docs/global.html#fill">fill</a> </li>
-  <li> <a href="docs/global.html#fillCircle">fillCircle</a> </li>
-  <li> <a href="docs/global.html#fillRect">fillRect</a> </li>
-  <li> <a href="docs/global.html#fillStyle">fillStyle</a> </li>
-  <li> <a href="docs/global.html#fillText">fillText</a> </li>
-  <li> <a href="docs/global.html#font">font</a> </li>
-  <li> <a href="docs/global.html#getPixelColor">getPixelColor</a> </li>
-  <li> <a href="docs/global.html#getPixelsByColor">getPixelsByColor</a> </li>
-  <li> <a href="docs/global.html#getImageData">getImageData</a> </li>
-  <li> <a href="docs/global.html#globalAlpha">globalAlpha</a> </li>
-  <li> <a href="docs/global.html#globalCompositeOperation">globalCompositeOperation</a> </li>
-  <li> <a href="docs/global.html#isPointInPath">isPointInPath</a> </li>
-  <li> <a href="docs/global.html#line">line</a> </li>
-  <li> <a href="docs/global.html#lineCap">lineCap</a> </li>
-  <li> <a href="docs/global.html#lineJoin">lineJoin</a> </li>
-  <li> <a href="docs/global.html#lineTo">lineTo</a> </li>
-  <li> <a href="docs/global.html#lineWidth">lineWidth</a> </li>
-  <li> <a href="docs/global.html#measureText">measureText</a> </li>
-  <li> <a href="docs/global.html#miterLimit">miterLimit</a> </li>
-  <li> <a href="docs/global.html#moveTo">moveTo</a> </li>
-  <li> <a href="docs/global.html#putImageData">putImageData</a> </li>
-  <li> <a href="docs/global.html#quadraticCurveTo">quadraticCurveTo</a> </li>
-  <li> <a href="docs/global.html#quadraticCurveToFixed">quadraticCurveToFixed</a> </li>
-  <li> <a href="docs/global.html#rect">rect</a> </li>
-  <li> <a href="docs/global.html#rectangle">rectangle</a> </li>
-  <li> <a href="docs/global.html#reset">reset</a> </li>
-  <li> <a href="docs/global.html#restore">restore</a> </li>
-  <li> <a href="docs/global.html#rotate">rotate</a> </li>
-  <li> <a href="docs/global.html#roundedRectangle">roundedRectangle</a> </li>
-  <li> <a href="docs/global.html#save">save</a> </li>
-  <li> <a href="docs/global.html#scale">scale</a> </li>
-  <li> <a href="docs/global.html#setTransform">setTransform</a> </li>
-  <li> <a href="docs/global.html#shadowBlur">shadowBlur</a> </li>
-  <li> <a href="docs/global.html#shadowColor">shadowColor</a> </li>
-  <li> <a href="docs/global.html#shadowOffset">shadowOffset</a> </li>
-  <li> <a href="docs/global.html#shadowOffsetX">shadowOffsetX</a> </li>
-  <li> <a href="docs/global.html#shadowOffsetY">shadowOffsetY</a> </li>
-  <li> <a href="docs/global.html#stroke">stroke</a> </li>
-  <li> <a href="docs/global.html#strokeCircle">strokeCircle</a> </li>
-  <li> <a href="docs/global.html#strokeRect">strokeRect</a> </li>
-  <li> <a href="docs/global.html#strokeRoundedRectangle">strokeRoundedRectangle</a> </li>
-  <li> <a href="docs/global.html#strokeStyle">strokeStyle</a> </li>
-  <li> <a href="docs/global.html#strokeText">strokeText</a> </li>
-  <li> <a href="docs/global.html#textAlign">textAlign</a> </li>
-  <li> <a href="docs/global.html#textBaseline">textBaseline</a> </li>
-  <li> <a href="docs/global.html#transform">transform</a> </li>
-  <li> <a href="docs/global.html#translate">translate</a> </li>
-</ul>
-</article>
-<footer>
-<small>Copyright 2013, Rob Larsen</small>
-</footer>
-<script src="Cee.js"></script>
-<script src="_assets/scripts/demo.js"></script>
-</body>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Cee.js by roblarsen</title>
+
+    <link rel="stylesheet" href="assets/stylesheets/styles.css">
+    <link rel="stylesheet" href="assets/stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Cee.js</h1>
+        <p>A helper library for the canvas 2d API</p>
+        <ul>
+          <li><a href="https://github.com/roblarsen/CeeJS/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/roblarsen/CeeJS/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/roblarsen/CeeJS">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Cee.js</h1>
+
+<p>Cee.js is a small helper library for the canvas 2d API. The goal is to extend and enhance the basic API while still remaining familiar. <a href="demo/index.html">View the demos</a>, try out the <a href="http://plnkr.co/edit/wroi8u?p=preview" title="demo plunker">code on plunker</a> or read the <a href="docs/Cee.js.html">documentation</a></p>
+
+<h2>API and Enhancements</h2>
+
+<p>There are currently two areas of focus</p>
+
+<ul>
+<li>
+<em>Chaining</em> any method that doesn't return an explicit value is chainable. </li>
+<li>
+<em>API Enhancements</em> These range from new concepts (getting the boundingBox of the last operation, getting the currentPos (x and y) of the 'cursor',) missing methods (circle, rectangle) to convenience methods (canvas properties are now getter/setter methods.)</li>
+</ul><p>A simple example might look like this</p>
+
+<div class="highlight">
+<pre>
+        <span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Canvas</span><span class="p">(</span><span class="s2">"ctx"</span><span class="p">);</span>
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="s1">'rgb(0,'</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="s1">','</span> <span class="o">+</span>
+                         <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s1">')'</span><span class="p">;</span>
+
+            <span class="nx">ctx</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">().</span><span class="nx">line</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span><span class="p">.</span><span class="mi">4</span><span class="o">*</span><span class="nx">i</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="p">.</span><span class="mi">4</span><span class="o">*</span><span class="nx">i</span><span class="p">,</span><span class="nx">angle</span><span class="o">:</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">distance</span><span class="o">:</span><span class="nx">i</span> <span class="o">*</span> <span class="p">.</span><span class="mi">40</span> <span class="p">}).</span><span class="nx">strokeStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">).</span><span class="nx">stroke</span><span class="p">();</span>
+        <span class="p">}</span>
+
+
+</pre>
+</div>
+<h2>Credits</h2>
+
+<p>So far...</p>
+
+<p>Dreamed up by Rob Larsen with active encouragement by the Isobar Creative Technology team. </p>
+
+<p>Kicked off by Bob Holt</p>
+
+<p>Smart stuff added by Marc Neuwirth</p>
+
+<p>Continuing housekeeping and project sheperding by Rob Larsen</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/roblarsen">roblarsen</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="assets/javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-251752-14");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
 </html>
