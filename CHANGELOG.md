@@ -1,5 +1,7 @@
 #Cee.js Changelog
 
+0.3.0 Grunt, Bower and a contributing.md added
+
 0.2.4 Bug fix. Found some leaked globals and other small bugs with JSHint.
 
 0.2.3 added math.degrees

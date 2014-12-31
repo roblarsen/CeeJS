@@ -85,7 +85,6 @@ included in the project:
 
 1. [Fork](https://help.github.com/articles/fork-a-repo) the project, clone your
    fork, and configure the remotes:
-
    ```bash
    # Clone your fork of the repo into the current directory
    git clone https://github.com/<your-username>/CeeJS.git
@@ -96,15 +95,19 @@ included in the project:
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
-
    ```bash
    git checkout master
    git pull upstream master
    ```
 
+3. Running the project
+	1. `npm install -g grunt-cli`
+	1. `npm install`
+	2. Run `grunt --help` to see all tasks. Basics, though:
+		-  `grunt` - alias for `grunt dev` - runs lint, tests, and starts watch task
+
 3. Create a new topic branch (off the main project development branch) to
    contain your feature, change, or fix:
-
    ```bash
    git checkout -b <topic-branch-name>
    ```
@@ -116,13 +119,11 @@ included in the project:
    feature to tidy up your commits before making them public.
 
 5. Locally merge (or rebase) the upstream development branch into your topic branch:
-
    ```bash
    git pull [--rebase] upstream master
    ```
 
 6. Push your topic branch up to your fork:
-
    ```bash
    git push origin <topic-branch-name>
    ```

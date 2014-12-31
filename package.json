@@ -1,6 +1,6 @@
 {
   "name": "Cee.js",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "A helper library for the canvas 2d API",
   "main": "Cee.js",
   "directories": {
