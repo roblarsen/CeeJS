@@ -1,0 +1,27 @@
+{
+  "name": "Cee.js",
+  "version": "0.3.0",
+  "homepage": "https://github.com/roblarsen/CeeJS",
+  "authors": [
+    "Rob Larsen <rob@htmlcssjavascript.com>"
+  ],
+  "description": "Cee.js is a small helper library for the canvas 2d API.",
+  "main": "Cee.min.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "canvas",
+    "chaining",
+    "utility",
+    "visualization"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,5 +1,5 @@
 /**
- * Cee.js v0.2.4
+ * Cee.js v0.3.0
  *
  * https://github.com/roblarsen/CeeJS
  *
@@ -7,7 +7,7 @@
  *
  * MIT license http://roblarsen.github.io/CeeJS/MIT-license.txt
  *
- * build: 1418622800390
+ * build: 1420043916991
  *
  */
 
